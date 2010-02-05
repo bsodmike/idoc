@@ -4,3 +4,6 @@ log/*.log
 **/.DS_Store
 tmp/**/*
 config/database.yml
+.idea/.generators
+.idea/.rakeTasks
+.idea/workspace.xml
