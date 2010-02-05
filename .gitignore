@@ -1,6 +1,6 @@
 .rvmrc
-log/*
+log/*.log
 .DS_Store
 **/.DS_Store
-tmp/*
+tmp/**/*
 config/database.yml
