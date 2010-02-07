@@ -16,7 +16,7 @@ Feature:
   @wip
   Scenario: Create more documentation
     Given I have created a page
-    When I go to the create documentation page
+    When I go to the add documentation page
     And I enter documentation
     And I press "Save"
     Then I should see "Page added"
