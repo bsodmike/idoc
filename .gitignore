@@ -6,3 +6,4 @@ tmp/**/*
 .idea/.generators
 .idea/.rakeTasks
 .idea/workspace.xml
+db/*.sqlite3

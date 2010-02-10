@@ -3,6 +3,7 @@
 development:
   adapter: postgresql
   database: davidworkman
+  password: Bilabong12
   pool: 5
   timeout: 5000
 
@@ -21,5 +22,5 @@ production:
   pool: 5
   timeout: 5000
 
-cucumber:
+cucumber:                                   
   <<: *TEST
