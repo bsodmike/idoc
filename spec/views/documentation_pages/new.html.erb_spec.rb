@@ -1,12 +1,11 @@
 require 'spec_helper'
 
-describe "/documentation_pages/new" do
+describe "create a new documentation page" do
   before(:each) do
     render 'documentation_pages/new'
   end
 
-  #Delete this example and add some real ones or delete this file
-  it "should tell you where to find the file" do
-    response.should have_tag('p', %r[Find me in app/views/documentation_pages/new])
+  it "should give a form for entering a new page" do
+
   end
 end

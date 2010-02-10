@@ -1,0 +1,5 @@
+module DocumentationPageHelpers
+
+end
+
+World(DocumentationPageHelpers)

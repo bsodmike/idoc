@@ -3,7 +3,8 @@ Given /^there is no documentation$/ do
 end
 
 When /^I enter documentation$/ do
-  pending # express the regexp above with the code you wish you had
+  fill_in 'Title', :with => "Testing"
+  fill_in "Content", :with => "Test documentation"
 end
 
 Then /^I should see the documentation page$/ do
