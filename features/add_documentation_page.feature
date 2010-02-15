@@ -3,7 +3,6 @@ Feature:
   As a user
   I need to add new documentation pages
 
-  @wip
   Scenario: Create the first documentation page
     Given there is no documentation
     And I am on the home page
