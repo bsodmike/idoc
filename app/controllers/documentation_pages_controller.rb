@@ -1,4 +1,5 @@
 class DocumentationPagesController < ApplicationController
+  before_filter :find_menu_items, :only => [:new, :show]
   def new
     @documentation_page = DocumentationPage.new
   end

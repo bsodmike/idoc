@@ -7,4 +7,8 @@ class ApplicationController < ActionController::Base
 
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
+  
+  def find_menu_items
+    @menu_items = DocumentationPage.find :all
+  end
 end

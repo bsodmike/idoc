@@ -1,12 +1,17 @@
 require 'spec_helper'
 
-describe DocumentationPagesController, "creating a new page" do
+describe DocumentationPagesController, "providing a blank documentation page" do
+  it_should_behave_like "finding menu items"
   
   it "should set up the data for a new page" do
     DocumentationPage.should_receive(:new).and_return(doc_page = mock_model(DocumentationPage))
     get :new
     assigns(:documentation_page).should == doc_page
   end
+  
+end
+
+describe DocumentationPagesController, "creating a new page" do
 
   context "with valid data" do
     before(:each) do
@@ -41,6 +46,8 @@ describe DocumentationPagesController, "creating a new page" do
 end
 
 describe DocumentationPagesController, "displaying a documentation page" do
+  it_should_behave_like "finding menu items"
+  
   it "should find the documentation page" do
     doc_page = mock_model(DocumentationPage)
     DocumentationPage.should_receive(:find).with(doc_page.id.to_s).and_return(doc_page)
