@@ -7,3 +7,5 @@ tmp/**/*
 .idea/.rakeTasks
 .idea/workspace.xml
 db/*.sqlite3
+.project
+.loadpath
