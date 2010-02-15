@@ -19,5 +19,5 @@ Then /^I should see the menu item for the page$/ do
 end
 
 Given /^I have created a page$/ do
-  pending # express the regexp above with the code you wish you had
+  DocumentationPage.create("title" => "A page", "content" => "More content")
 end

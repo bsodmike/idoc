@@ -12,7 +12,6 @@ Feature:
     And I should see the documentation page
     And I should see the menu item for the page
 
-  @wip
   Scenario: Create more documentation
     Given I have created a page
     When I go to the add documentation page
