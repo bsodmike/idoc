@@ -8,11 +8,14 @@ When /^I enter documentation$/ do
 end
 
 Then /^I should see the documentation page$/ do
-  pending # express the regexp above with the code you wish you had
+  response.should contain("Testing")
+  response.should contain("Test documentation")
 end
 
 Then /^I should see the menu item for the page$/ do
-  pending # express the regexp above with the code you wish you had
+  response.should have_selector("ul.menu") do |menu|
+    menu.should contain("Testing")
+  end
 end
 
 Given /^I have created a page$/ do
