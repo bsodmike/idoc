@@ -9,3 +9,5 @@ tmp/**/*
 db/*.sqlite3
 .project
 .loadpath
+rerun.txt
+public/stylesheets/compiled/*.css

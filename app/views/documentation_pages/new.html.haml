@@ -1,6 +1,14 @@
 -form_for(@documentation_page) do |f|
-  =f.label :title
-  =f.text_field :title
-  =f.label :content
-  =f.text_area :content
-  =submit_tag 'Save'
+  .yui-gf
+    .yui-u.first.form_label
+      !=f.label :title
+    .yui-u
+      !=f.text_field :title
+  .yui-gf
+    .yui-u.first.form_label
+      !=f.label :content
+    .yui-u
+      !=f.text_area :content, :rows => 10
+  .yui-gf
+    .yui-u
+      !=submit_tag 'Save'

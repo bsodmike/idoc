@@ -1,2 +1,14 @@
-= yield
-= render :partial => 'shared/menu', :object => @menu_items
+!!! 5
+%html
+  %head
+    = stylesheet_link_tag 'compiled/screen.css', :media => 'screen, projection'
+  %body
+    .yui-t1#doc
+      #hd
+      #bd
+        #yui-main
+          .yui-b
+            != yield
+        .yui-b
+          != render :partial => 'shared/menu', :object => @menu_items
+      #ft
