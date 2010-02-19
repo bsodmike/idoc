@@ -11,3 +11,4 @@ db/*.sqlite3
 .loadpath
 rerun.txt
 public/stylesheets/compiled/*.css
+app/stylesheets/.sass-cache/*

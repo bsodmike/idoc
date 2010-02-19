@@ -3,12 +3,17 @@
   %head
     != stylesheet_link_tag 'compiled/screen.css', :media => 'screen, projection'
   %body
-    .yui-t1#doc
-      #hd
-      #bd
-        #yui-main
-          .yui-b
+    #idoc-body
+      #header
+        .section-main
+          .section-item
+            title here
+        .section-item
+          iDoc
+      #body
+        .section-main
+          .section-item
             != yield
-        .yui-b
+        .section-item
           != render :partial => 'shared/menu', :object => @menu_items
-      #ft
+      #footer
