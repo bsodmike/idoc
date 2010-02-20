@@ -6,6 +6,7 @@ require 'spec/autorun'
 require 'spec/rails'
 require 'webrat'
 require 'controllers/application_controller_spec'
+require "email_spec"
 
 # Uncomment the next line to use webrat's matchers
 #require 'webrat/integrations/rspec-rails'
@@ -22,4 +23,6 @@ Spec::Runner.configure do |config|
   config.use_instantiated_fixtures  = false
   config.fixture_path = RAILS_ROOT + '/spec/fixtures/'
   config.include Webrat::Matchers, :type => :views
+  config.include EmailSpec::Matchers
+  config.include EmailSpec::Helpers
 end
