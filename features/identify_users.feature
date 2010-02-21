@@ -21,13 +21,19 @@ Feature:
   	Then I should see 'Account activated'
 	
   @proposed
-  Scenario: An unidentified user identifies themself with credentials for an activated account
+  Scenario: An unidentified user identifies with credentials for an activated account
   
   @proposed
-  Scenario: An unidentified user identifies themself with credentials for an inactive account
+  Scenario: An unidentified user identifies with credentials for an inactive account
   
   @proposed
-  Scenario: An unidentified user identifies themself with credentials for an unknown account
+  Scenario: An unidentified user identifies with credentials for an unknown account
   
   @proposed
   Scenario: An anonymous user requests an iDoc identity with invalid details
+
+  @proposed
+  Scenario: An identified user request an iDoc identity
+
+  @proposed
+  Scenario: An identified user attempts to re-identify

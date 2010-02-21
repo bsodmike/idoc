@@ -4,8 +4,7 @@ Feature:
   I need to add new documentation pages
 
   Scenario: Create the first documentation page
-  	Given I am identified
-    And there is no documentation
+    Given there is no documentation
     And I am on the home page
     When I enter documentation
     And I press "Save"
@@ -14,8 +13,7 @@ Feature:
     And I should see the menu item for the page
 
   Scenario: Create more documentation
-  	Given I am identified
-    And I have created a page
+    Given I have created a page
     When I go to the add documentation page
     And I enter documentation
     And I press "Save"
