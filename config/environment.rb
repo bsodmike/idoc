@@ -8,5 +8,8 @@ require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
   config.gem 'haml'
+  config.gem 'compass'
+  config.gem 'warden'
+  config.gem 'devise'
   config.time_zone = 'UTC'
 end

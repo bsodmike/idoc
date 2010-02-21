@@ -6,7 +6,7 @@
   <component name="ProjectDetails">
     <option name="projectName" value="iDoc" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="Ruby SDK 1.8.7 (/Users/davidworkman/.rvm/rubies/ruby-1.8.7-p248/bin/ruby)" project-jdk-type="RUBY_SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="Ruby SDK 1.9.1 (/Users/davidworkman/.rvm/rubies/ruby-1.9.1-p378/bin/ruby)" project-jdk-type="RUBY_SDK" />
   <component name="SvnBranchConfigurationManager">
     <option name="mySupportsUserInfoFilter" value="true" />
   </component>
