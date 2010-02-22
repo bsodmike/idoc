@@ -49,7 +49,6 @@ Feature:
     And I should see "Email"
     And I should see "Password"
 
-  @wip
   Scenario: An identified user request an iDoc identity
     Given I have created an account
     And I have activated my account
