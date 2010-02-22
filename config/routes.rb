@@ -2,7 +2,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resource :user_session
 
-  map.resources :users
+  map.resources :users, :collection => {:confirm => :get}
 
   map.resources :documentation_pages
 

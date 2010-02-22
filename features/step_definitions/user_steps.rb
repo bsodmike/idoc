@@ -9,18 +9,8 @@ When /^I enter the required account details$/ do
   fill_in "Password confirmation", :with => "password"
 end
 
-Then /^I should have a new email$/ do
-  pending # express the regexp above with the code you wish you had
-end
-
 Given /^I have created an account$/ do
-  pending # express the regexp above with the code you wish you had
-end
-
-When /^I follow 'confirm' in the email$/ do
-  pending # express the regexp above with the code you wish you had
-end
-
-Then /^I should see 'Account activated'$/ do
-  pending # express the regexp above with the code you wish you had
+  visit path_to("the new account page")
+  When "I enter the required account details"
+  click_button "Register"
 end

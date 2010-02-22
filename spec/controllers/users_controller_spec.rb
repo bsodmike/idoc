@@ -18,7 +18,7 @@ describe UsersController, "creating a new user account" do
     context "With valid user data" do
       before(:each) do
         @valid_data = {}
-        User.stub!(:new).and_return(@user = mock_model(User, :save => true))
+        User.stub!(:new).and_return(@user = mock_model(User, :save_without_session_maintenance => true))
       end
 
       it "should create a user with the provided data" do
@@ -26,8 +26,8 @@ describe UsersController, "creating a new user account" do
         post :create, :user => @valid_data
       end
 
-      it "should save the user" do
-        @user.should_receive(:save)
+      it "should save the user without logging in" do
+        @user.should_receive(:save_without_session_maintenance)
         post :create, :user => @valid_data
       end
 
@@ -45,7 +45,7 @@ describe UsersController, "creating a new user account" do
     context "With invalid user data" do
       before(:each) do
         @invalid_data = {}
-        User.stub!(:new).and_return(@user = mock_model(User, :save => false))
+        User.stub!(:new).and_return(@user = mock_model(User, :save_without_session_maintenance => false))
 
       end
 
@@ -55,7 +55,7 @@ describe UsersController, "creating a new user account" do
       end
 
       it "should attempt to save the user" do
-        @user.should_receive(:save)
+        @user.should_receive(:save_without_session_maintenance)
         post :create, :user => @invalid_data
       end
 
@@ -74,6 +74,39 @@ describe UsersController, "creating a new user account" do
         assigns[:user].should == @user
       end
     end
+
+  end
+end
+
+describe UsersController, "Confirming a user account" do
+  context "when unactivated" do
+
+    before(:each) do
+      User.stub!(:find_by_perishable_token).and_return(@user = mock_model(User, :activate! => true))
+      @perishable_token = "1234"
+    end
+    it "should find a user by the activation token" do
+      User.should_receive(:find_by_perishable_token).with(@perishable_token)
+      get :confirm, :activation_token => @perishable_token
+    end
+
+    it "should activate the user" do
+      @user.should_receive(:activate!)
+      get :confirm, :activation_token => @perishable_token
+    end
+
+    it "should inform the user that activation was successful" do
+      get :confirm, :activation_token => @perishable_token
+      flash[:notice].should contain("Account activated")
+    end
+
+    it "should redirect the user to the account login page" do
+      get :confirm, :activation_token => @perishable_token
+      response.should redirect_to(new_user_session_url)
+    end
+  end
+
+  context "when activated" do
 
   end
 end

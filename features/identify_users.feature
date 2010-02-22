@@ -10,14 +10,14 @@ Feature:
   	And I press "Register"
   	Then I should see "Sign-up successful"
   	And I should receive an email
-  	
-  @wip
+
   Scenario: A registered user confirms their email address
   	Given I have created an account
   	Then I should receive an email
   	When I open the email
-  	And I follow 'confirm' in the email
-  	Then I should see 'Account activated'
+    Then I should see "confirm" in the email body
+  	When I follow "confirm" in the email
+  	Then I should see "Account activated"
 	
   @proposed
   Scenario: An unidentified user identifies with credentials for an activated account

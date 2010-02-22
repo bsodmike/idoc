@@ -2,13 +2,40 @@ require "spec_helper"
 
 describe User do
 
-  before(:each) do
-    @valid_attributes = {:email => "test@test.com", :password => "password", :password_confirmation => "password"}
-  end
+  context "with valid attributes" do
+    before(:each) do
+      UserSignup.stub!(:deliver_confirmation_email)
+      @valid_attributes = {:email => "test@test.com", :password => "password", :password_confirmation => "password"}
+    end
 
-  it "should send a confirmation email after being created" do
-    @user = User.new(@valid_attributes)
-    UserSignup.should_receive(:deliver_confirmation_email).with(@user)
-    @user.save
+    it "should send a confirmation email after being created" do
+      @user = User.new(@valid_attributes)
+      UserSignup.should_receive(:deliver_confirmation_email).with(@user)
+      @user.save
+    end
+
+    it "should generate a new perishable token when created" do
+      @user = User.new(@valid_attributes)
+      @user.should_receive(:reset_perishable_token!)
+      @user.save
+    end
+
+    it "should not set activated to true when provided with an activated parameter" do
+      @valid_attributes[:activated] = true
+      @user = User.new(@valid_attributes)
+      @user.activated.should be_false
+    end
+
+    it "should be activated after calling activate!" do
+      @user = User.new(@valid_attributes)
+      @user.activate!
+      @user.activated.should be_true
+    end
+
+    it "should be saved after being activated" do
+      @user = User.new(@valid_attributes)
+      @user.activate!
+      @user.changed?.should == false
+    end
   end
 end
