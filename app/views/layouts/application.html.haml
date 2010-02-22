@@ -13,6 +13,8 @@
       #body
         .section-main
           .section-item
+            - if flash[:notice]
+              .notice= flash[:notice]
             != yield
         .section-item
           != render :partial => 'shared/menu', :object => @menu_items

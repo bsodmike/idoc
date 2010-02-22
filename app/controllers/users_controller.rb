@@ -7,6 +7,15 @@ class UsersController < ApplicationController
   end
 
   def create
+    @user = User.new(params[:user])
+    if @user.save
+      flash[:notice] = "Sign-up successful"
+      redirect_to user_path(@user)
+    else
+      flash[:error] = "There were errors in the user data provided"
+      render :action => :new
+    end
+    
   end
 
   def show

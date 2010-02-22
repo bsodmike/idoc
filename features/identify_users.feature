@@ -10,7 +10,7 @@ Feature:
   	And I enter the required account details
   	And I press "Register"
   	Then I should see "Sign-up successful"
-  	And I should have a new email
+  	And I should receive an email
   	
   @wip
   Scenario: A registered user confirms their email address
