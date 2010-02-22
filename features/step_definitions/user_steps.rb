@@ -1,9 +1,11 @@
 Given /I am not identified/ do
-  visit path_to("the logout page")
+  visit path_to("the user session page"), :delete
 end
 
 When /^I enter the required account details$/ do
-  pending # express the regexp above with the code you wish you had
+  fill_in :email, :with => "test@test.com"
+  fill_in :password, :with => "password"
+  fill_in "Password confirmation", :with => "password"
 end
 
 Then /^I should have a new email$/ do

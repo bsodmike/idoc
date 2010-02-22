@@ -14,11 +14,11 @@ module NavigationHelpers
     when /the add documentation page/
       new_documentation_page_path
 
-    when /the logout page/
-      destroy_user_session_path
+    when /the user session page/
+      user_session_path
 
     when /the new account page/
-      new_user_registration_path
+      new_user_path
 
     else
       raise "Can't find mapping from \"#{page_name}\" to a path.\n" +
