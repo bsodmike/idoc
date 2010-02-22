@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   end
 
   def activate!
-    self.activated = true
+    self.active = true
     self.save_without_session_maintenance
   end
 end

@@ -21,15 +21,15 @@ describe User do
     end
 
     it "should not set activated to true when provided with an activated parameter" do
-      @valid_attributes[:activated] = true
+      @valid_attributes[:active] = true
       @user = User.new(@valid_attributes)
-      @user.activated.should be_false
+      @user.active.should be_false
     end
 
     it "should be activated after calling activate!" do
       @user = User.new(@valid_attributes)
       @user.activate!
-      @user.activated.should be_true
+      @user.active.should be_true
     end
 
     it "should be saved after being activated" do

@@ -25,7 +25,7 @@ end
 
 Given /^I have not activated my account$/ do
   user = User.find_by_email(@email_address)
-  user.activated = false
+  user.active = false
   user.save!
 end
 

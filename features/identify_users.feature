@@ -19,7 +19,6 @@ Feature:
   	When I follow "confirm" in the email
   	Then I should see "Account activated"
 
-  @wip
   Scenario: An unidentified user identifies with credentials for an activated account
     Given I have created an account
     And I have activated my account
@@ -29,15 +28,16 @@ Feature:
     Then I should be on the home page
     And I should see "Logged in successfully"
 
-  @wip
   Scenario: An unidentified user identifies with credentials for an inactive account
     Given I have created an account
     And I have not activated my account
     When I go to the account logon page
     And I enter my account details
     And I press "Log in"
-    Then I should be on the account logon page
+    Then I should be on the user session page
     And I should see "Your account is not activated"
+    And I should see "Email"
+    And I should see "Password"
   
   @proposed
   Scenario: An unidentified user identifies with credentials for an unknown account

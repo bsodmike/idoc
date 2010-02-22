@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(:version => 20100222170231) do
     t.string   "last_login_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "activated",           :default => false, :null => false
+    t.boolean  "active",              :default => false, :null => false
   end
 
 end

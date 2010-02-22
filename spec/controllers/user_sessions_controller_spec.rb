@@ -69,7 +69,30 @@ describe UserSessionsController do
 
     end
     context "when the user account isn't activated" do
-      
+      before(:each) do
+        UserSession.stub!(:new).and_return(@user_session = mock_model(UserSession, :save => false))
+        @valid_credentials = {}
+      end
+
+      it "should create the session" do
+        UserSession.should_receive(:new).with(@valid_credentials)
+        post :create, :user_session => @valid_credentials
+      end
+
+      it "should attempt to save the session" do
+        @user_session.should_receive(:save)
+        post :create, :user_session => @valid_credentials
+      end
+
+      it "should inform the user of their account status" do
+        post :create, :user_session => @valid_credentials
+        flash[:error].should contain("Your account is not activated")
+      end
+
+      it "should provide the user with the login form again" do
+        post :create, :user_session => @valid_credentials
+        response.should render_template("user_sessions/new")
+      end
     end
   end
 

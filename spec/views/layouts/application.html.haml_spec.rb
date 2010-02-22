@@ -38,5 +38,21 @@ describe "the application main layout" do
     end
   end
 
+  context "A flash[:error] message is present" do
+    it "should render a box for the flash message" do
+      flash[:error] = "Test error"
+      do_render
+      response.should have_selector("div.error") do |d|
+        d.should contain("Test error")
+      end
+    end
+  end
+
+  context "A flash[:error message is not present" do
+    it "should not render a box for the flash message" do
+      do_render
+      response.should_not have_selector("div.error")
+    end
+  end
 
 end
