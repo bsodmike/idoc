@@ -18,12 +18,26 @@ Feature:
     Then I should see "confirm" in the email body
   	When I follow "confirm" in the email
   	Then I should see "Account activated"
-	
-  @proposed
+
+  @wip
   Scenario: An unidentified user identifies with credentials for an activated account
-  
-  @proposed
+    Given I have created an account
+    And I have activated my account
+    When I go to the account logon page
+    And I enter my account details
+    And I press "Log in"
+    Then I should be on the home page
+    And I should see "Logged in successfully"
+
+  @wip
   Scenario: An unidentified user identifies with credentials for an inactive account
+    Given I have created an account
+    And I have not activated my account
+    When I go to the account logon page
+    And I enter my account details
+    And I press "Log in"
+    Then I should be on the account logon page
+    And I should see "Your account is not activated"
   
   @proposed
   Scenario: An unidentified user identifies with credentials for an unknown account

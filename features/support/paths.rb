@@ -17,6 +17,9 @@ module NavigationHelpers
     when /the user session page/
       user_session_path
 
+    when /the account logon page/
+      new_user_session_path
+
     when /the new account page/
       new_user_path
 
