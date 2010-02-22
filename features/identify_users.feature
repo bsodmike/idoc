@@ -38,15 +38,30 @@ Feature:
     And I should see "Your account is not activated"
     And I should see "Email"
     And I should see "Password"
-  
-  @proposed
+
   Scenario: An unidentified user identifies with credentials for an unknown account
-  
-  @proposed
-  Scenario: An anonymous user requests an iDoc identity with invalid details
+    Given I have not created an account
+    When I go to the account logon page
+    And I enter my account details
+    And I press "Log in"
+    Then I should be on the user session page
+    And I should see "Username or password was incorrect"
+    And I should see "Email"
+    And I should see "Password"
 
-  @proposed
+  @wip
   Scenario: An identified user request an iDoc identity
+    Given I have created an account
+    And I have activated my account
+    And I have logged in to my account
+    When I go to the new account page
+    Then I should be on the home page
+    And I should see "You already have an account"
 
-  @proposed
   Scenario: An identified user attempts to re-identify
+    Given I have created an account
+    And I have activated my account
+    And I have logged in to my account
+    When I go to the account logon page
+    Then I should be on the home page
+    And I should see "You are already logged in"
