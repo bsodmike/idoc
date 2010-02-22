@@ -3,7 +3,8 @@ Given /I am not identified/ do
 end
 
 When /^I enter the required account details$/ do
-  fill_in :email, :with => "test@test.com"
+  @email_address = "test@test.com"
+  fill_in :email, :with => @email_address
   fill_in :password, :with => "password"
   fill_in "Password confirmation", :with => "password"
 end

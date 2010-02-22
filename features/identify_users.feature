@@ -2,8 +2,7 @@ Feature:
   (Constraint)
   In order to track the author of documentation and comments
   I need to provide a way to identify users
-  
-  @wip
+
   Scenario: An anonymous user requests an iDoc identity with valid details
   	Given I am not identified
   	When I go to the new account page

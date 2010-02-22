@@ -26,6 +26,12 @@ begin
       t.profile = 'wip'
     end
 
+    Cucumber::Rake::Task.new({:proposed => 'db:test:prepare'}, 'Show features that have been proposed') do |t|
+      t.binary = vendored_cucumber_bin
+      t.fork = true # You may get faster startup if you set this to false
+      t.profile = 'proposed'
+    end
+
     desc 'Run all features'
     task :all => [:ok, :wip]
   end
