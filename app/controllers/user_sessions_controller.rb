@@ -1,6 +1,6 @@
 class UserSessionsController < ApplicationController
   before_filter :find_menu_items, :only => [:new, :create]
-  before_filter :check_logged_out, :only => [:new, :create]
+  before_filter lambda{|cntrl| cntrl.require_logged_out("You are already logged in")}, :only => [:new, :create]
 
   def destroy
     @user_session = UserSession.find
@@ -26,15 +26,4 @@ class UserSessionsController < ApplicationController
       render :action => :new
     end
   end
-
-  def check_logged_out
-    if UserSession.find
-      flash[:error] = "You are already logged in"
-      redirect_to root_url
-      return false
-    else
-      return true
-    end
-  end
-
 end

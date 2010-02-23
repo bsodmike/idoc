@@ -4,7 +4,9 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :users, :collection => {:confirm => :get}
 
-  map.resources :documentation_pages
+  map.resources :documentation_pages do |doc|
+    doc.resources :comments
+  end
 
   map.root :controller => :documentation_pages, :action => :new
 end

@@ -11,4 +11,24 @@ class ApplicationController < ActionController::Base
   def find_menu_items
     @menu_items = DocumentationPage.find :all
   end
+
+  def require_logged_out(message)
+    if UserSession.find
+      flash[:error] = message
+      redirect_to root_url
+      return false
+    else
+      return true
+    end
+  end
+
+  def require_logged_in(message)
+    if !UserSession.find
+      flash[:error] = message
+      redirect_to new_user_session_url
+      return false
+    else
+      return true
+    end
+  end
 end

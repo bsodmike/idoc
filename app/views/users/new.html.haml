@@ -1,8 +1,19 @@
 - form_for @user do |f|
-  != f.label :email
-  != f.text_field :email
-  != f.label :password
-  != f.password_field :password
-  != f.label :password_confirmation
-  != f.password_field :password_confirmation
-  != submit_tag "Register"
+  .yui-gf
+    .yui-u.first.form_label
+      != f.label :email
+    .yui-u
+      != f.text_field :email
+  .yui-gf
+    .yui-u.first.form_label
+      != f.label :password
+    .yui-u
+      != f.password_field :password
+  .yui-gf
+    .yui-u.first.form_label
+      != f.label :password_confirmation
+    .yui-u
+      != f.password_field :password_confirmation
+  .yui-gf
+    .yui-u
+      != submit_tag "Register"

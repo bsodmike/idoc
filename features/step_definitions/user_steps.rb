@@ -26,11 +26,18 @@ Given /^I have not created an account$/ do
   User.destroy_all
 end
 
+Given /^I am identified$/ do
+  Given "I have created an account"
+  Given "I have activated my account"
+  Given "I have logged in to my account"
+end
+
 Given /^I have logged in to my account$/ do
   visit path_to("the account logon page")
   fill_in :email, :with => @email_address
   fill_in :password, :with => "password"
   click_button "Log in"
+  Then 'I should see "Logged in successfully"'
 end
 
 When /^I enter my account details$/ do

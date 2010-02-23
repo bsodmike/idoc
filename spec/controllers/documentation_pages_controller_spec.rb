@@ -125,10 +125,22 @@ end
 describe DocumentationPagesController, "displaying a documentation page" do
   it_should_behave_like "finding menu items"
 
+  before(:each) do
+    UserSession.stub!(:find).and_return(nil)
+    @doc_page = mock_model(DocumentationPage)
+    DocumentationPage.should_receive(:find).with(@doc_page.id.to_s).and_return(@doc_page)
+  end
   it "should find the documentation page" do
-    doc_page = mock_model(DocumentationPage)
-    DocumentationPage.should_receive(:find).with(doc_page.id.to_s).and_return(doc_page)
-    get :show, :id => doc_page.id
-    assigns(:documentation_page).should == doc_page
+    get :show, :id => @doc_page.id
+    assigns(:documentation_page).should == @doc_page
+  end
+
+  context "with an identified user" do
+    it "should find the identified user" do
+      UserSession.should_receive(:find).and_return(user_session = mock_model(UserSession))
+      user_session.should_receive(:record).and_return(user = mock_model(User))
+      get :show, :id => @doc_page.id
+      assigns[:current_user].should == user
+    end
   end
 end

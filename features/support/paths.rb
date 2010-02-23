@@ -23,6 +23,9 @@ module NavigationHelpers
     when /the new account page/
       new_user_path
 
+    when /the document page/
+      documentation_page_path(@documentation_page)
+
     else
       raise "Can't find mapping from \"#{page_name}\" to a path.\n" +
         "Now, go and add a mapping in #{__FILE__}"

@@ -1,8 +1,7 @@
 class UsersController < ApplicationController
 
   before_filter :find_menu_items
-
-  before_filter :check_logged_in, :only => [:new, :create]
+  before_filter lambda{|cntrl| cntrl.require_logged_out("You already have an account")}, :only => [:new, :create]
 
   def new
     @user = User.new
@@ -28,14 +27,5 @@ class UsersController < ApplicationController
   end
 
   def show
-  end
-
-  def check_logged_in
-    if UserSession.find
-      flash[:error] = "You already have an account"
-      redirect_to root_url
-      return false
-    end
-    return true
   end
 end

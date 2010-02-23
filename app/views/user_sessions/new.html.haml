@@ -1,6 +1,14 @@
 -form_for @user_session, :url => user_session_path do |f|
-  != f.label :email
-  != f.text_field :email
-  != f.label :password
-  != f.password_field :password
-  != submit_tag "Log in"
+  .yui-gf
+    .yui-u.first.form_label
+      != f.label :email
+    .yui-u
+      != f.text_field :email
+  .yui-gf
+    .yui-u.first.form_label
+      != f.label :password
+    .yui-u
+      != f.password_field :password
+  .yui-gf
+    .yui-u
+      != submit_tag "Log in"

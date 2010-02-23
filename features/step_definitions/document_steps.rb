@@ -19,5 +19,5 @@ Then /^I should see the menu item for the page$/ do
 end
 
 Given /^I have created a page$/ do
-  DocumentationPage.create("title" => "A page", "content" => "More content")
+  @documentation_page = DocumentationPage.create("title" => "A page", "content" => "More content")
 end

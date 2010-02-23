@@ -39,7 +39,6 @@ describe UsersController, "requesting a form to create a new user" do
       response.should redirect_to(root_url)
     end
   end
-
 end
 
 describe UsersController, "creating a new user account" do

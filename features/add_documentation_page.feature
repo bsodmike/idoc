@@ -4,9 +4,7 @@ Feature:
   I need to add new documentation pages
 
   Scenario: Create the first documentation page when identified
-    Given I have created an account
-    And I have activated my account
-    And I have logged in to my account
+    Given I am identified
     And there is no documentation
     And I am on the home page
     When I enter documentation
@@ -16,9 +14,7 @@ Feature:
     And I should see the menu item for the page
 
   Scenario: Create more documentation when identified
-    Given I have created an account
-    And I have activated my account
-    And I have logged in to my account
+    Given I am identified
     And I have created a page
     When I go to the add documentation page
     And I enter documentation
