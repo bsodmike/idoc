@@ -33,7 +33,7 @@ begin
     end
 
     desc 'Run all features'
-    task :all => [:ok, :wip]
+    task :all => [:proposed, :ok, :wip]
   end
   desc 'Alias for cucumber:ok'
   task :cucumber => 'cucumber:ok'
