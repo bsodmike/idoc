@@ -7,8 +7,20 @@ When /^I enter documentation$/ do
   fill_in "Content", :with => "Test documentation"
 end
 
+When /^I enter documentation without a title$/ do
+  fill_in "Content", :with => "Test documentation"
+end
+
+When /^I enter documentation without page content$/ do
+  fill_in "Title", :with => "Testing"
+end
+
 Then /^I should see the documentation page$/ do
   response.should contain("Testing")
+  response.should contain("Test documentation")
+end
+
+Then /^I should see the page body$/ do
   response.should contain("Test documentation")
 end
 

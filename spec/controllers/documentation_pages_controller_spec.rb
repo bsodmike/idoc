@@ -50,7 +50,8 @@ describe DocumentationPagesController, "providing a blank documentation page" do
 end
 
 describe DocumentationPagesController, "creating a new page" do
-
+  it_should_behave_like "finding menu items"
+  
   context "with an identified user" do
     before(:each) do
       @doc_page = mock_model(DocumentationPage, :save => true)
@@ -100,10 +101,18 @@ describe DocumentationPagesController, "creating a new page" do
 
       it "should attempt to save the page" do
         @doc_page.should_receive(:save)
-        post :create, :documentation_Page => @invalid_data
+        post :create, :documentation_page => @invalid_data
       end
 
-      it "should "
+      it "should inform the user of the problem" do
+        post :create, :documentation_page => @invalid_data
+        flash[:error].should contain("Errors existed in the documentation page")
+      end
+
+      it "should provide the user with the form to correct the mistake" do
+        post :create, :documentation_page => @invalid_data
+        response.should render_template('documentation_pages/new')
+      end
     end
   end
   context "without an identified user" do

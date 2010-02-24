@@ -23,7 +23,6 @@ Feature:
     And I should see the documentation page
     And I should see the menu item for the page
 
-  @wip
   Scenario: Attempt to create a documentation page without a title
     Given I am identified
     When I go to the add documentation page
@@ -33,7 +32,6 @@ Feature:
     And I should see "Title can't be blank"
     And I should see the page body
 
-  @wip
   Scenario: Attempt to create a documentation page without any content
     Given I am identified
     When I go to the add documentation page
@@ -41,9 +39,7 @@ Feature:
     And I press "Save"
     Then I should be on the documentation page
     And I should see "Content can't be blank"
-    And I should see the page title
 
-  @wip
   Scenario: Attempt to create a completely blank documentation page
     Given I am identified
     When I go to the add documentation page
