@@ -2,6 +2,7 @@ Page added
 %h1= @documentation_page.title
 .page_content= @documentation_page.content
 - if @current_user
+  != link_to "Edit page", edit_documentation_page_path(@documentation_page)
   != link_to "Add comment", new_documentation_page_comment_path(@documentation_page)
 - else
   You need to log in to add a comment

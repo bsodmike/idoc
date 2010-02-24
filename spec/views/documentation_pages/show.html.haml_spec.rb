@@ -53,4 +53,10 @@ describe "displaying a documentation page with a logged in user" do
       f.should contain("Add comment")
     end
   end
+
+  it "should provide a link to edit the page" do
+    response.should have_selector("a", :href => edit_documentation_page_path(@documentation_page)) do |f|
+      f.should contain("Edit page")
+    end
+  end
 end

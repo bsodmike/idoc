@@ -1,5 +1,5 @@
 class DocumentationPagesController < ApplicationController
-  before_filter :find_menu_items, :only => [:new, :create, :show]
+  before_filter :find_menu_items, :only => [:new, :create, :edit, :show]
   before_filter lambda{|cntrl| cntrl.require_logged_in("You must be logged on to add documentation")},
                 :only => [:new, :create]
   
@@ -15,6 +15,15 @@ class DocumentationPagesController < ApplicationController
       flash[:error] = "Errors existed in the documentation page"
       render :action => :new
     end
+    
+  end
+
+  def edit
+    @documentation_page = DocumentationPage.find(params[:id])
+    
+  end
+
+  def update
     
   end
 

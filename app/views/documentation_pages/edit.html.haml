@@ -1,0 +1,16 @@
+-form_for(@documentation_page) do |f|
+  -if !@documentation_page.errors.empty?
+    .errors= error_messages_for :documentation_page
+  .yui-gf
+    .yui-u.first.form_label
+      !=f.label :title
+    .yui-u
+      !=f.text_field :title
+  .yui-gf
+    .yui-u.first.form_label
+      !=f.label :content
+    .yui-u
+      !=f.text_area :content, :rows => 10
+  .yui-gf
+    .yui-u
+      !=submit_tag 'Save changes'

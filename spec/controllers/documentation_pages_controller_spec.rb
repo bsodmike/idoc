@@ -14,7 +14,7 @@ describe DocumentationPagesController, "providing a blank documentation page" do
       UserSession.should_receive(:find)
       get :new
     end
-    
+
     it "should set up the data for a new page" do
       DocumentationPage.should_receive(:new).and_return(doc_page = mock_model(DocumentationPage))
       get :new
@@ -51,7 +51,7 @@ end
 
 describe DocumentationPagesController, "creating a new page" do
   it_should_behave_like "finding menu items"
-  
+
   context "with an identified user" do
     before(:each) do
       @doc_page = mock_model(DocumentationPage, :save => true)
@@ -164,4 +164,26 @@ describe DocumentationPagesController, "displaying a documentation page" do
       assigns[:current_user].should == user
     end
   end
+end
+
+describe DocumentationPagesController, "editing an existing page (providing the form)" do
+  it_should_behave_like "finding menu items"
+
+  context "with an identified user" do
+    before(:each) do
+      UserSession.stub!(:find).and_return(mock_model(UserSession))
+      @doc_page = mock_model(DocumentationPage)
+      DocumentationPage.should_receive(:find).with(@doc_page.id.to_s).and_return(@doc_page)
+    end
+
+    it "should find the documentation page" do
+      get :edit, :id => @doc_page.id
+      assigns[:documentation_page].should == @doc_page
+    end
+  end
+
+end
+
+describe DocumentationPagesController, "editing an existing page (performing the update)" do
+
 end
