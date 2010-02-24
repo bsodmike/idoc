@@ -14,7 +14,6 @@ Feature:
     And I should see "Comment added"
     And I should see my comment
 
-  @wip
   Scenario: Attempt to add a comment on a documentation page when not identified
     Given I am not identified
     And I have created a page

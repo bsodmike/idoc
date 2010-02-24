@@ -92,6 +92,18 @@ describe DocumentationPagesController, "creating a new page" do
         DocumentationPage.stub!(:new).and_return(@doc_page)
         @invalid_data = {}
       end
+
+      it "should create a page" do
+        DocumentationPage.should_receive(:new).with(@invalid_data)
+        post :create, :documentation_page => @invalid_data
+      end
+
+      it "should attempt to save the page" do
+        @doc_page.should_receive(:save)
+        post :create, :documentation_Page => @invalid_data
+      end
+
+      it "should "
     end
   end
   context "without an identified user" do
@@ -116,7 +128,7 @@ describe DocumentationPagesController, "creating a new page" do
     end
 
     it "should put the user on the account logon page" do
-      get :new
+      post :create, :documentation_page => @page_data
       response.should redirect_to(new_user_session_url)
     end
   end

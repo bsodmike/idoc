@@ -26,7 +26,8 @@ end
 
 describe "when the page has some comments" do
   before(:each) do
-    @comment = mock_model(Comment, :body => 'Test comment')
+    @comment_time = Time.now
+    @comment = mock_model(Comment, :body => 'Test comment', :created_at => @comment_time)
     @documentation_page = mock_model(DocumentationPage, :title => "Test title", :content => "Test documentation", :comments => [@comment])
     assigns[:documentation_page] = @documentation_page
     render 'documentation_pages/show'
