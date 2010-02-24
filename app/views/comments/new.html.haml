@@ -1,0 +1,11 @@
+- form_for([@documentation_page, @comment]) do |f|
+  - if !@comment.errors.empty?
+    .errors= error_messages_for :comment
+  .yui-gf
+    .yui-u.first.form_label
+      != f.label :body, "Comment"
+    .yui-u
+      != f.text_area :body
+  .yui-gf
+    .yui-u
+      != submit_tag "Submit comment"

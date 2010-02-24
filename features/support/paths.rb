@@ -26,6 +26,11 @@ module NavigationHelpers
     when /the document page/
       documentation_page_path(@documentation_page)
 
+    when /the add comment page/
+      new_documentation_page_comment_path(@documentation_page)
+
+    when /the comment page/
+      documentation_page_comments_path(@documentation_page)
     else
       raise "Can't find mapping from \"#{page_name}\" to a path.\n" +
         "Now, go and add a mapping in #{__FILE__}"

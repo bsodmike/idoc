@@ -5,3 +5,5 @@ Page added
   != link_to "Add comment", new_documentation_page_comment_path(@documentation_page)
 - else
   You need to log in to add a comment
+- @documentation_page.comments.each do |comment|
+  .comment= comment.body

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "display a documentation page anonymous browsing" do
   before(:each) do
-    @documentation_page = mock_model(DocumentationPage, :title => "Test title", :content => "Test documentation")
+    @documentation_page = mock_model(DocumentationPage, :title => "Test title", :content => "Test documentation", :comments => [])
     assigns[:documentation_page] = @documentation_page
     render 'documentation_pages/show'
   end
@@ -23,9 +23,25 @@ describe "display a documentation page anonymous browsing" do
   end
 end
 
+
+describe "when the page has some comments" do
+  before(:each) do
+    @comment = mock_model(Comment, :body => 'Test comment')
+    @documentation_page = mock_model(DocumentationPage, :title => "Test title", :content => "Test documentation", :comments => [@comment])
+    assigns[:documentation_page] = @documentation_page
+    render 'documentation_pages/show'
+  end
+
+  it "should display the comment" do
+    response.should have_selector(".comment") do |d|
+      d.should contain(@comment.body)
+    end
+  end
+end
+
 describe "displaying a documentation page with a logged in user" do
   before(:each) do
-    @documentation_page = mock_model(DocumentationPage, :title => "Test title", :content => "Test documentation")
+    @documentation_page = mock_model(DocumentationPage, :title => "Test title", :content => "Test documentation", :comments => [])
     assigns[:documentation_page] = @documentation_page
     assigns[:current_user] = mock_model(User, :email => "test@test.com")
     render 'documentation_pages/show'

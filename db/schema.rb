@@ -9,7 +9,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100222170231) do
+ActiveRecord::Schema.define(:version => 20100223165649) do
+
+  create_table "comments", :force => true do |t|
+    t.text     "body",                  :null => false
+    t.integer  "user_id"
+    t.integer  "documentation_page_id", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "documentation_pages", :force => true do |t|
     t.string   "title",      :null => false
