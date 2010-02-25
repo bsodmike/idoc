@@ -3,7 +3,6 @@ Feature:
   As a Document Author
   I need to edit existing documentation
 
-  @wip
   Scenario: Edit an existing documentation page as an identified user
     Given I am identified
     And I have created a page
@@ -13,5 +12,8 @@ Feature:
     And I press "Save changes"
     Then I should be on the document page
     And I should see the new title
-    And I should see "Page updated"
+    And I should see "Page successfully updated"
     And I should see the page body
+
+  @wip
+  Scenario: 

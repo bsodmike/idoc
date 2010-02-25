@@ -120,7 +120,8 @@ end
 describe DocumentationPagesController, "editing an existing page (performing the update)" do
   before(:each) do
     @failed_logon_error_message = "You must be logged on to add documentation"
-    @doc_page = mock_model(DocumentationPage)
+    @doc_page = mock_model(DocumentationPage, :save => true)
+    @doc_page.stub!(:update_attributes)
     DocumentationPage.stub!(:find).and_return(@doc_page)
     @valid_params = {}
   end
@@ -131,7 +132,24 @@ describe DocumentationPagesController, "editing an existing page (performing the
   it_should_behave_like "requires user logon"
 
   it "should find the documentation page" do
+    DocumentationPage.should_receive(:find).with(@doc_page.id.to_s)
     post :update, :id => @doc_page.id, :documentation_page => @valid_params
     assigns[:documentation_page].should == @doc_page
+  end
+
+  it "should update the documentation page's attributes and then save" do
+    @doc_page.should_receive(:update_attributes).once.ordered.with(@valid_params)
+    @doc_page.should_receive(:save).once.ordered
+    post :update, :id => @doc_page.id, :documentation_page => @valid_params
+  end
+
+  it "should inform the user of the successful update" do
+    post :update, :id => @doc_page.id, :documentation_page => @valid_params
+    flash[:notice].should contain("Page successfully updated")
+  end
+
+  it "should return the user to the documentation page" do
+    post :update, :id => @doc_page.id, :documentation_page => @valid_params
+    response.should redirect_to(documentation_page_url(@doc_page))
   end
 end

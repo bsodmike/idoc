@@ -25,6 +25,10 @@ class DocumentationPagesController < ApplicationController
 
   def update
     @documentation_page = DocumentationPage.find(params[:id])
+    @documentation_page.update_attributes(params[:documentation_page])
+    @documentation_page.save
+    flash[:notice] = "Page successfully updated"
+    redirect_to @documentation_page
   end
 
   def show
