@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   before_filter :find_menu_items, :only => [:new, :create]
-  before_filter lambda{|cntrl| cntrl.require_logged_in("You must be logged in to add a comment")}
+  before_filter lambda{|cntrl| cntrl.require_logged_in("You must be logged on to add a comment")}
   def new
     @documentation_page = DocumentationPage.find(params[:documentation_page_id])
     @comment = @documentation_page.comments.build

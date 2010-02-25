@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe CommentsController, "Creating a new comment (form setup)" do
   before(:each) do
-    @failed_logon_error_message = "You must be logged in to add a comment"
+    @failed_logon_error_message = "You must be logged on to add a comment"
     @doc_page = mock_model(DocumentationPage, :comments => (@comments =  mock("comment_list")))
     @comments.stub!(:build).and_return(@comment = mock_model(Comment))
     DocumentationPage.stub!(:find).and_return(@doc_page)

@@ -26,6 +26,8 @@ module NavigationHelpers
       when /the document page/
         documentation_page_path(@documentation_page)
 
+      when /the edit document page/
+        edit_documentation_page_path(@documentation_page)                                
       when /the documentation page/
         documentation_pages_path
 

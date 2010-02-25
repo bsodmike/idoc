@@ -5,7 +5,7 @@ require File.expand_path(File.join(File.dirname(__FILE__),'..','config','environ
 require 'spec/autorun'
 require 'spec/rails'
 require 'webrat'
-require 'controllers/application_controller_spec'
+require 'shared_specs/shared_controller_spec'
 require "email_spec"
 
 # Uncomment the next line to use webrat's matchers

@@ -100,7 +100,7 @@ end
 
 describe DocumentationPagesController, "editing an existing page (providing the form)" do
   before(:each) do
-    @failed_logon_error_message = "You must be logged on to add documentation"
+    @failed_logon_error_message = "You must be logged on to edit documentation"
     @doc_page = mock_model(DocumentationPage)
     DocumentationPage.stub!(:find).and_return(@doc_page)
   end
@@ -119,7 +119,7 @@ end
 
 describe DocumentationPagesController, "editing an existing page (performing the update)" do
   before(:each) do
-    @failed_logon_error_message = "You must be logged on to add documentation"
+    @failed_logon_error_message = "You must be logged on to edit documentation"
     @doc_page = mock_model(DocumentationPage, :save => true)
     @doc_page.stub!(:update_attributes)
     DocumentationPage.stub!(:find).and_return(@doc_page)
@@ -143,13 +143,31 @@ describe DocumentationPagesController, "editing an existing page (performing the
     post :update, :id => @doc_page.id, :documentation_page => @valid_params
   end
 
-  it "should inform the user of the successful update" do
-    post :update, :id => @doc_page.id, :documentation_page => @valid_params
-    flash[:notice].should contain("Page successfully updated")
+  context "successful update" do
+    it "should inform the user of the successful update" do
+      post :update, :id => @doc_page.id, :documentation_page => @valid_params
+      flash[:notice].should contain("Page successfully updated")
+    end
+
+    it "should return the user to the documentation page" do
+      post :update, :id => @doc_page.id, :documentation_page => @valid_params
+      response.should redirect_to(documentation_page_url(@doc_page))
+    end
   end
 
-  it "should return the user to the documentation page" do
-    post :update, :id => @doc_page.id, :documentation_page => @valid_params
-    response.should redirect_to(documentation_page_url(@doc_page))
+  context "unsuccessful update" do
+    before(:each) do
+      @doc_page.stub!(:save).and_return(false)
+      @invalid_params = {}
+    end
+    it "should inform the user of an error occuring" do
+      post :update, :id => @doc_page.id, :documentation_page => @invalid_params
+      flash[:error].should contain("Errors occured during page update")
+    end
+
+    it "should provide the user with the update form again" do
+      post :update, :id => @doc_page.id, :documentation_page => @invalid_params
+      response.should render_template("documentation_pages/edit")
+    end
   end
 end

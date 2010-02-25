@@ -19,6 +19,11 @@ When /^I enter documentation without page content$/ do
   fill_in "Title", :with => @title
 end
 
+When /^I remove the document title$/ do
+  @title = ""
+  fill_in "Title", :with => @title
+end
+
 When /^I change the document title$/ do
   @title = "New testing"
   fill_in "Title", :with => @title

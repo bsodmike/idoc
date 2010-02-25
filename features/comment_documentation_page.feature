@@ -21,7 +21,7 @@ Feature:
     Then I should see "You need to log in to add a comment"
     When I go to the add comment page
     Then I should be on the account logon page
-    And I should see "You must be logged in to add a comment"
+    And I should see "You must be logged on to add a comment"
 
   Scenario: Attempt to add a comment without a comment body as an identified user
     Given I am identified
