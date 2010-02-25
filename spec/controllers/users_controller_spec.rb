@@ -1,6 +1,9 @@
 require 'spec_helper'
 
 describe UsersController, "requesting a form to create a new user" do
+  def perform_action
+    get :new
+  end
   it_should_behave_like "finding menu items"
 
   context "When not identified as a user" do

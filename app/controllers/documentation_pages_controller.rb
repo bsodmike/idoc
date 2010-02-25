@@ -1,7 +1,7 @@
 class DocumentationPagesController < ApplicationController
-  before_filter :find_menu_items, :only => [:new, :create, :edit, :show]
+  before_filter :find_menu_items, :only => [:new, :create, :edit, :update, :show]
   before_filter lambda{|cntrl| cntrl.require_logged_in("You must be logged on to add documentation")},
-                :only => [:new, :create]
+                :only => [:new, :create, :edit, :update]
   
   def new
     @documentation_page = DocumentationPage.new
@@ -24,7 +24,7 @@ class DocumentationPagesController < ApplicationController
   end
 
   def update
-    
+    @documentation_page = DocumentationPage.find(params[:id])
   end
 
   def show
