@@ -8,6 +8,11 @@
       !=f.text_field :title
   .yui-gf
     .yui-u.first.form_label
+      !=f.label :parent_id, "Parent"
+    .yui-u
+      !=f.collection_select :parent_id, @all_documents, :id, :title, :prompt => true, :include_blank => true
+  .yui-gf
+    .yui-u.first.form_label
       !=f.label :content
     .yui-u
       !=f.text_area :content, :rows => 10

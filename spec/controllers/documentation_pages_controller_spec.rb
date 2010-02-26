@@ -81,9 +81,10 @@ describe DocumentationPagesController, "displaying a documentation page" do
   before(:each) do
     UserSession.stub!(:find).and_return(nil)
     @doc_page = mock_model(DocumentationPage)
-    DocumentationPage.should_receive(:find).with(@doc_page.id.to_s).and_return(@doc_page)
+    DocumentationPage.stub!(:find).and_return(@doc_page)
   end
   it "should find the documentation page" do
+    DocumentationPage.should_receive(:find).with(@doc_page.id.to_s)
     get :show, :id => @doc_page.id
     assigns(:documentation_page).should == @doc_page
   end
@@ -102,7 +103,10 @@ describe DocumentationPagesController, "editing an existing page (providing the 
   before(:each) do
     @failed_logon_error_message = "You must be logged on to edit documentation"
     @doc_page = mock_model(DocumentationPage)
+    @all_pages = Array.new(4) {mock_model(DocumentationPage)}
+    @all_pages << @doc_page
     DocumentationPage.stub!(:find).and_return(@doc_page)
+    DocumentationPage.stub!(:find).with(:all).and_return(@all_pages)
   end
   def perform_action
     get :edit, :id => @doc_page.id
@@ -114,6 +118,16 @@ describe DocumentationPagesController, "editing an existing page (providing the 
     DocumentationPage.should_receive(:find).with(@doc_page.id.to_s)
     get :edit, :id => @doc_page.id
     assigns[:documentation_page].should == @doc_page
+  end
+
+  it "should find all the documentation pages" do
+    DocumentationPage.should_receive(:find).with(:all).and_return(@all_pages)
+    get :edit, :id => @doc_page.id
+  end
+
+  it "should remove the current page from it's all_documents output" do
+    get :edit, :id => @doc_page.id
+    assigns[:all_documents].should == (@all_pages - [@doc_page])
   end
 end
 
@@ -159,10 +173,23 @@ describe DocumentationPagesController, "editing an existing page (performing the
     before(:each) do
       @doc_page.stub!(:save).and_return(false)
       @invalid_params = {}
+      @all_pages = Array.new(4) {mock_model(DocumentationPage)}
+      @all_pages << @doc_page
+      DocumentationPage.stub!(:find).with(:all).and_return(@all_pages)
     end
     it "should inform the user of an error occuring" do
       post :update, :id => @doc_page.id, :documentation_page => @invalid_params
       flash[:error].should contain("Errors occured during page update")
+    end
+
+    it "should find all the documentation pages" do
+      DocumentationPage.should_receive(:find).with(:all).and_return(@all_pages)
+      get :edit, :id => @doc_page.id
+    end
+
+    it "should remove the current page from it's all_documents output" do
+      get :edit, :id => @doc_page.id
+      assigns[:all_documents].should == (@all_pages - [@doc_page])
     end
 
     it "should provide the user with the update form again" do

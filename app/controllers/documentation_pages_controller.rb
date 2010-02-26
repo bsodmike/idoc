@@ -22,7 +22,7 @@ class DocumentationPagesController < ApplicationController
 
   def edit
     @documentation_page = DocumentationPage.find(params[:id])
-
+    @all_documents = DocumentationPage.find(:all) - [@documentation_page]
   end
 
   def update
@@ -32,6 +32,7 @@ class DocumentationPagesController < ApplicationController
       flash[:notice] = "Page successfully updated"
       redirect_to @documentation_page
     else
+      @all_documents = DocumentationPage.find(:all) - [@documentation_page]
       flash[:error] = "Errors occured during page update"
       render :action => :edit
     end

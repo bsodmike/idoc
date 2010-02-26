@@ -24,5 +24,6 @@ describe "the menu navigation" do
   it "should have a menu item" do
     have_menu_item("testing")
   end
-  
+
+  context "with a "
 end

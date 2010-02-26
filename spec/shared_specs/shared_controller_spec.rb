@@ -2,11 +2,17 @@ require 'spec_helper'
 if !@included then
   shared_examples_for "finding menu items" do
     before(:each) do
+      @find_method = controller.method(:find_menu_items)
       controller.stub!(:find_menu_items).and_return(true)
     end
     it "should attempt to find items for the menu" do
       controller.should_receive(:find_menu_items)
       perform_action
+    end
+
+    it "should find all the documents" do
+      DocumentationPage.should_receive(:find).with(:all).and_return(mock("document_list"))
+      @find_method.call
     end
   end
 

@@ -1,9 +1,11 @@
 require 'spec_helper'
 
-describe "create a new documentation page" do
+describe "update an existing documentation page" do
   before(:each) do
     @errors = mock("Errors", :empty? => true)
     assigns[:documentation_page] = @doc_page = mock_model(DocumentationPage, :null_object => true, :errors => @errors)
+    assigns[:all_documents] = [mock_model(DocumentationPage, :title => "Testing"),
+                               mock_model(DocumentationPage, :title => "Another Test")]
     render 'documentation_pages/edit'
   end
 
@@ -26,15 +28,27 @@ describe "create a new documentation page" do
     end
   end
 
+  it "should provide a list of all the parents" do
+    response.should have_selector("select", :name => 'documentation_page[parent_id]') do |s|
+      s.should have_selector("option") do |o|
+        o.should contain("Testing")
+      end
+      s.should have_selector("option") do |o|
+        o.should contain("Another Test")
+      end
+    end
+  end
+
   it "should not display an error box" do
     response.should_not have_selector(".errors")
   end
 end
 
-describe "displaying a new documentation page form with errors" do
+describe "updating an existing documentation page form with errors" do
   before(:each) do
     @errors = mock("Errors", :empty? => false)
     assigns[:documentation_page] = mock_model(DocumentationPage, :null_object => true, :errors => @errors)
+    assigns[:all_documents] = []
     template.stub!(:error_messages_for).and_return("Test error")
     render 'documentation_pages/edit'
   end

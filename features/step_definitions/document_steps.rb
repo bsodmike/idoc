@@ -53,3 +53,28 @@ Given /^I have created a page$/ do
   @content = "More content"
   @documentation_page = DocumentationPage.create("title" => @title, "content" => @content)
 end
+
+Given /^I have created two document pages$/ do
+  @title = "A page"
+  @content = "Some content"
+  @documentation_page = DocumentationPage.create("title" => @title, "content" => @content)
+  @title2 = "Another page"
+  @content2 = "Some more content"
+  @documentation_page2 = DocumentationPage.create("title" => @title2, "content" => @content2)
+end
+
+When /^I set the parent to the other document$/ do
+  select(@title2, :from => :parent)
+end
+
+Then /^I should see the menu list in a nested list$/ do
+  response.should have_selector("ul.menu") do |menu|
+    menu.should have_selector("li") do |item|
+      item.should contain(@title2)
+      item.should have_selector("ul.menu") do |nested_menu|
+        nested_menu.should contain(@title)
+      end
+    end
+  end
+end
+

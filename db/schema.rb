@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100223165649) do
+ActiveRecord::Schema.define(:version => 20100225151033) do
 
   create_table "comments", :force => true do |t|
     t.text     "body",                  :null => false
@@ -24,7 +24,11 @@ ActiveRecord::Schema.define(:version => 20100223165649) do
     t.text     "content",    :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "parent_id"
+    t.integer  "position"
   end
+
+  add_index "documentation_pages", ["parent_id", "position"], :name => "documentation_pages_parent_id_key", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "email",                                  :null => false
