@@ -27,3 +27,11 @@ Feature:
     And I am on the document page for "Test page 1"
     When I follow "Next"
     Then I should be on the document page for "Test subpage 1"
+
+  Scenario: Viewing the previous document page using the previous link in a single level documentation layout
+    Given I am not identified
+    And I have created a page called "Test page 1"
+    And I have created a page called "Test page 2"
+    And I am on the document page for "Test page 2"
+    When I follow "Previous"
+    Then I should be on the document page for "Test page 1"

@@ -26,10 +26,23 @@ describe DocumentationPage do
       page.has_next?.should be_true
     end
 
+    it "should give a positive result with has_previous? when there is a documentation page at the same level with a lower position" do
+      DocumentationPage.create(:title => "Test", :content => "Some content")
+      page = DocumentationPage.create(:title => "Another test", :content => "more content")
+      page.has_previous?.should be_true
+    end
+
     it "should provide the next page when requested" do
       page1 = DocumentationPage.create(:title => "Test", :content => "Some content")
       page2 = DocumentationPage.create(:title => "Another test", :content => "more content")
       page1.next.should == page2
+    end
+
+    it "should provide the previous page when requested" do
+      page1 = DocumentationPage.create(:title => "Test", :content => "Some content")
+      page2 = DocumentationPage.create(:title => "Another test", :content => "more content")
+      page2.previous.should == page1
+
     end
   end
 
@@ -48,6 +61,24 @@ describe DocumentationPage do
 
         subpage1 = DocumentationPage.create(:title => "Test 2", :content => "Some content", :parent_id => page1.id)
         page1.next.should == subpage1
+      end
+    end
+
+    context "finding the next item of the last of an items children" do
+      it "should have a next item when the parent has a next item" do
+        page1 = DocumentationPage.create(:title => "Test", :content => "Some content")
+        page2 = DocumentationPage.create(:title => "Another test", :content => "more content")
+
+        subpage1 = DocumentationPage.create(:title => "Test 2", :content => "Some content", :parent_id => page1.id)
+        subpage1.has_next?.should be_true
+      end
+
+      it "should have a next item corresponding to the next item of the parent" do
+        page1 = DocumentationPage.create(:title => "Test", :content => "Some content")
+        page2 = DocumentationPage.create(:title => "Another test", :content => "more content")
+
+        subpage1 = DocumentationPage.create(:title => "Test 2", :content => "Some content", :parent_id => page1.id)
+        subpage1.next.should == page2
       end
     end
   end

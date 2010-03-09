@@ -13,21 +13,40 @@ class DocumentationPage < ActiveRecord::Base
     end
   end
 
-  def has_next?
-    if !self.children.empty?
+  def has_next?(include_children = true)
+    if include_children && !self.children.empty?
       return true
     elsif self.parent_id
-      return !DocumentationPage.find(:first, :conditions => ["parent_id = ? AND position > ?", self.parent_id, self.position]).nil?
+      return self.parent.has_next?(false) ? true :  !DocumentationPage.find(:first, :conditions => ["parent_id = ? AND position > ?", self.parent_id, self.position]).nil?
     else
       return !DocumentationPage.find(:first, :conditions => ["parent_id IS NULL AND position > ?", self.position]).nil?
     end
   end
 
-  def next
-    if self.has_next?
-      return self.children[0] if !self.children.empty?
+  def has_previous?
+    if self.parent_id
+      return !DocumentationPage.find(:first, :conditions => ["parent_id = ? AND position < ?", self.parent_id, self.position]).nil?
+    else
+      return !DocumentationPage.find(:first, :conditions => ["parent_id IS NULL AND position < ?", self.position]).nil?
+    end
+  end
+
+  def previous
+    if self.has_previous?
       if self.parent_id
-        return DocumentationPage.find(:first, :conditions => ["parent_id = ? AND position > ?", self.parent_id, self.position], :order => "position ASC")
+        return DocumentationPage.find(:first, :conditions => ["parent_id = ? AND position < ?", self.parent_id, self.position], :order => "position DESC")
+      else
+        return DocumentationPage.find(:first, :conditions => ["parent_id IS NULL AND position < ?", self.position], :order => "position DESC")
+      end
+    end
+  end
+
+  def next(include_children = true)
+    if self.has_next?
+      return self.children[0] if include_children && !self.children.empty?
+      if self.parent_id
+        result = DocumentationPage.find(:first, :conditions => ["parent_id = ? AND position > ?", self.parent_id, self.position], :order => "position ASC")
+        return result ? result : self.parent.next(false)
       else
         return DocumentationPage.find(:first, :conditions => ["parent_id IS NULL AND position > ?", self.position], :order => "position ASC")
       end

@@ -1,6 +1,7 @@
 %h1= @documentation_page.title
 .page_content= @documentation_page.content
 .documentation_navigation
+  != link_to "Previous", documentation_page_path(@documentation_page.previous) if (@documentation_page.has_previous?)
   != link_to "Next", documentation_page_path(@documentation_page.next) if (@documentation_page.has_next?)
 - if @current_user
   != link_to "Edit page", edit_documentation_page_path(@documentation_page)
