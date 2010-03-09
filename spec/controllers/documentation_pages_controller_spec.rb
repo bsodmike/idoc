@@ -56,6 +56,11 @@ describe DocumentationPagesController, "creating a new page" do
       post :create, :documentation_page => @valid_data
       response.should redirect_to(documentation_page_url(@doc_page))
     end
+
+    it "should inform the user of the successful creation" do
+      post :create, :documentation_page => @valid_data
+      flash[:notice].should contain("Page added")
+    end
   end
 
   context "with invalid data" do

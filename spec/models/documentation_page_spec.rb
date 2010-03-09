@@ -18,4 +18,37 @@ describe DocumentationPage do
     page.save
     page.position.should == DocumentationPage.maximum(:position)
   end
+
+  context "Single layer of documentation"  do
+    it "should give a positive result with has_next? when there is a documentation page at the same level with a greater position" do
+      page = DocumentationPage.create(:title => "Test", :content => "Some content")
+      DocumentationPage.create(:title => "Another test", :content => "more content")
+      page.has_next?.should be_true
+    end
+
+    it "should provide the next page when requested" do
+      page1 = DocumentationPage.create(:title => "Test", :content => "Some content")
+      page2 = DocumentationPage.create(:title => "Another test", :content => "more content")
+      page1.next.should == page2
+    end
+  end
+
+  context "Multiple layour of documentation" do
+    context "finding the next item of an item with children" do
+      it "should have a next item when a page has children" do
+        page1 = DocumentationPage.create(:title => "Test", :content => "Some content")
+        page2 = DocumentationPage.create(:title => "Another test", :content => "more content", :parent_id => page1.id)
+        page1.has_next?.should be_true
+      end
+
+      it "should return the first of it's children when requested" do
+
+        page1 = DocumentationPage.create(:title => "Test", :content => "Some content")
+        page2 = DocumentationPage.create(:title => "Another test", :content => "more content")
+
+        subpage1 = DocumentationPage.create(:title => "Test 2", :content => "Some content", :parent_id => page1.id)
+        page1.next.should == subpage1
+      end
+    end
+  end
 end

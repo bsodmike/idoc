@@ -13,6 +13,7 @@ class DocumentationPagesController < ApplicationController
   def create
     @documentation_page = DocumentationPage.create(params[:documentation_page])
     if @documentation_page.save
+      flash[:notice] = "Page added"
       redirect_to documentation_page_url(@documentation_page)
     else
       flash[:error] = "Errors existed in the documentation page"

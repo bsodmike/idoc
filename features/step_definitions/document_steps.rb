@@ -21,6 +21,11 @@ Given /^I have created two document pages$/ do
   @documentation_page2 = DocumentationPage.create("title" => @title2, "content" => @content2)
 end
 
+Given /^I have created a subpage of "(.*)" called "(.*)"$/ do |parent_title, page_title|
+  @parent = DocumentationPage.find_by_title(parent_title)
+  DocumentationPage.create("title" => page_title, "parent_id" => @parent.id, "content" => "Test content")
+end
+
 Given /^I have created a subpage of "(.*)" called "(.*)" with position (\d)$/ do |parent_title, page_title, position|
   @parent = DocumentationPage.find_by_title(parent_title)
   DocumentationPage.create("title" => page_title, "parent_id" => @parent.id, "content" => "Test content", "position" => position)
