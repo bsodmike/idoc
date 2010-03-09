@@ -10,5 +10,6 @@ Rails::Initializer.run do |config|
   config.gem 'haml'
   config.gem 'compass'
   config.gem 'authlogic'
+  config.gem 'friendly_id'
   config.time_zone = 'UTC'
 end

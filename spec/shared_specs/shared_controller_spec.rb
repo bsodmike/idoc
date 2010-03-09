@@ -10,8 +10,8 @@ if !@included then
       perform_action
     end
 
-    it "should find all the documents" do
-      DocumentationPage.should_receive(:find).with(:all).and_return(mock("document_list"))
+    it "should find all the root documents" do
+      DocumentationPage.should_receive(:find).with(:all, :conditions => {:parent_id => nil}).and_return(mock("document_list"))
       @find_method.call
     end
   end

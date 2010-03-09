@@ -1,3 +1,6 @@
 %ul.menu
-  - @menu_items.each do |item|
-    %li!= link_to h(item.title), documentation_page_path(item)
+  - items.each do |item|
+    %li
+      != link_to h(item.title), documentation_page_path(item)
+      - if !item.children.empty?
+        != render :partial => 'shared/menu', :locals => {:items => item.children}

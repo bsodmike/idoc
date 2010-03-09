@@ -17,6 +17,10 @@ describe DocumentationPagesController, "providing a blank documentation page" do
     get :new
     assigns(:documentation_page).should == doc_page
   end
+  it "should find all the documentation pages" do
+    DocumentationPage.should_receive(:find).with(:all).and_return(@all_pages)
+    get :new
+  end
 end
 
 describe DocumentationPagesController, "creating a new page" do
@@ -68,6 +72,11 @@ describe DocumentationPagesController, "creating a new page" do
     it "should provide the user with the form to correct the mistake" do
       post :create, :documentation_page => @invalid_data
       response.should render_template('documentation_pages/new')
+    end
+
+    it "should find all the documentation pages" do
+      DocumentationPage.should_receive(:find).with(:all).and_return(@all_pages)
+      post :create, :documentation_page => @invalid_data
     end
   end
 end

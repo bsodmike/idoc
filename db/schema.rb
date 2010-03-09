@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100225151033) do
+ActiveRecord::Schema.define(:version => 20100309131633) do
 
   create_table "comments", :force => true do |t|
     t.text     "body",                  :null => false
@@ -29,6 +29,18 @@ ActiveRecord::Schema.define(:version => 20100225151033) do
   end
 
   add_index "documentation_pages", ["parent_id", "position"], :name => "documentation_pages_parent_id_key", :unique => true
+
+  create_table "slugs", :force => true do |t|
+    t.string   "name"
+    t.integer  "sluggable_id"
+    t.integer  "sequence",                     :default => 1, :null => false
+    t.string   "sluggable_type", :limit => 40
+    t.string   "scope"
+    t.datetime "created_at"
+  end
+
+  add_index "slugs", ["name", "sluggable_type", "sequence", "scope"], :name => "index_slugs_on_n_s_s_and_s", :unique => true
+  add_index "slugs", ["sluggable_id"], :name => "index_slugs_on_sluggable_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                                  :null => false

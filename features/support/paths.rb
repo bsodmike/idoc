@@ -23,12 +23,18 @@ module NavigationHelpers
       when /the new account page/
         new_user_path
 
-      when /the document page/
+      when /the document page for "(.*)"/
+        documentation_page_path(DocumentationPage.find_by_title($1))
+      
+      when /the document page$/
         documentation_page_path(@documentation_page)
 
-      when /the edit document page/
-        edit_documentation_page_path(@documentation_page)                                
-      when /the documentation page/
+      when /the edit document page$/
+        edit_documentation_page_path(@documentation_page)
+
+      when /the edit document page for "(.*)"/
+        edit_documentation_page_path(DocumentationPage.find_by_title($1))
+      when /the documentation page$/
         documentation_pages_path
 
       when /the add comment page/

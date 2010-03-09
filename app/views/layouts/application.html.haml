@@ -18,6 +18,6 @@
             - if flash[:error]
               .error= flash[:error]
             != yield
-        .section-item
-          != render :partial => 'shared/menu', :object => @menu_items
+        .section-item#menu_container
+          != render :partial => 'shared/menu', :locals => {:items => @menu_items}
       #footer
