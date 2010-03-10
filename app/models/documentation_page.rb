@@ -25,33 +25,68 @@ class DocumentationPage < ActiveRecord::Base
 
   def has_previous?
     if self.parent_id
-      return !DocumentationPage.find(:first, :conditions => ["parent_id = ? AND position < ?", self.parent_id, self.position]).nil?
+      #if we have a parent_id then we always have a previous item
+      return true
     else
-      return !DocumentationPage.find(:first, :conditions => ["parent_id IS NULL AND position < ?", self.position]).nil?
+      #otherwise, if we don't the lowest position of all root pages, then we have a previous element 
+      return DocumentationPage.minimum(:position, :conditions => "parent_id IS NULL") != self.position
     end
+  end
+
+  def has_up?
+    self.parent_id ? true : false
   end
 
   def previous
     if self.has_previous?
+      page_options = {:order => "position DESC"}
       if self.parent_id
-        return DocumentationPage.find(:first, :conditions => ["parent_id = ? AND position < ?", self.parent_id, self.position], :order => "position DESC")
+        page_options[:conditions] = ["parent_id = ? AND position < ?", self.parent_id, self.position]
+        page_options[:no_result] = self.parent
       else
-        return DocumentationPage.find(:first, :conditions => ["parent_id IS NULL AND position < ?", self.position], :order => "position DESC")
+        page_options[:conditions] = ["parent_id IS NULL AND position < ?", self.position]
+        page_options[:no_result] = nil
+      end
+      return find_pages(page_options) do |result|
+        while !result.children.empty?
+          result = result.children[-1]
+        end
+        result
       end
     end
   end
 
-  def next(include_children = true)
+  def next(options = nil)
+    options ||= {}
     if self.has_next?
-      return self.children[0] if include_children && !self.children.empty?
+      return self.children[0] if !options[:ignore_children] && !self.children.empty?
+      page_options = {:order => "position ASC"}
       if self.parent_id
-        result = DocumentationPage.find(:first, :conditions => ["parent_id = ? AND position > ?", self.parent_id, self.position], :order => "position ASC")
-        return result ? result : self.parent.next(false)
+        page_options[:conditions] = ["parent_id = ? AND position > ?", self.parent_id, self.position]
+        page_options[:no_result] = self.parent.next(:ignore_children => true)
       else
-        return DocumentationPage.find(:first, :conditions => ["parent_id IS NULL AND position > ?", self.position], :order => "position ASC")
+        page_options[:conditions] = ["parent_id IS NULL AND position > ?", self.position]
+        page_options[:no_result] = nil
       end
-    else
-      return nil
+
+      return find_pages(page_options)
     end
+  end
+
+  def up
+    if self.has_up?
+      return self.parent
+    end
+  end
+
+  private
+
+  def find_pages(options)
+    result = DocumentationPage.find(:first, :conditions => options[:conditions], :order => options[:order])
+    if !result
+      return options[:no_result]
+    end
+    result = yield result if block_given?
+    return result
   end
 end

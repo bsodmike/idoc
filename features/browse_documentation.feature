@@ -35,3 +35,11 @@ Feature:
     And I am on the document page for "Test page 2"
     When I follow "Previous"
     Then I should be on the document page for "Test page 1"
+
+  Scenario: Viewing the parent document page using the parent link
+    Given I am not identified
+    And I have created a page called "Test page 1"
+    And I have created a subpage of "Test page 1" called "Test subpage 1"
+    And I am on the document page for "Test subpage 1"
+    When I follow "Up"
+    Then I should be on the document page for "Test page 1"

@@ -19,6 +19,19 @@ describe DocumentationPage do
     page.position.should == DocumentationPage.maximum(:position)
   end
 
+  it "should have an 'up' page when it has a parent" do
+    page = DocumentationPage.create(:title => "Test title", :content => "Some content", :position => 1)
+    subpage = DocumentationPage.new(:title => "Testing title", :content => "Some test content", :parent_id => page.id)
+    subpage.has_up?.should be_true
+  end
+
+  it "should return the parent page when the 'up' page is requested" do
+    page = DocumentationPage.create(:title => "Test title", :content => "Some content", :position => 1)
+    subpage = DocumentationPage.new(:title => "Testing title", :content => "Some test content", :parent_id => page.id)
+
+    subpage.up.should == page
+  end
+  
   context "Single layer of documentation"  do
     it "should give a positive result with has_next? when there is a documentation page at the same level with a greater position" do
       page = DocumentationPage.create(:title => "Test", :content => "Some content")
@@ -79,6 +92,16 @@ describe DocumentationPage do
 
         subpage1 = DocumentationPage.create(:title => "Test 2", :content => "Some content", :parent_id => page1.id)
         subpage1.next.should == page2
+      end
+    end
+
+    context "finding the previous item of an item before another item with children" do
+      it "should have a previous item corresponding to the last child of the previous item" do
+        page1 = DocumentationPage.create(:title => "Test", :content => "Some content")
+        page2 = DocumentationPage.create(:title => "Another test", :content => "more content")
+
+        subpage1 = DocumentationPage.create(:title => "Test 2", :content => "Some content", :parent_id => page1.id)
+        page2.previous.should == subpage1
       end
     end
   end
