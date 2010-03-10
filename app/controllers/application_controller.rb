@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   end
 
   def require_logged_out(message)
-    if UserSession.find
+    if current_session
       flash[:error] = message
       redirect_to root_url
       return false
@@ -23,12 +23,24 @@ class ApplicationController < ActionController::Base
   end
 
   def require_logged_in(message)
-    if !UserSession.find
+    if !current_session
       flash[:error] = message
       redirect_to new_user_session_url
       return false
     else
       return true
+    end
+  end
+
+  def current_session
+    return @current_session if @current_session
+    @current_session = UserSession.find
+  end
+
+  def current_user
+    return @current_user if @current_user
+    if current_session
+      @current_user = current_session.record
     end
   end
 end

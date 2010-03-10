@@ -9,6 +9,7 @@ class CommentsController < ApplicationController
   def create
     @documentation_page = DocumentationPage.find(params[:documentation_page_id])
     @comment = @documentation_page.comments.build(params[:comment])
+    @comment.user = current_user
     if @comment.save
       flash[:notice] = "Comment added"
       redirect_to @documentation_page

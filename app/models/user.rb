@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
+  validates_length_of :displayname, :minimum => 3 
   acts_as_authentic
-  attr_accessible :email, :password, :password_confirmation
+  attr_accessible :email, :displayname, :password, :password_confirmation
 
   after_create :send_signup_confirmation!
 

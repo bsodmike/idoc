@@ -5,7 +5,7 @@ describe User do
   context "with valid attributes" do
     before(:each) do
       UserSignup.stub!(:deliver_confirmation_email)
-      @valid_attributes = {:email => "test@test.com", :password => "password", :password_confirmation => "password"}
+      @valid_attributes = {:email => "test@test.com", :password => "password", :password_confirmation => "password", :displayname => "Tester"}
     end
 
     it "should send a confirmation email after being created" do
@@ -36,6 +36,14 @@ describe User do
       @user = User.new(@valid_attributes)
       @user.activate!
       @user.changed?.should == false
+    end
+
+    it "should require a displayname of at least 3 characters" do
+      @valid_attributes[:displayname] = "a"
+      @user = User.new(@valid_attributes)
+      @user.valid?.should be_false
+      @user.displayname = "aaa"
+      @user.valid?.should be_true
     end
   end
 end

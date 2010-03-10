@@ -10,3 +10,7 @@ end
 Then /^I should see my comment$/ do
   Then "I should see \"#{@comment_body}\""
 end
+
+Then /^I should see my display name$/ do
+  Then "I should see \"Tester\""  
+end

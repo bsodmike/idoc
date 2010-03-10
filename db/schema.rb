@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100309131633) do
+ActiveRecord::Schema.define(:version => 20100310145700) do
 
   create_table "comments", :force => true do |t|
     t.text     "body",                  :null => false
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(:version => 20100309131633) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "active",              :default => false, :null => false
+    t.string   "displayname",         :default => "",    :null => false
   end
 
 end

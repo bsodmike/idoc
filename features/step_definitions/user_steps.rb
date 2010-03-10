@@ -48,6 +48,7 @@ end
 When /^I enter the required account details$/ do
   @email_address = "test@test.com"
   fill_in :email, :with => @email_address
+  fill_in :displayname, :with => "Tester"
   fill_in :password, :with => "password"
   fill_in "Password confirmation", :with => "password"
 end

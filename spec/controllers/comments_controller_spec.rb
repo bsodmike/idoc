@@ -31,8 +31,10 @@ describe CommentsController, "Creating a new comment (comment construction)" do
     @failed_logon_error_message = "You must be logged on to add a comment"
     @doc_page = mock_model(DocumentationPage, :comments => (@comments =  mock("comment_list")))
     @comments.stub!(:build).and_return(@comment = mock_model(Comment, :save => true))
+    @comment.stub!(:user=)
     DocumentationPage.stub!(:find).and_return(@doc_page)
     @params = {}
+    controller.stub!(:current_user).and_return(@user = mock_model(User))
   end
   def perform_action
     post :create, :documentation_page_id => @doc_page.id, :comment => {}
@@ -48,6 +50,11 @@ describe CommentsController, "Creating a new comment (comment construction)" do
 
   it "should build a comment from the documentation comment list" do
     @comments.should_receive(:build).with(@params)
+    post :create, :documentation_page_id => @doc_page.id, :comment => @params
+  end
+
+  it "should set the comment user to the current user" do
+    @comment.should_receive(:user=).with(@user)
     post :create, :documentation_page_id => @doc_page.id, :comment => @params
   end
 

@@ -13,6 +13,7 @@ Feature:
     Then I should be on the document page
     And I should see "Comment added"
     And I should see my comment
+    And I should see my display name
 
   Scenario: Attempt to add a comment on a documentation page when not identified
     Given I am not identified

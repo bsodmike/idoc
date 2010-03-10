@@ -6,6 +6,11 @@
       != f.text_field :email
   .yui-gf
     .yui-u.first.form_label
+      != f.label :displayname
+    .yui-u
+      != f.text_field :displayname
+  .yui-gf
+    .yui-u.first.form_label
       != f.label :password
     .yui-u
       != f.password_field :password
