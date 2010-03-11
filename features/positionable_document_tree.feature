@@ -66,4 +66,16 @@ Feature:
     When I go to the edit document page for "Test subpage 2"
     Then I should see the position set to 2
 
+  Scenario: When a conflict occurs in position, the new page should get that position
+    Given I am identified
+    And I have created a page called "Test page" with position 1
+    When I go to the add documentation page
+    And I enter a new page called "Test page 2"
+    And I set the position to 1
+    And I press "Save"
+    Then I should see "Page added"
+    And I should see "Test page 2" before "Test page"
+    When I go to the edit document page for "Test page"
+    Then I should see the position set to 2
+
     

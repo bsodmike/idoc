@@ -25,6 +25,12 @@ describe DocumentationPage do
     subpage.has_up?.should be_true
   end
 
+  it "should alter the position of later pages if a collision occurs" do
+    page = DocumentationPage.create(:title => "Test title", :content => "Some content", :position => 1)
+    page2 = DocumentationPage.create(:title => "Test title 2", :content => "Some content", :position => 1)
+    DocumentationPage.find(page.id).position.should == 2
+  end
+
   it "should return the parent page when the 'up' page is requested" do
     page = DocumentationPage.create(:title => "Test title", :content => "Some content", :position => 1)
     subpage = DocumentationPage.new(:title => "Testing title", :content => "Some test content", :parent_id => page.id)

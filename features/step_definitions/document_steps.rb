@@ -12,6 +12,10 @@ Given /^I have created a page$/ do
   @documentation_page = DocumentationPage.create("title" => @title, "content" => @content)
 end
 
+Given /^I have created a page called "(.*)" with position (\d)$/ do |page_title, position|
+  DocumentationPage.create("title" => page_title, "content" => "Test content", "position" => position)
+end
+
 Given /^I have created two document pages$/ do
   @title = "A page"
   @content = "Some content"
@@ -136,7 +140,7 @@ Then /^I should see the menu item for "(.*)"$/ do |page_title|
   end
 end
 
-Then /^I should see "(.*)" before "(.*)" underneath "(.*)"$/ do |subpage1, subpage2, page|
+Then /^I should see "(.*)" before "([^"]*)" underneath "(.*)"$/ do |subpage1, subpage2, page|
   response.should have_selector("ul.menu") do |menu|
     menu.should contain(page) do |menu_item|
       menu_item.should have_selector("li") do |item|
@@ -145,6 +149,17 @@ Then /^I should see "(.*)" before "(.*)" underneath "(.*)"$/ do |subpage1, subpa
       menu_item.should have_selector("li + li") do |item|
         item.should contain(subpage2)
       end
+    end
+  end
+end
+
+Then /^I should see "(.*)" before "([^"]*)"$/ do |page1, page2|
+  response.should have_selector("ul.menu") do |menu|
+    menu.should have_selector("li") do |item|
+      item.should contain(page1)
+    end
+    menu.should have_selector("li + li") do |item|
+      item.should contain(page2)
     end
   end
 end

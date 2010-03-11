@@ -2,7 +2,7 @@ class DocumentationPage < ActiveRecord::Base
   has_many :comments
   has_friendly_id :title, :use_slug => true
   acts_as_tree :order => 'position ASC'
-  before_save :set_position
+  before_save :set_position, :fix_position_collisions
 
   validates_presence_of :title, :content
 
@@ -10,6 +10,19 @@ class DocumentationPage < ActiveRecord::Base
     if !self.position
       position = DocumentationPage.maximum(:position)
       self.position = position ? position + 1 : 1
+    end
+  end
+
+  def fix_position_collisions
+    collision = nil
+    if self.parent_id
+      collision = DocumentationPage.find(:first, :conditions => {:parent_id => self.parent_id, :position => self.position})
+    else
+      collision = DocumentationPage.find(:first, :conditions => ["parent_Id IS NULL AND position = ?", self.position])
+    end
+    if collision and collision.id != self.id
+      collision.position += 1
+      collision.save
     end
   end
 
