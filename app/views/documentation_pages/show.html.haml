@@ -1,5 +1,5 @@
 %h1= @documentation_page.title
-.page_content= @documentation_page.content
+.page_content!= @documentation_page.content.markdown
 .documentation_navigation
   != @documentation_page.has_previous? ? link_to("Previous", documentation_page_path(@documentation_page.previous)) : "Previous"
   != @documentation_page.has_up? ? link_to("Up", documentation_page_path(@documentation_page.up)): "Up"
@@ -11,6 +11,6 @@
   You need to log in to add a comment
 - @documentation_page.comments.each do |comment|
   .comment
-    .body= comment.body
+    != comment.body.markdown
     .author= comment.user.displayname
-    .created_at= distance_of_time_in_words_to_now(comment.created_at)
+    .created_at= "#{distance_of_time_in_words_to_now(comment.created_at)} ago"

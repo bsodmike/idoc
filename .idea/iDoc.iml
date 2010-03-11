@@ -153,6 +153,12 @@
     </requirement>
     <requirement>
       <requirement>
+        <dependency name="sanitize" version="0" bound="GREATER_OR_EQUAL" />
+      </requirement>
+      <source from="config/environment.rb" />
+    </requirement>
+    <requirement>
+      <requirement>
         <dependency name="webrat" version="0.6.0" bound="GREATER_OR_EQUAL" />
       </requirement>
       <source from="config/environments/cucumber.rb" />
@@ -188,6 +194,7 @@
     <orderEntry type="library" scope="PROVIDED" name="[gem] activesupport (v2.3.5, /Users/davidworkman/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5)" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="[gem] friendly_id (v2.3.2, /Users/davidworkman/.rvm/gems/ruby-1.9.1-p378/gems/friendly_id-2.3.2)" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="[gem] rdiscount (v1.6.3, /Users/davidworkman/.rvm/gems/ruby-1.9.1-p378/gems/rdiscount-1.6.3)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] sanitize (v1.2.0, /Users/davidworkman/.rvm/gems/ruby-1.9.1-p378/gems/sanitize-1.2.0)" level="application" />
   </component>
 </module>
 
