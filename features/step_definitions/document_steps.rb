@@ -43,6 +43,14 @@ When /^I enter documentation$/ do
   fill_in "Content", :with => @content
 end
 
+When /^I enter a title$/ do
+  fill_in "Title", :with => "Testing"
+end
+
+When /^I enter content with bold and italic markdown elements$/ do
+  fill_in "Content", :with => "Some **Bold** and *italic* text"
+end
+
 When /^I enter documentation without a title$/ do
   @content = "Test documentation"
   fill_in "Content", :with => @content
@@ -81,6 +89,16 @@ end
 
 When /^I set the position to (\d)$/ do |position|
   fill_in "Position", :with => position
+end
+
+When /^I enter a youtube video$/ do
+  @youtube_vid = '<object width="640" height="385"><param name="movie" value="http://www.youtube.com/v/RyMTjhel_oM&amp;hl=en_US&amp;fs=1&amp;" /><param name="allowFullScreen" value="true" /><param name="allowscriptaccess" value="always" /><embed src="http://www.youtube.com/v/RyMTjhel_oM&amp;hl=en_US&amp;fs=1&amp;" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="640" height="385"></embed></object>'
+  fill_in "Content", :with => @youtube_vid
+end
+
+When /^I enter a non youtube video$/ do
+  @non_youtube_vid = 'rad video <object width="640" height="385"><param name="movie" value="http://www.yawntube.com/v/RyMTjhel_oM&amp;hl=en_US&amp;fs=1&amp;" /><param name="allowFullScreen" value="true" /><param name="allowscriptaccess" value="always" /><embed src="http://www.yawntube.com/v/RyMTjhel_oM&amp;hl=en_US&amp;fs=1&amp;" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="640" height="385"></embed></object>'
+  fill_in "Content", :with => @non_youtube_vid
 end
 
 Then /^I should see the documentation page$/ do
@@ -155,3 +173,21 @@ Then /^I should see the menu list in a nested list$/ do
   end
 end
 
+Then /^I should see an? ([^ ]*) element in the content$/ do |element|
+  response.should have_selector(".page_content") do |page|
+    page.should have_selector(element)
+  end
+end
+
+Then /^I should not see an? ([^ ]*) element in the content$/ do |element|
+
+  response.should_not have_selector(element)
+end
+
+
+Then /I should see a youtube video$/ do
+  response.should have_selector("object") do |obj|
+    obj.should have_selector("param")
+    obj.should have_selector("embed")
+  end
+end
