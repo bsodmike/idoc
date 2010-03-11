@@ -27,4 +27,7 @@ $(document).ready(function() {
     });
     $('fieldset.positioning').hide();
     $('fieldset.positioning_tree').show();
+    $('#documentation_page_title').change(function(event) {
+        $("#current_item > a")[0].innerHTML = event.target.value;
+    });
 });

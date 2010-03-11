@@ -9,4 +9,4 @@
   - if root && current_item.id.nil?
     %li{:rel => "editable", :id => "current_item"}
       %ins &nbsp;
-      != link_to "New page", "#"
+      != link_to current_item.title || "New page", "#"
