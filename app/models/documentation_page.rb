@@ -1,6 +1,7 @@
 class DocumentationPage < ActiveRecord::Base
   has_many :comments
   has_friendly_id :title, :use_slug => true
+  default_scope :order => 'position ASC'
   acts_as_tree :order => 'position ASC'
   before_save :set_position, :fix_position_collisions
 
