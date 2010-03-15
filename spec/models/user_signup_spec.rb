@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe UserSignup do
   include ActionController::UrlWriter
-  
+
 
   before(:each) do
     @host = "test.host"
@@ -16,7 +16,9 @@ describe UserSignup do
   end
 
   it "should have the account confirmation url" do
-    @email.should contain(confirm_users_url(:activation_token => @user.perishable_token, :host => @host))
+    @email.should have_selector("a", :href => confirm_users_url(:activation_token => @user.perishable_token, :host => @host)) do |link|
+      link.should contain("confirm")
+    end
   end
 
 end

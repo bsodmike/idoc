@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   # filter_parameter_logging :password
   
   def find_menu_items
-    @menu_items = DocumentationPage.find :all, :conditions => {:parent_id => nil}
+    @menu_items = DocumentationPage.roots
   end
 
   def require_logged_out(message)

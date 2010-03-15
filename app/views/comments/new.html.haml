@@ -1,3 +1,4 @@
+!= title "Adding comment on #{@documentation_page.title}"
 - form_for([@documentation_page, @comment]) do |f|
   - if !@comment.errors.empty?
     .errors= error_messages_for :comment

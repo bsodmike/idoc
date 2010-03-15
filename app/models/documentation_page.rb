@@ -1,31 +1,12 @@
+require 'tree_positioning'
 class DocumentationPage < ActiveRecord::Base
   has_many :comments
   has_friendly_id :title, :use_slug => true
   default_scope :order => 'position ASC'
   acts_as_tree :order => 'position ASC'
-  before_save :set_position, :fix_position_collisions
+  include TreePositioning
 
   validates_presence_of :title, :content
-
-  def set_position
-    if !self.position
-      position = DocumentationPage.maximum(:position)
-      self.position = position ? position + 1 : 1
-    end
-  end
-
-  def fix_position_collisions
-    collision = nil
-    if self.parent_id
-      collision = DocumentationPage.find(:first, :conditions => {:parent_id => self.parent_id, :position => self.position})
-    else
-      collision = DocumentationPage.find(:first, :conditions => ["parent_Id IS NULL AND position = ?", self.position])
-    end
-    if collision and collision.id != self.id
-      collision.position += 1
-      collision.save
-    end
-  end
 
   def has_next?(include_children = true)
     if include_children && !self.children.empty?

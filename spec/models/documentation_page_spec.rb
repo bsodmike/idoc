@@ -16,7 +16,7 @@ describe DocumentationPage do
     DocumentationPage.create(:title => "Test title", :content => "Some content", :position => 1)
     page = DocumentationPage.new(:title => "Testing title", :content => "Some test content")
     page.save
-    page.position.should == DocumentationPage.maximum(:position)
+    page.position.should == DocumentationPage.maximum(:position, :conditions => "parent_id IS NULL")
   end
 
   it "should have an 'up' page when it has a parent" do

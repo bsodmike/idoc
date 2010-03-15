@@ -1,4 +1,4 @@
-%h1= @documentation_page.title
+!= title h(@documentation_page.title)
 .page_content!= @documentation_page.content.markdown
 .documentation_navigation
   != @documentation_page.has_previous? ? link_to("Previous", documentation_page_path(@documentation_page.previous)) : "Previous"
