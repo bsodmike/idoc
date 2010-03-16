@@ -65,9 +65,9 @@ describe UsersController, "creating a new user account" do
         post :create, :user => @valid_data
       end
 
-      it "should redirect to the new users page" do
+      it "should redirect to the logon page" do
         post :create, :user => @valid_data
-        response.should redirect_to(user_path(@user))
+        response.should redirect_to(new_user_session_url)
       end
 
       it "should inform the user that the account was created successfully" do
