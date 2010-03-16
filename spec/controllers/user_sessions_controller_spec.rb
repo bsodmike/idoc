@@ -71,9 +71,8 @@ describe UserSessionsController do
       context "and user provides invalid credentials" do
         before(:each) do
           UserSession.stub!(:find).and_return(nil)
-          @user = mock_model(User, :active? => true)
           UserSession.stub!(:new).and_return(@user_session = mock_model(UserSession, :save => false,
-                                                                        :attempted_record => @user))
+                                                                        :account_inactive? => false))
           @invalid_credentials = {}
         end
 
@@ -88,12 +87,7 @@ describe UserSessionsController do
         end
 
         it "should check for an attempted record" do
-          @user_session.should_receive(:attempted_record)
-          post :create, :user_session => @invalid_credentials
-        end
-
-        it "should check the user activation state" do
-          @user.should_receive(:active?)
+          @user_session.should_receive(:account_inactive?)
           post :create, :user_session => @invalid_credentials
         end
 
@@ -139,9 +133,8 @@ describe UserSessionsController do
     context "when the user account isn't activated" do
       before(:each) do
         UserSession.stub!(:find).and_return(nil)
-        @user = mock_model(User, :active? => false)
         UserSession.stub!(:new).and_return(@user_session = mock_model(UserSession, :save => false,
-                                                                      :attempted_record => @user))
+                                                                      :account_inactive? => true))
         @valid_credentials = {}
       end
 
