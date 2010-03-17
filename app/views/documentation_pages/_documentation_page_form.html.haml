@@ -1,28 +1,11 @@
 -form_for(documentation_page) do |f|
-  -if !documentation_page.errors.empty?
-    .errors= error_messages_for :documentation_page
+  = render :partial => 'shared/errors', :locals => {:obj => documentation_page, :sym => :documentation_page}
   .yui-gf
     .yui-u.first.form_label
       !=f.label :title
     .yui-u
       !=f.text_field :title
-  %fieldset.positioning
-    .yui-gf
-      .yui-u.first.form_label
-        !=f.label :parent_id, "Parent"
-      .yui-u
-        !=f.collection_select :parent_id, all_documents, :id, :title, :prompt => true, :include_blank => true
-    .yui-gf
-      .yui-u.first.form_label
-        !=f.label :position
-      .yui-u
-        !=f.text_field :position
-  %fieldset.positioning_tree
-    .yui-gf
-      .yui-u.first.form_label
-        !=label_tag "Document page position"
-      .yui-u#menu_editor
-        != render :partial => 'menu_edit', :locals => {:items => @menu_items, :current_item => documentation_page, :root => true}
+  != render :partial => 'positioning', :locals => {:f => f, :all_documents => all_documents, :documentation_page => documentation_page}
   .yui-gf
     .yui-u.first.form_label
       !=f.label :content
@@ -32,7 +15,4 @@
     .yui-u
       !=submit_tag 'Save changes'
 
-
-.preview
-  %h2 Live preview
-  .wmd-preview
+!= render :partial => 'shared/markdown_preview'

@@ -1,16 +1,5 @@
 != title h(@documentation_page.title)
 .page_content!= @documentation_page.content.markdown
-.documentation_navigation
-  != @documentation_page.has_previous? ? link_to("Previous", documentation_page_path(@documentation_page.previous)) : "Previous"
-  != @documentation_page.has_up? ? link_to("Up", documentation_page_path(@documentation_page.up)): "Up"
-  != @documentation_page.has_next? ? link_to("Next", documentation_page_path(@documentation_page.next)) : "Next"
-- if @current_user
-  != link_to "Edit page", edit_documentation_page_path(@documentation_page)
-  != link_to "Add comment", new_documentation_page_comment_path(@documentation_page)
-- else
-  You need to log in to add a comment
-- @documentation_page.comments.each do |comment|
-  .comment
-    != comment.body.markdown
-    .author= comment.user.displayname
-    .created_at= "#{distance_of_time_in_words_to_now(comment.created_at)} ago"
+!= render :partial => 'navigation_links', :locals => {:doc_page => @documentation_page}
+!= render :partial => 'signed_in_page_links', :locals => {:doc_page => @documentation_page}
+!= render :partial => 'comments/comment', :collection => @documentation_page.comments

@@ -1,7 +1,6 @@
 != title "Adding comment on #{@documentation_page.title}"
 - form_for([@documentation_page, @comment]) do |f|
-  - if !@comment.errors.empty?
-    .errors= error_messages_for :comment
+  = render :partial => 'shared/errors', :locals => {:obj => @comment, :sym => :comment}
   .yui-gf
     .yui-u.first.form_label
       != f.label :body, "Comment"

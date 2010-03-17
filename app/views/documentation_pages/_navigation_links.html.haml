@@ -1,0 +1,4 @@
+.documentation_navigation
+  != doc_page.has_previous? ? link_to("Previous", documentation_page_path(doc_page.previous)) : "Previous"
+  != doc_page.has_up? ? link_to("Up", documentation_page_path(doc_page.up)): "Up"
+  != doc_page.has_next? ? link_to("Next", documentation_page_path(doc_page.next)) : "Next"

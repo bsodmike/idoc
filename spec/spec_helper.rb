@@ -25,4 +25,8 @@ Spec::Runner.configure do |config|
   config.include Webrat::Matchers, :type => :views
   config.include EmailSpec::Matchers
   config.include EmailSpec::Helpers
+  config.include CommentsControllerHelpers, :type => :controllers
+  config.include CommentModelHelpers, :type => :models
+  config.include DocumentationPagesControllerHelpers, :type => :controllers
+  config.include DocumentationPageModelHelpers, :type => :models
 end

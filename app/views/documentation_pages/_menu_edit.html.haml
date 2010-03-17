@@ -1,12 +1,5 @@
 %ul.menu
-  - items.each do |item|
-    %li{current_item?(item, current_item)}
-      - if item.id == current_item.id
-        %ins &nbsp;
-      != link_to h(item.title), "#"
-      - if !item.children.empty?
-        != render :partial => 'menu_edit', :locals => {:items => item.children, :current_item => current_item, :root => false}
-  - if root && current_item.id.nil?
-    %li{:rel => "editable", :id => "current_item"}
-      %ins &nbsp;
-      != link_to current_item.title || "New page", "#"
+  != render :partial => 'menu_item', :collection => items, :locals => {:current_item => current_item}
+
+  - if render_as_new_item?(current_item, root)
+    != render :partial => 'new_menu_item', :locals => {:new_item => current_item}

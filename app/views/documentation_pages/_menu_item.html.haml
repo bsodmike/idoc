@@ -1,0 +1,6 @@
+%li{current_item?(menu_item, current_item)}
+  - if menu_item.id == current_item.id
+    %ins &nbsp;
+  != link_to h(menu_item.title), "#"
+  - if !menu_item.children.empty?
+    != render :partial => 'menu_edit', :locals => {:items => menu_item.children, :current_item => current_item, :root => false}
