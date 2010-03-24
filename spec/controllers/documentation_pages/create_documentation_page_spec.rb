@@ -13,7 +13,7 @@ describe DocumentationPagesController, "creating a new page" do
   it_should_behave_like "requires user logon"
 
   it "should create the page" do
-    DocumentationPage.should_receive(:new).with(})
+    DocumentationPage.should_receive(:new).with({})
     perform_action
   end
 
@@ -41,6 +41,7 @@ describe DocumentationPagesController, "creating a new page" do
   context "with invalid data" do
     before(:each) do
       @doc_page.stub!(:save).and_return(false)
+      create_all_pages_array(@doc_page)
     end
 
     it "should inform the user of the problem" do
@@ -55,7 +56,7 @@ describe DocumentationPagesController, "creating a new page" do
 
     it "should find all the documentation pages" do
       perform_action
-      assigns[:all_documents].should == @all_pages
+      assigns[:all_documents].should == @all_pages - [@doc_pages]
     end
   end
 end

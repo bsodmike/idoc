@@ -18,6 +18,8 @@ describe DocumentationPagesController, "displaying a documentation page" do
 
   context "with an identified user" do
     it "should find the identified user" do
+      UserSession.should_receive(:find).and_return(user_session = mock_model(UserSession))
+      user_session.should_receive(:record).and_return(user = mock_model(User))
       perform_action
       assigns[:current_user].should == user
     end
