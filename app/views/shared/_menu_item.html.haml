@@ -1,4 +1,5 @@
 %li
-  != link_to h(menu_item.title), documentation_page_path(menu_item)
+  != link_to_unless_current h(menu_item.title), documentation_page_path(menu_item) do
+    - "<span id='menu_current_item'>#{menu_item.title}</span>"
   - if !menu_item.children.empty?
     != render :partial => 'shared/menu', :locals => {:items => menu_item.children}

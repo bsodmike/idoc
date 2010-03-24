@@ -6,4 +6,4 @@
   .section-item#menu_container
     != render :partial => 'shared/menu', :locals => {:items => @menu_items}
   - if @current_user
-    != button_to "Add page", new_documentation_page_path
+    != button_to "Add page", new_documentation_page_path, :id => "add_page_button"

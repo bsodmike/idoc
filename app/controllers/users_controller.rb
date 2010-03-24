@@ -34,6 +34,4 @@ private
     flash[:error] = "There were errors in the user data provided"
     render :action => :new
   end
-
-
 end
