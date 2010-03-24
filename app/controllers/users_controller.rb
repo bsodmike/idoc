@@ -27,7 +27,7 @@ private
 
   def successful_action(success_message)
     flash[:notice] = success_message
-    redirect_to new_user_session_url
+    redirect_back_or_default new_user_session_url
   end
 
   def unsuccessful_action

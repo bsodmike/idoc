@@ -2,4 +2,21 @@
 .page_content!= @documentation_page.content.markdown
 != render :partial => 'navigation_links', :locals => {:doc_page => @documentation_page}
 != render :partial => 'signed_in_page_links', :locals => {:doc_page => @documentation_page}
+%h2 Comments
 != render :partial => 'comments/comment', :collection => @documentation_page.comments
+- if @current_user
+  %h3 Add comment
+  - form_for([@documentation_page, @documentation_page.comments.build]) do |f|
+    .yui-gf
+      .yui-u.first.form_label
+        != f.label :body, "Comment"
+      .yui-u
+        != f.text_area :body
+    .yui-gf
+      .yui-u
+        != submit_tag "Submit comment"
+
+  %h3 Live preview
+  .wmd-preview
+- else
+  You need to log in to add a comment.

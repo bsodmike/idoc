@@ -18,14 +18,14 @@ if !@included then
 
   shared_examples_for "requires user logon" do
     before(:each) do
-      UserSession.stub(:find).and_return(@user_session = mock_model(UserSession))
+      @user = mock_model(User)
+      UserSession.stub(:find).and_return(@user_session = mock_model(UserSession, :record => @user))
     end
 
     context "with an identified user" do
       before(:each) do
         @doc_page = mock_model(DocumentationPage, :save => true)
         DocumentationPage.stub!(:new).and_return(@doc_page)
-        UserSession.stub(:find).and_return(@user_session = mock_model(UserSession))
       end
 
       it "should check for a logged in user" do

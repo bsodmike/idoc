@@ -1,5 +1,10 @@
 #header
   .section-main
     .section-item
+      - if !@current_user
+        != render :partial => 'shared/login_bar'
+      - else
+        #logout_bar
+          != button_to "Logout", user_session_path, :method => :delete
   .section-item
     iDoc

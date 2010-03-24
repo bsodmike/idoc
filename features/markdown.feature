@@ -12,12 +12,3 @@ Feature:
     Then I should see "Page added"
     And I should see a strong element in the content
     And I should see an em element in the content
-
-  Scenario: Adding a document page with a youtube video
-    Given I am identified
-    When I go to the add documentation page
-    And I enter a title
-    And I enter a youtube video
-    And I press "Save"
-    Then I should see "Page added"
-    And I should see a youtube video

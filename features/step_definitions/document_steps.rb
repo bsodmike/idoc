@@ -100,6 +100,11 @@ When /^I enter a youtube video$/ do
   fill_in "Content", :with => @youtube_vid
 end
 
+When /^I enter a vimeo video$/ do
+  @vimeo_vid = '<object width="400" height="264"><param name="allowfullscreen" value="true" /><param name="allowscriptaccess" value="always" /><param name="movie" value="http://vimeo.com/moogaloop.swf?clip_id=9730308&amp;server=vimeo.com&amp;show_title=1&amp;show_byline=1&amp;show_portrait=0&amp;color=&amp;fullscreen=1" /><embed src="http://vimeo.com/moogaloop.swf?clip_id=9730308&amp;server=vimeo.com&amp;show_title=1&amp;show_byline=1&amp;show_portrait=0&amp;color=&amp;fullscreen=1" type="application/x-shockwave-flash" allowfullscreen="true" allowscriptaccess="always" width="400" height="264"></embed></object><p><a href="http://vimeo.com/9730308">projection animation test</a> from <a href="http://vimeo.com/reanimatr">reanimatr</a> on <a href="http://vimeo.com">Vimeo</a>.</p>'
+  fill_in "Content", :with => @vimeo_vid
+end
+
 When /^I enter a non youtube video$/ do
   @non_youtube_vid = 'rad video <object width="640" height="385"><param name="movie" value="http://www.yawntube.com/v/RyMTjhel_oM&amp;hl=en_US&amp;fs=1&amp;" /><param name="allowFullScreen" value="true" /><param name="allowscriptaccess" value="always" /><embed src="http://www.yawntube.com/v/RyMTjhel_oM&amp;hl=en_US&amp;fs=1&amp;" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="640" height="385"></embed></object>'
   fill_in "Content", :with => @non_youtube_vid
@@ -204,5 +209,12 @@ Then /I should see a youtube video$/ do
   response.should have_selector("object") do |obj|
     obj.should have_selector("param")
     obj.should have_selector("embed")
+  end
+end
+
+Then /^I should see a vimeo video$/ do
+  response.should have_selector("object") do |video|
+    video.should have_selector("param")
+    video.should have_selector("embed")
   end
 end

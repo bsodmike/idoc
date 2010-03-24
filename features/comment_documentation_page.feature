@@ -7,7 +7,6 @@ Feature:
     Given I am identified
     And I have created a page
     When I go to the document page
-    And I follow "Add comment"
     And I enter a comment
     And I press "Submit comment"
     Then I should be on the document page
@@ -28,7 +27,6 @@ Feature:
     Given I am identified
     And I have created a page
     When I go to the document page
-    And I follow "Add comment"
     And I enter a comment without a body
     And I press "Submit comment"
     Then I should be on the comment page

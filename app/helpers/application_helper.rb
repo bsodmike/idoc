@@ -8,4 +8,11 @@ module ApplicationHelper
     end
     return result 
   end
+
+  def dont_display_login_bar
+    current_page?(:controller => :users, :action => :new) ||
+    current_page?(:controller => :users, :action => :create) ||
+    current_page?(:controller => :user_sessions, :action => :new) ||
+    current_page?(:controller => :user_sessions, :action => :create)
+  end
 end

@@ -5,7 +5,7 @@ class UserSessionsController < ApplicationController
   def destroy
     @user_session = UserSession.find
     @user_session.destroy unless @user_session.nil?
-    redirect_to root_url
+    redirect_back_or_default root_url
   end
 
   def new
@@ -25,7 +25,7 @@ private
 
   def successful_user_sign_in
     set_successful_sign_in_message
-    redirect_to root_url
+    redirect_back_or_default root_url
   end
 
   def set_successful_sign_in_message

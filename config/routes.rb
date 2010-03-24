@@ -8,5 +8,5 @@ ActionController::Routing::Routes.draw do |map|
     doc.resources :comments
   end
 
-  map.root :controller => :documentation_pages, :action => :new
+  map.root :controller => :documentation_pages, :action => :root
 end

@@ -50,3 +50,14 @@ $(document).ready(function() {
         $("#current_item > a")[0].innerHTML = event.target.value;
     });
 });
+
+$(document).ready(function() {
+    var form = $('#header_login');
+    var button = $('#header_login_button');
+    form.hide();
+    button.show();
+    button.click(function() {
+        form.show();
+        $("#header_buttons").hide();
+    });
+});

@@ -28,6 +28,7 @@ class ApplicationController < ActionController::Base
       redirect_to new_user_session_url
       return false
     else
+      current_user
       return true
     end
   end
@@ -42,5 +43,14 @@ class ApplicationController < ActionController::Base
     if current_session
       @current_user = current_session.record
     end
+  end
+
+  def store_location
+    session[:return_to] = request.request_uri
+  end
+
+  def redirect_back_or_default(default)
+    redirect_to(session[:return_to] || default)
+    session[:return_to] = nil
   end
 end

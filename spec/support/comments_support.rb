@@ -16,7 +16,6 @@ module CommentsControllerHelpers
     @comments.stub!(:build).and_return(@comment = mock_model(Comment))
     @comment.stub!(:user=)
     DocumentationPage.stub!(:find).and_return(@doc_page)
-    controller.stub!(:current_user).and_return(@user = mock_model(User))
   end
 end
 
