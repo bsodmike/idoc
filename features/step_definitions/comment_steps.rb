@@ -1,6 +1,6 @@
 When /^I enter a comment$/ do
   @comment_body = "Test comment"
-  fill_in :comment, :with => @comment_body
+  fill_in "comment_body", :with => @comment_body
 end
 
 When /^I enter a comment without a body$/ do
