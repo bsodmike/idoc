@@ -1,13 +1,30 @@
 @import yui.sass
 @import yui-ext.sass
 @import compass/reset.sass
-@import forms.sass   
+@import forms.sass
+@import comments.sass
 
 +yui-base-fonts
 +yui-base
 +yui-grids-init("#footer", "#body")
 +yui-grid-divisions
 
+=background-gradient(!colour1, !colour2, !colour3)
+  background = !colour2
+  background = -webkit-gradient(linear, left bottom, left top, color-stop(0, !colour1), color-stop(0.5, !colour2), color-stop(1, !colour3))
+  background = -moz-linear-gradient(center bottom, !colour1 0%, !colour2 50%, !colour3 100%)
+
+#header, #body, #footer
+  padding: 0 10px
+
+#header
+  padding-top: 5px
+  height: 25px
+  +background-gradient(darkgreen, #32cd32, darkgreen)
+
+#documentation, .page_content
+  clear: both
+  
 #login_bar, #logout_bar, #add_page_button
   float: right
 
@@ -25,40 +42,20 @@
   color: #C0F
   padding: 2px
 
-
-textarea
-  width: 80%
+.markdown_editor
+  width: 100%
+  height: 300px
 
 fieldset.positioning_tree, a#header_login_button
   display: none
  
 .wmd-preview
+  height: 300px
   border: 1px solid black
+  overflow: auto
 
-#comments
-  margin-top: 5px
-  border-top: 1px dotted black
-  padding-right: 2%
+.documentation_navigation
+  float: left
 
-.button
-  cursor: pointer
-
-.comment_head
-  margin: 3px 0 0 0
-  padding-bottom: 3px
-  font-weight: bold
-  border-bottom: 1px solid black
-
-.comment
-  .author
-    float: left
-    font-weight: bold
-  .created_at
-    float: right
-  .body
-    padding-top: 3px
-    clear: both
-  border-bottom: 1px solid black
-
-.odd_comment_row
-  background-color: #ccc
+.documentation_editing
+  float: right

@@ -1,7 +1,8 @@
-!= title h(@documentation_page.title)
-.page_content!= @documentation_page.content.markdown
-!= render :partial => 'navigation_links', :locals => {:doc_page => @documentation_page}
-!= render :partial => 'signed_in_page_links', :locals => {:doc_page => @documentation_page}
+#documentation
+  != title h(@documentation_page.title)
+  != render :partial => 'page_bar', :locals => {:doc_page => @documentation_page}
+  .page_content!= @documentation_page.content.markdown
+!= render :partial => 'page_bar', :locals => {:doc_page => @documentation_page}
 #comments
   .comment_head= "Comments (#{@documentation_page.comments.count})" 
   != render :partial => 'comments/comment', :collection => @documentation_page.comments
@@ -9,17 +10,16 @@
     %h3#comment_button Add comment
     #comment_form
       - form_for([@documentation_page, @documentation_page.comments.build]) do |f|
-        .yui-gf
-          .yui-u.first.form_label
-            != f.label :body, "Comment"
+        .yui-g
+          .yui-u.first
+            != f.text_area :body, :class => 'markdown_editor'
           .yui-u
-            != f.text_area :body
-        .yui-gf
+            %h3.live_header Live preview
+            .wmd-preview
+              %noscript You need javascript enabled to see the live preview
+        .yui-g
           .yui-u
             != submit_tag "Submit comment"
 
-      %h3 Live preview
-      .wmd-preview
-        %noscript You need javascript enabled to see the live preview
   - else
     You need to log in to add a comment.
