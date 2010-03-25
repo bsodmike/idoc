@@ -3,16 +3,12 @@
 @import compass/reset.sass
 @import forms.sass
 @import comments.sass
+@import gradients.sass
 
 +yui-base-fonts
 +yui-base
 +yui-grids-init("#footer", "#body")
 +yui-grid-divisions
-
-=background-gradient(!colour1, !colour2, !colour3)
-  background = !colour2
-  background = -webkit-gradient(linear, left bottom, left top, color-stop(0, !colour1), color-stop(0.5, !colour2), color-stop(1, !colour3))
-  background = -moz-linear-gradient(center bottom, !colour1 0%, !colour2 50%, !colour3 100%)
 
 #header, #body, #footer
   padding: 0 10px
@@ -22,7 +18,8 @@
   height: 25px
   +background-gradient(darkgreen, #32cd32, darkgreen)
 
-#logo
+#logo a
+  text-decoration: none
   font-weight: bold
   font-size: 123.1%
 
@@ -75,3 +72,6 @@ fieldset.positioning_tree, a#header_login_button
 
 .documentation_editing
   float: right
+
+.button
+  color: blue
