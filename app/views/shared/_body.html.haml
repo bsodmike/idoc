@@ -3,7 +3,8 @@
     .section-item#main_content
       != render :partial => 'shared/messages'
       != yield
-  .section-item#menu_container
-    != render :partial => 'shared/menu', :locals => {:items => @menu_items}
-  - if @current_user
-    != button_to "Add page", new_documentation_page_path, :method => :get, :id => "add_page_button"
+  .section-item#left_menu
+    #menu_container
+      != render :partial => 'shared/menu', :locals => {:items => @menu_items}
+    - if @current_user
+      != button_to "Add page", new_documentation_page_path, :method => :get, :id => "add_page_button"
