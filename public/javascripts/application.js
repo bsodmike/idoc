@@ -61,3 +61,13 @@ $(document).ready(function() {
         $("#header_buttons").hide();
     });
 });
+
+$(document).ready(function() {
+    var button = $('#comment_button');
+    var form = $('#comment_form');
+    form.hide();
+    button.addClass("button");
+    button.click(function() {
+        form.toggle("blind", {}, 1500);
+    });
+});

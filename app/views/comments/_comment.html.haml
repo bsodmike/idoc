@@ -1,4 +1,4 @@
-.comment
-  != comment.body.markdown
+.comment{ :class => comment_counter.even? ? "even_comment_row" :"odd_comment_row" }                  
   .author= comment.user.displayname
   .created_at= "#{distance_of_time_in_words_to_now(comment.created_at)} ago"
+  .body!= comment.body.markdown
