@@ -5,8 +5,6 @@
     .yui-u!=f.text_field :title
   != render :partial => 'positioning', :locals => {:f => f, :all_documents => all_documents, :documentation_page => documentation_page}
   != f.label :content
-  .yui-gf
-    .yui-u.first.form_label!= f.label :content
-    .yui-u!= f.tinymce :content
+  != f.tinymce :content
   .yui-gf
     .yui-u!=submit_tag 'Save changes'
