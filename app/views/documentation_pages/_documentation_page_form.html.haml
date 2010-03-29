@@ -1,16 +1,13 @@
 -form_for(documentation_page) do |f|
-  = render :partial => 'shared/errors', :locals => {:obj => documentation_page, :sym => :documentation_page}
+  != render :partial => 'shared/errors', :locals => {:obj => documentation_page, :sym => :documentation_page}
   .yui-gf
     .yui-u.first.form_label
       !=f.label :title
     .yui-u
       !=f.text_field :title
   != render :partial => 'positioning', :locals => {:f => f, :all_documents => all_documents, :documentation_page => documentation_page}
-  .yui-gf
-    .yui-u.first.form_label
-      !=f.label :content
-    .yui-u
-      !=f.text_area :content, :rows => 10
+  != f.label :content
+  != render :partial => 'shared/markdown_editor', :locals => {:f => f, :element => :content}
   .yui-gf
     .yui-u
       !=submit_tag 'Save changes'

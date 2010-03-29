@@ -8,18 +8,7 @@
   != render :partial => 'comments/comment', :collection => @documentation_page.comments
   - if @current_user
     %h3#comment_button Add comment
-    #comment_form
-      - form_for([@documentation_page, @documentation_page.comments.build]) do |f|
-        .yui-g
-          .yui-u.first
-            != f.text_area :body, :class => 'markdown_editor'
-          .yui-u
-            %h3.live_header Live preview
-            .wmd-preview
-              %noscript You need javascript enabled to see the live preview
-        .yui-g
-          .yui-u
-            != submit_tag "Submit comment"
+    #comment_form!= render :partial => 'comments/comment_form', :locals => {:doc_page => @documentation_page}
 
   - else
     You need to log in to add a comment.
