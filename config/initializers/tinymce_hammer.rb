@@ -10,7 +10,5 @@ Tinymce::Hammer.init = [
   [:theme, 'advanced'],
   [:theme_advanced_toolbar_align, 'left'],
   [:theme_advanced_toolbar_location, 'top'],
-  [:theme_advanced_buttons1, 'undo,redo,cut,copy,paste,pastetext,|,bold,italic,strikethrough,blockquote,charmap,bullist,numlist,removeformat,|,link,unlink,image,media,|,cleanup,code'],
-  [:theme_advanced_buttons2, ''],
-  [:theme_advanced_buttons3, '']
+  [:theme_advanced_buttons1, 'undo,redo,cut,copy,paste,pastetext,|,bold,italic,strikethrough,blockquote,charmap,bullist,numlist,removeformat,|,link,unlink,image,media,|,cleanup,code']
 ]

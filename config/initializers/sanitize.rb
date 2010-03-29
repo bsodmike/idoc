@@ -26,7 +26,7 @@ Sanitize::Config::RELAXED[:transformers] = lambda do |env|
     end
 
 class String
-  def markdown()
-    Sanitize.clean(RDiscount.new(self).to_html, Sanitize::Config::RELAXED)
+  def sanitize()
+    Sanitize.clean(self, Sanitize::Config::RELAXED)
   end
 end
