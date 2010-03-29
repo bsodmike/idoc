@@ -1,5 +1,5 @@
 - form_for([doc_page, doc_page.comments.build]) do |f|
-  != render :partial => 'shared/markdown_editor', :locals => {:f => f, :element => :body}
   .yui-g
-    .yui-u
-      != submit_tag "Submit comment"
+    .yui-u.first!= f.tinymce :body, :rows => 5
+  .yui-g
+    .yui-u.first!= submit_tag "Submit comment"
