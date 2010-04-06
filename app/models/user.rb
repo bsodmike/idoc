@@ -14,4 +14,8 @@ class User < ActiveRecord::Base
     self.active = true
     self.save_without_session_maintenance
   end
+
+  def is_moderator?
+    self.moderator
+  end
 end

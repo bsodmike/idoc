@@ -45,5 +45,10 @@ describe User do
       @user.displayname = "aaa"
       @user.valid?.should be_true
     end
+
+    it "should not be a moderator initially" do
+      @user = User.new(@valid_attributes)
+      @user.is_moderator?.should be_false
+    end
   end
 end

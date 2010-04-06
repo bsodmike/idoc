@@ -13,3 +13,4 @@ rerun.txt
 public/stylesheets/compiled/*.css
 app/stylesheets/.sass-cache/*
 test/*
+spec/fixtures/*

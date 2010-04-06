@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100401104051) do
+ActiveRecord::Schema.define(:version => 20100406140716) do
 
   create_table "comments", :force => true do |t|
     t.text     "body",                  :null => false
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(:version => 20100401104051) do
     t.boolean  "active",              :default => false, :null => false
     t.string   "displayname",         :default => "",    :null => false
     t.boolean  "admin",               :default => false, :null => false
+    t.boolean  "moderator",           :default => false
   end
 
 end
