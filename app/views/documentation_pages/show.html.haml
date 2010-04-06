@@ -6,7 +6,7 @@
 #comments
   .comment_head= "Comments (#{@documentation_page.comments.count})" 
   != render :partial => 'comments/comment', :collection => @documentation_page.comments
-  - if @current_user
+  - if can? :create, Comment
     %h3#comment_button Add comment
     #comment_form!= render :partial => 'comments/comment_form', :locals => {:doc_page => @documentation_page}
 

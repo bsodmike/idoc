@@ -32,6 +32,11 @@ Given /^I am identified$/ do
   Given "I have logged in to my account"
 end
 
+Given /^there is a non\-moderator user called "([^\"]*)" with email "([^\"]*)"$/ do |display_name, email|
+  User.create!(:email => email, :displayname => display_name, :password => "password", :password_confirmation => "password")
+end
+
+
 Given /^I have logged in to my account$/ do
   visit path_to("the account logon page")
   fill_in :email, :with => @email_address
@@ -49,6 +54,15 @@ Given /^I am identified as an administrator$/ do
   Given "I have logged in to my account"
 end
 
+Given /^I am identified as a normal user/ do
+  Given "I have created an account"
+  Given "I have activated my account"
+  user = User.find_by_email(@email_address)
+  user.admin = false
+  user.save!
+  Given "I have logged in to my account"
+end
+
 When /^I enter my account details$/ do
   fill_in :email, :with => @email_address
   fill_in :password, :with => "password"
@@ -60,4 +74,12 @@ When /^I enter the required account details$/ do
   fill_in :displayname, :with => "Tester"
   fill_in :password, :with => "password"
   fill_in "Password confirmation", :with => "password"
+end
+
+When /^I select "([^\"]*)" from the user list$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^I should see "([^\"]*)" in the moderator list$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
 end

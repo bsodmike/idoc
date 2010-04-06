@@ -12,3 +12,9 @@ Feature:
     Then I should be on the home page
     And I should see "Page deleted"
     And I should not see "Test page 1"
+
+  Scenario: Attempt to delete a page as a non-administrator
+    Given I am not identified
+    And I have created a page called "Test page 1"
+    When I am on the document page for "Test page 1"
+    Then I should not see a button for "Delete page"

@@ -125,6 +125,10 @@ Then /^I should see the menu item for the page$/ do
   end
 end
 
+Then /^I should not see a button for "([^\"]*)"/ do |button_name|
+  response.should_not have_selector('input[type=submit]', :value => button_name)
+end
+
 Then /^I should see the new title$/ do
   response.should contain(@title)
 end

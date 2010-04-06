@@ -1,4 +1,6 @@
-- if @current_user
+- if can? :update, doc_page
   .documentation_editing
     != link_to image_tag('edit.png', :alt => "Edit page"), edit_documentation_page_path(doc_page)
-!= button_to 'Delete page', documentation_page_path(doc_page), :method => :delete
+- if can? :destroy, doc_page
+  .documentation_delete
+    != button_to 'Delete page', documentation_page_path(doc_page), :method => :delete

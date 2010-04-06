@@ -42,6 +42,10 @@ module NavigationHelpers
 
       when /the comment page/
         documentation_page_comments_path(@documentation_page)
+
+      when /the edit moderator list page/
+        edit_admin_moderator_list_path
+      
       else
         raise "Can't find mapping from \"#{page_name}\" to a path.\n" +
                 "Now, go and add a mapping in #{__FILE__}"

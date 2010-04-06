@@ -4,8 +4,7 @@ class DocumentationPagesController < ApplicationController
 
   def new
     if can? :create, DocumentationPage
-      @documentation_page = DocumentationPage.new
-      @all_documents = DocumentationPage.find(:all)
+      setup_new_page
     else
       cant_create_page
     end
@@ -39,32 +38,46 @@ class DocumentationPagesController < ApplicationController
   end
 
   def show
-    current_user
     @documentation_page = DocumentationPage.find params[:id]
-  end
-
-  def destroy
-    @documentation_page = DocumentationPage.find(params[:id])
-    @documentation_page.destroy if can? :manage, @documentation_page
-    flash[:notice] = "Page deleted"
-    redirect_to root_url
-  end
-
-  def root
-    if DocumentationPage.roots.empty?
-      if require_logged_in("You must be logged on to add documentation")
-        @all_documents = DocumentationPage.find(:all)
-        @documentation_page = DocumentationPage.new
-        render :action => :new
-      end
-    else
-      current_user
-      @documentation_page = DocumentationPage.roots[0]
+    if can? :read, @documentation_page
       render :action => :show
     end
   end
 
+  def destroy
+    @documentation_page = DocumentationPage.find(params[:id])
+    if can? :destroy, @documentation_page
+      @documentation_page.destroy
+      flash[:notice] = "Page deleted"
+      redirect_to root_url
+    else
+      flash[:error] = "You are not allowed to destroy documentation pages"
+      redirect_to @documentation_page
+    end
+  end
+
+  def root
+    if DocumentationPage.roots.empty?
+      if can? :create, DocumentationPage
+        setup_new_page
+        render :action => :new
+      else
+        cant_create_page
+      end
+    else
+      @documentation_page = DocumentationPage.roots[0]
+      if can? :read, @documentation_page
+        render :action => :show
+      end
+    end
+  end
+
   private
+
+  def setup_new_page
+    @documentation_page = DocumentationPage.new
+    @all_documents = DocumentationPage.find(:all)
+  end
 
   def create_page
     @documentation_page = DocumentationPage.new(params[:documentation_page])

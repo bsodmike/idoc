@@ -1,0 +1,11 @@
+!!! 5
+%html
+  %head
+    %title= title :site_name => 'iDoc'
+    != render :partial => 'shared/stylesheets'
+    != render :partial => 'shared/javascript_includes'
+  %body
+    #idoc-body
+      != render :partial => 'shared/admin/header'
+      != render :partial => 'shared/admin/body'
+      != render :partial => 'shared/admin/footer'

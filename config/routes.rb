@@ -1,5 +1,9 @@
 ActionController::Routing::Routes.draw do |map|
 
+  map.namespace :admin do |admin|
+    admin.resource :moderator_list, :controller => :moderator_list
+  end
+
   map.resource :user_session
 
   map.resources :users, :collection => {:confirm => :get}
