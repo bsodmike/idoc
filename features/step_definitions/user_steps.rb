@@ -40,6 +40,15 @@ Given /^I have logged in to my account$/ do
   Then 'I should see "Logged in successfully"'
 end
 
+Given /^I am identified as an administrator$/ do
+  Given "I have created an account"
+  Given "I have activated my account"
+  user = User.find_by_email(@email_address)
+  user.admin = true
+  user.save!
+  Given "I have logged in to my account"
+end
+
 When /^I enter my account details$/ do
   fill_in :email, :with => @email_address
   fill_in :password, :with => "password"

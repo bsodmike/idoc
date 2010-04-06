@@ -12,5 +12,6 @@ Rails::Initializer.run do |config|
   config.gem 'authlogic'
   config.gem 'friendly_id'
   config.gem 'sanitize'
+  config.gem 'cancan'
   config.time_zone = 'UTC'
 end

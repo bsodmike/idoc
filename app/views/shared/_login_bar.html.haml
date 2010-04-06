@@ -7,5 +7,5 @@
       != f.password_field :password
       != submit_tag "Log in"
     #header_buttons
-      != link_to "Sign up", new_user_path
-      != link_to 'Login', "#", :id => "header_login_button"
+      != link_to "Sign up", new_user_path, :class => 'button'
+      != link_to 'Login', "#", :id => "header_login_button", :class => 'button'

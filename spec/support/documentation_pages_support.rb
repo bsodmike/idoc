@@ -1,7 +1,7 @@
 module DocumentationPagesControllerHelpers
   def setup_update_page
     setup_shared
-    @doc_page.stub!(:update_attributes)
+    @doc_page.stub!(:update_attributes!)
   end
 
   def setup_edit_form
@@ -19,7 +19,7 @@ module DocumentationPagesControllerHelpers
 
   def setup_shared
     @failed_logon_error_message = "You must be logged on to edit documentation"
-    @doc_page = mock_model(DocumentationPage, :save => true)
+    @doc_page = mock_model(DocumentationPage)
     DocumentationPage.stub!(:find).and_return(@doc_page)
   end
 end
