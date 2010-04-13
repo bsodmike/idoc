@@ -42,15 +42,15 @@
     </requirement>
     <requirement>
       <requirement>
-        <dependency name="authlogic" version="0" bound="GREATER_OR_EQUAL" />
+        <dependency name="authlogic" version="2.1.3" bound="EQUAL" />
       </requirement>
-      <source from="config/environment.rb" />
+      <source from="GemFile" />
     </requirement>
     <requirement>
       <requirement>
-        <dependency name="cancan" version="0" bound="GREATER_OR_EQUAL" />
+        <dependency name="cancan" version="1.0.2" bound="EQUAL" />
       </requirement>
-      <source from="config/environment.rb" />
+      <source from="GemFile" />
     </requirement>
     <requirement>
       <requirement>
@@ -60,15 +60,9 @@
     </requirement>
     <requirement>
       <requirement>
-        <dependency name="compass" version="0" bound="GREATER_OR_EQUAL" />
+        <dependency name="compass" version="0.8.17" bound="EQUAL" />
       </requirement>
-      <source from="config/environment.rb" />
-    </requirement>
-    <requirement>
-      <requirement>
-        <dependency name="cucumber-rails" version="0.2.4" bound="GREATER_OR_EQUAL" />
-      </requirement>
-      <source from="config/environments/cucumber.rb" />
+      <source from="GemFile" />
     </requirement>
     <requirement>
       <requirement>
@@ -78,28 +72,15 @@
     </requirement>
     <requirement>
       <requirement>
-        <dependency name="database_cleaner" version="0.4.3" bound="GREATER_OR_EQUAL" />
-      </requirement>
-      <source from="config/environments/cucumber.rb" />
-    </requirement>
-    <requirement>
-      <requirement>
-        <dependency name="email_spec" version="0" bound="GREATER_OR_EQUAL" />
-      </requirement>
-      <source from="config/environments/cucumber.rb" />
-      <source from="config/environments/test.rb" />
-    </requirement>
-    <requirement>
-      <requirement>
         <dependency name="fastthread" version="0" bound="GREATER_OR_EQUAL" />
       </requirement>
       <source manual="true" />
     </requirement>
     <requirement>
       <requirement>
-        <dependency name="friendly_id" version="0" bound="GREATER_OR_EQUAL" />
+        <dependency name="friendly_id" version="3.0.2" bound="EQUAL" />
       </requirement>
-      <source from="config/environment.rb" />
+      <source from="GemFile" />
     </requirement>
     <requirement>
       <requirement>
@@ -109,16 +90,33 @@
     </requirement>
     <requirement>
       <requirement>
+        <dependency name="haml" version="2.2.23" bound="EQUAL" />
+      </requirement>
+      <source from="GemFile" />
+    </requirement>
+    <requirement>
+      <requirement>
         <dependency name="haml" version="0" bound="GREATER_OR_EQUAL" />
       </requirement>
       <source manual="true" />
-      <source from="config/environment.rb" />
+    </requirement>
+    <requirement>
+      <requirement>
+        <dependency name="mongrel" version="1.1.6" bound="EQUAL" />
+      </requirement>
+      <source from="GemFile" />
     </requirement>
     <requirement>
       <requirement>
         <dependency name="mongrel" version="0" bound="GREATER_OR_EQUAL" />
       </requirement>
       <source manual="true" />
+    </requirement>
+    <requirement>
+      <requirement>
+        <dependency name="pg" version="0.9.0" bound="EQUAL" />
+      </requirement>
+      <source from="GemFile" />
     </requirement>
     <requirement>
       <requirement>
@@ -131,6 +129,12 @@
         <dependency name="rack" version="0" bound="GREATER_OR_EQUAL" />
       </requirement>
       <source manual="true" />
+    </requirement>
+    <requirement>
+      <requirement>
+        <dependency name="rails" version="2.3.5" bound="EQUAL" />
+      </requirement>
+      <source from="GemFile" />
     </requirement>
     <requirement>
       <requirement>
@@ -147,35 +151,9 @@
     </requirement>
     <requirement>
       <requirement>
-        <dependency name="rspec" version="1.3.0" bound="GREATER_OR_EQUAL" />
+        <dependency name="sanitize" version="1.2.0" bound="EQUAL" />
       </requirement>
-      <source from="config/environments/cucumber.rb" />
-    </requirement>
-    <requirement>
-      <requirement>
-        <dependency name="rspec-rails" version="1.3.2" bound="GREATER_OR_EQUAL" />
-      </requirement>
-      <source from="config/environments/cucumber.rb" />
-      <source from="config/environments/test.rb" />
-    </requirement>
-    <requirement>
-      <requirement>
-        <dependency name="sanitize" version="0" bound="GREATER_OR_EQUAL" />
-      </requirement>
-      <source from="config/environment.rb" />
-    </requirement>
-    <requirement>
-      <requirement>
-        <dependency name="spork" version="0.7.5" bound="GREATER_OR_EQUAL" />
-      </requirement>
-      <source from="config/environments/cucumber.rb" />
-      <source from="config/environments/test.rb" />
-    </requirement>
-    <requirement>
-      <requirement>
-        <dependency name="webrat" version="0.6.0" bound="GREATER_OR_EQUAL" />
-      </requirement>
-      <source from="config/environments/cucumber.rb" />
+      <source from="GemFile" />
     </requirement>
   </component>
   <component name="NewModuleRootManager">
