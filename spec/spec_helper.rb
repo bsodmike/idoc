@@ -1,27 +1,29 @@
-# This file is copied to ~/spec when you run 'ruby script/generate rspec'
-# from the project root directory.
+require 'rubygems'
+require 'spork'
+
 ENV["RAILS_ENV"] ||= 'test'
-require File.expand_path(File.join(File.dirname(__FILE__),'..','config','environment'))
-require 'spec/autorun'
-require 'spec/rails'
-require 'webrat'
-require 'shared_specs/shared_controller_spec'
-require "email_spec"
+Spork.prefork do
+  # Loading more in this block will cause your tests to run faster. However, 
+  # if you change any configuration or code from libraries loaded here, you'll
+  # need to restart spork for it take effect.
+  require File.expand_path(File.join(File.dirname(__FILE__),'..','config','environment'))
+  require 'spec/autorun'
+  require 'spec/rails'
+  require 'webrat'
+  require "email_spec"
+  Dir[File.expand_path(File.join(File.dirname(__FILE__),'support','**','*.rb'))].each {|f| require f}
+  require File.expand_path(File.join(File.dirname(__FILE__), 'shared_specs/shared_controller_spec'))
+end
 
-# Uncomment the next line to use webrat's matchers
-#require 'webrat/integrations/rspec-rails'
+Spork.each_run do
+  # This code will be run each time you run your specs.
 
-# Requires supporting files with custom matchers and macros, etc,
-# in ./support/ and its subdirectories.
-Dir[File.expand_path(File.join(File.dirname(__FILE__),'support','**','*.rb'))].each {|f| require f}
+end
 
 Spec::Runner.configure do |config|
   # If you're not using ActiveRecord you should remove these
   # lines, delete config/database.yml and disable :active_record
   # in your config/boot.rb
-  config.use_transactional_fixtures = true
-  config.use_instantiated_fixtures  = false
-  config.fixture_path = RAILS_ROOT + '/spec/fixtures/'
   config.include Webrat::Matchers, :type => :views
   config.include EmailSpec::Matchers
   config.include EmailSpec::Helpers

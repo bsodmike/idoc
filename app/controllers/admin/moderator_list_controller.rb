@@ -7,4 +7,16 @@ class Admin::ModeratorListController < ApplicationController
       @users = ModeratorList.users
     end
   end
+
+  def update
+    if can? :update, ModeratorList
+      ModeratorList.update_list(params[:moderator_list])
+      flash[:notice] = "Moderator added"
+      redirect_to admin_moderator_list_url
+    end
+  end
+
+  def show
+    
+  end
 end

@@ -7,8 +7,8 @@ Feature:
     Given I am identified as an administrator
     And there is a non-moderator user called "Harry" with email "harry@test.host"
     When I go to the edit moderator list page
-    And I select "Harry" from "Users"
-    And I press "Add to moderators"
+    And I select "harry@test.host" from "Add moderators"
+    And I press "Update moderators"
     Then I should see "Moderator added"
     And I should see "Harry" in the moderator list
 

@@ -1,4 +1,3 @@
-require 'spec_helper'
 if !@included then
   shared_examples_for "finding menu items" do
     before(:each) do

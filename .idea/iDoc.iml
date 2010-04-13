@@ -84,6 +84,13 @@
     </requirement>
     <requirement>
       <requirement>
+        <dependency name="email_spec" version="0" bound="GREATER_OR_EQUAL" />
+      </requirement>
+      <source from="config/environments/cucumber.rb" />
+      <source from="config/environments/test.rb" />
+    </requirement>
+    <requirement>
+      <requirement>
         <dependency name="fastthread" version="0" bound="GREATER_OR_EQUAL" />
       </requirement>
       <source manual="true" />
@@ -159,6 +166,13 @@
     </requirement>
     <requirement>
       <requirement>
+        <dependency name="spork" version="0.7.5" bound="GREATER_OR_EQUAL" />
+      </requirement>
+      <source from="config/environments/cucumber.rb" />
+      <source from="config/environments/test.rb" />
+    </requirement>
+    <requirement>
+      <requirement>
         <dependency name="webrat" version="0.6.0" bound="GREATER_OR_EQUAL" />
       </requirement>
       <source from="config/environments/cucumber.rb" />
@@ -180,6 +194,14 @@
     <orderEntry type="library" scope="PROVIDED" name="[gem] sanitize (v1.2.0, /Users/davidworkman/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/gems/1.9.1/gems/sanitize-1.2.0)" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="[gem] authlogic (v2.1.3, /Users/davidworkman/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/gems/1.9.1/gems/authlogic-2.1.3)" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="[gem] compass (v0.8.17, /Users/davidworkman/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/gems/1.9.1/gems/compass-0.8.17)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] cucumber (v0.6.3, /Users/davidworkman/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/gems/1.9.1/gems/cucumber-0.6.3)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] rack (v1.1.0, /Users/davidworkman/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/gems/1.9.1/gems/rack-1.1.0)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] rspec-rails (v1.3.2, /Users/davidworkman/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/gems/1.9.1/gems/rspec-rails-1.3.2)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] rspec (v1.3.0, /Users/davidworkman/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/gems/1.9.1/gems/rspec-1.3.0)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] webrat (v0.7.0, /Users/davidworkman/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/gems/1.9.1/gems/webrat-0.7.0)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] cucumber-rails (v0.3.0, /Users/davidworkman/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/gems/1.9.1/gems/cucumber-rails-0.3.0)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] rack-test (v0.5.3, /Users/davidworkman/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/gems/1.9.1/gems/rack-test-0.5.3)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] database_cleaner (v0.5.0, /Users/davidworkman/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/gems/1.9.1/gems/database_cleaner-0.5.0)" level="application" />
     <orderEntry type="library" name="[gem] actionmailer (v2.3.5, null)" level="application" />
     <orderEntry type="library" name="[gem] rails (v2.3.5, null)" level="application" />
     <orderEntry type="library" name="[gem] rack (v1.0.1, null)" level="application" />
@@ -190,7 +212,6 @@
     <orderEntry type="library" name="[gem] haml (v2.2.20, null)" level="application" />
     <orderEntry type="library" name="[gem] friendly_id (v2.3.2, null)" level="application" />
     <orderEntry type="library" name="[gem] rake (v0.8.7, null)" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="[gem] cucumber (v0.6.3, /Users/davidworkman/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/gems/1.9.1/gems/cucumber-0.6.3)" level="application" />
   </component>
 </module>
 

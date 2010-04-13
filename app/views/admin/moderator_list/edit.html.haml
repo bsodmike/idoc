@@ -1,0 +1,5 @@
+- form_for(:moderator_list, :url => admin_moderator_list_path, :html => { :method => :put }) do |f|
+  != f.label :add_moderators, "Add moderators"
+  != f.collection_select :add_moderators, @users, :id, :email, {}, {:multiple => "multiple"}
+  != submit_tag "Update moderators"
+  
