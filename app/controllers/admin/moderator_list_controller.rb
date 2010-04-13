@@ -17,6 +17,8 @@ class Admin::ModeratorListController < ApplicationController
   end
 
   def show
-    
+    if can? :read, ModeratorList
+      @moderators = ModeratorList.moderators
+    end
   end
 end

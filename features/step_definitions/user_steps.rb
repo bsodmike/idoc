@@ -76,6 +76,8 @@ When /^I enter the required account details$/ do
   fill_in "Password confirmation", :with => "password"
 end
 
-Then /^I should see "([^\"]*)" in the moderator list$/ do |arg1|
-  pending # express the regexp above with the code you wish you had
+Then /^I should see "([^\"]*)" in the moderator list$/ do |user|
+  response.should have_selector("#moderator_list") do |mod|
+    mod.should contain(user)
+  end
 end
