@@ -5,7 +5,6 @@ describe DocumentationPagesController, "providing a blank documentation page" do
     @failed_logon_error_message = "You must be logged on to add documentation"
     @doc_page = mock_model(DocumentationPage, :save => true)
     DocumentationPage.stub!(:new).and_return(@doc_page)
-    controller.stub!(:can?).and_return(true)
   end
   def perform_action
     get :new
@@ -13,6 +12,9 @@ describe DocumentationPagesController, "providing a blank documentation page" do
   it_should_behave_like "finding menu items"
 
   context "User is allowed to create page" do
+    before(:each) do
+      controller.stub!(:can?).and_return(true)
+    end
     it "should check for the create permission of DocumentationPage" do
       controller.should_receive(:can?).with(:create, DocumentationPage)
       perform_action
@@ -30,20 +32,5 @@ describe DocumentationPagesController, "providing a blank documentation page" do
     end
   end
 
-  context "User is not allowed to create page" do
-    context "User is not identified" do
-      before(:each) do
-        controller.stub!(:can?).and_return(false)
-      end
-      it "should redirect the user to the account logon page" do
-        perform_action
-        response.should redirect_to(new_user_session_url)
-      end
-
-      it "should inform the user of the problem" do
-        perform_action
-        flash[:error].should contain("You must be logged on to add documentation")
-      end
-    end
-  end
+  it_should_behave_like "deny access to area with 403 and user login"
 end

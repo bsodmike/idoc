@@ -15,42 +15,40 @@ if !@included then
     end
   end
 
-  shared_examples_for "requires user logon" do
+  shared_examples_for "deny access to area with 403 and user login" do
     before(:each) do
-      @user = mock_model(User)
-      UserSession.stub(:find).and_return(@user_session = mock_model(UserSession, :record => @user))
+      controller.stub!(:can?).and_return(false)
     end
 
-    context "with an identified user" do
+    context "User is logged in but not allowed to view" do
       before(:each) do
-        @doc_page = mock_model(DocumentationPage, :save => true)
-        DocumentationPage.stub!(:new).and_return(@doc_page)
+        controller.stub!(:current_user).and_return(mock_model(User))
       end
 
-      it "should check for a logged in user" do
-        UserSession.should_receive(:find)
+      it "should provide the user a 403 Forbidden error" do
         perform_action
+        response.status.should contain("403")
+      end
+
+      it "should render nothing" do
+        perform_action
+        response.should render_template('shared/403')
       end
     end
 
-    context "without an identified user" do
+    context "User is not logged in" do
       before(:each) do
-        UserSession.stub!(:find).and_return(nil)
+        controller.stub!(:current_user).and_return(nil)
       end
 
-      it "should check for a logged in user" do
-        UserSession.should_receive(:find)
-        perform_action
-      end
-
-      it "should inform the user of the problem" do
-        perform_action
-        flash[:error].should contain(@failed_logon_error_message)
-      end
-
-      it "should put the user on the account logon page" do
+      it "should redirect the user to the login page" do
         perform_action
         response.should redirect_to(new_user_session_url)
+      end
+
+      it "should inform the user they must be logged in" do
+        perform_action
+        flash[:error].should contain("You must be logged in to access this area")
       end
     end
   end

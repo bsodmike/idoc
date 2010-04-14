@@ -6,7 +6,6 @@ describe DocumentationPagesController, "creating a new page" do
     @doc_page = mock_model(DocumentationPage)
     @doc_page.stub!(:save!)
     DocumentationPage.stub!(:new).and_return(@doc_page)
-    controller.stub(:can?).and_return(true)
   end
   def perform_action
     post :create, :documentation_page => {}
@@ -19,6 +18,10 @@ describe DocumentationPagesController, "creating a new page" do
   end
 
   context "User can create pages" do
+    before(:each) do
+      controller.stub(:can?).and_return(true)
+    end
+    
     it "should create the page" do
       DocumentationPage.should_receive(:new).with({})
       perform_action
@@ -65,21 +68,5 @@ describe DocumentationPagesController, "creating a new page" do
     end
   end
 
-  context "User isn't allowed to create pages" do
-    context "User isn't logged in" do
-      before(:each) do
-        controller.stub(:can?).and_return(false)
-      end
-
-      it "should redirect the user to the login page" do
-        perform_action
-        response.should redirect_to(new_user_session_url)
-      end
-
-      it "should inform the user of the problem" do
-        perform_action
-        flash[:error].should contain("You must be logged on to add documentation")
-      end
-    end
-  end
+  it_should_behave_like "deny access to area with 403 and user login"
 end

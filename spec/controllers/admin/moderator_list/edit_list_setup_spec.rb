@@ -27,4 +27,6 @@ describe Admin::ModeratorListController, "Setup the edit moderator list form" do
       perform_action
     end
   end
+  
+  it_should_behave_like "deny access to area with 403 and user login"
 end

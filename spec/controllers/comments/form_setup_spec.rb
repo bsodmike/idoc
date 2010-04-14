@@ -30,19 +30,5 @@ describe CommentsController, "Creating a new comment (form setup)" do
     end
   end
 
-  context "User cannot create comments" do
-    before(:each) do
-      controller.stub!(:can?).and_return(false)
-    end
-
-    it "should inform the user they must be logged in" do
-      perform_action
-      flash[:error].should contain("You must be logged in to post comments")
-    end
-
-    it "should redirect the user to the login page" do
-      perform_action
-      response.should redirect_to(new_user_session_url)
-    end
-  end
+  it_should_behave_like "deny access to area with 403 and user login"
 end

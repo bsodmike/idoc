@@ -3,7 +3,6 @@ require 'spec_helper'
 describe DocumentationPagesController, "editing an existing page (performing the update)" do
   before(:each) do
     setup_update_page
-    controller.stub!(:can?).and_return(true)
   end
   def perform_action
     post :update, :id => @doc_page.id, :documentation_page => {}
@@ -20,12 +19,16 @@ describe DocumentationPagesController, "editing an existing page (performing the
     perform_action
   end
 
-  it "should update the documentation page's attributes and then save" do
-    @doc_page.should_receive(:update_attributes!).with({})
-    perform_action
-  end
-
   context "User can update the page" do
+    before(:each) do
+      controller.stub!(:can?).and_return(true)
+    end
+
+    it "should update the documentation page's attributes and then save" do
+      @doc_page.should_receive(:update_attributes!).with({})
+      perform_action
+    end
+
     context "successful update" do
       it "should inform the user of the successful update" do
         perform_action
@@ -65,21 +68,5 @@ describe DocumentationPagesController, "editing an existing page (performing the
     end
   end
 
-  context "User cannot update page" do
-    before(:each) do
-      controller.stub!(:can?).and_return(false)
-    end
-
-    context "User is not logged in" do
-      it "should redirect the user to the logon page" do
-        perform_action
-        response.should redirect_to(new_user_session_url)
-      end
-
-      it "should inform the user of the problem" do
-        perform_action
-        flash[:error].should contain("You must be logged on to edit documentation")
-      end
-    end
-  end
+  it_should_behave_like "deny access to area with 403 and user login"
 end

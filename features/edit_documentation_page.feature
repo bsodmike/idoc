@@ -32,4 +32,4 @@ Feature:
     Then I should not see "Edit page"
     When I go to the edit document page
     Then I should be on the account logon page
-    And I should see "You must be logged on to edit documentation"
+    And I should see "You must be logged in to access this area"

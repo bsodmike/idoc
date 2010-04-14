@@ -4,37 +4,37 @@ class DocumentationPagesController < ApplicationController
   before_filter :find_documentation_page, :only => [:edit, :update, :show, :destroy]
 
   def new
-    can_create_page do
+    allowed_to? :create, DocumentationPage do
       setup_new_page
     end
   end
 
   def create
-    can_create_page do
+    allowed_to? :create, DocumentationPage do
       create_page
     end
   end
 
   def edit
-    can_update_page do
+    allowed_to? :update, @documentation_page do
       @all_documents = find_candidate_parent_pages
     end
   end
 
   def update
-    can_update_page do
+    allowed_to? :update, @documentation_page do
       update_page
     end
   end
 
   def show
-    can_read_page do
+    allowed_to? :read, @documentation_page do
       render :action => :show
     end
   end
 
   def destroy
-    can_destroy_page do
+    allowed_to? :destroy, @documentation_page do
       destroy_page
     end
   end
@@ -54,17 +54,15 @@ class DocumentationPagesController < ApplicationController
   end
 
   def display_new_page
-    if can? :create, DocumentationPage
+    allowed_to? :create, DocumentationPage do
       setup_new_page
       render :action => :new
-    else
-      cant_create_page
     end
   end
 
   def display_first_page
     @documentation_page = DocumentationPage.roots.first
-    can_read_page do
+    allowed_to? :read, @documentation_page do
       render :action => :show
     end
   end
@@ -115,36 +113,6 @@ class DocumentationPagesController < ApplicationController
 
   def find_candidate_parent_pages
     DocumentationPage.find(:all) - [@documentation_page]
-  end
-
-  def can_create_page
-    if can? :create, DocumentationPage
-      yield
-    else
-      cant_create_page
-    end
-  end
-
-  def can_update_page
-    if can? :update, @documentation_page
-      yield
-    else
-      cant_update_page
-    end
-  end
-
-  def can_read_page
-    if can? :read, @documentation_page
-      yield
-    end
-  end
-
-  def can_destroy_page
-    if can? :destroy, @documentation_page
-      yield
-    else
-      cannot_destroy_page
-    end
   end
 
   def destroy_page

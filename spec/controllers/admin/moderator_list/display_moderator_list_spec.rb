@@ -1,11 +1,6 @@
 require 'spec_helper'
 
 describe Admin::ModeratorListController, "Display the moderators list" do
-
-  before(:each) do
-    controller.stub!(:can?).and_return(true)
-  end
-  
   def perform_action
     get :show
   end
@@ -15,8 +10,16 @@ describe Admin::ModeratorListController, "Display the moderators list" do
     perform_action
   end
 
-  it "should retrieve moderators" do
-    ModeratorList.should_receive(:moderators).and_return([])
-    perform_action
+  context "User can read the moderator list" do
+    before(:each) do
+      controller.stub(:can?).and_return(true)
+    end
+    
+    it "should retrieve moderators" do
+      ModeratorList.should_receive(:moderators).and_return([])
+      perform_action
+    end
   end
+
+  it_should_behave_like "deny access to area with 403 and user login"
 end

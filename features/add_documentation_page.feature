@@ -50,11 +50,11 @@ Feature:
     And there is no documentation
     When I go to the home page
     Then I should be on the account logon page
-    And I should see "You must be logged on to add documentation"
+    And I should see "You must be logged in to access this area"
 
   Scenario: Attempt to create a documentation page without identifying
     Given I am not identified
     And I have created a page called "Test page"
     When I go to the add documentation page
     Then I should be on the account logon page
-    And I should see "You must be logged on to add documentation"
+    And I should see "You must be logged in to access this area"
