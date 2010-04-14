@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Ability do
+describe Ability, "Comment abilities" do
   context "No user logged in" do
     before(:each) do
       @ability = Ability.new(nil)

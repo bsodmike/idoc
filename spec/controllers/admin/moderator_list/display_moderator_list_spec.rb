@@ -2,6 +2,10 @@ require 'spec_helper'
 
 describe Admin::ModeratorListController, "Display the moderators list" do
 
+  before(:each) do
+    controller.stub!(:can?).and_return(true)
+  end
+  
   def perform_action
     get :show
   end
