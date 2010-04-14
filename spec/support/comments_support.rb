@@ -5,7 +5,7 @@ module CommentsControllerHelpers
 
   def setup_create_comment
     setup_shared_comment
-    @comment.stub!(:save).and_return(true)
+    @comment.stub!(:save!)
   end
 
   private

@@ -1,78 +1,73 @@
 class DocumentationPagesController < ApplicationController
   before_filter :find_menu_items, :only => [:new, :create, :edit, :update, :show, :root]
   before_filter :store_location, :only => :show
+  before_filter :find_documentation_page, :only => [:edit, :update, :show, :destroy]
 
   def new
-    if can? :create, DocumentationPage
+    can_create_page do
       setup_new_page
-    else
-      cant_create_page
     end
   end
 
   def create
-    if can? :create, DocumentationPage
+    can_create_page do
       create_page
-    else
-      cant_create_page
     end
   end
 
   def edit
-    @documentation_page = DocumentationPage.find(params[:id])
-    if can? :update, @documentation_page
+    can_update_page do
       @all_documents = find_candidate_parent_pages
-    else
-      flash[:error] = "You must be logged on to edit documentation"
-      redirect_to new_user_session_url
     end
   end
 
   def update
-    @documentation_page = DocumentationPage.find(params[:id])
-    if can? :update, @documentation_page
+    can_update_page do
       update_page
-    else
-      cant_update_page
     end
   end
 
   def show
-    @documentation_page = DocumentationPage.find params[:id]
-    if can? :read, @documentation_page
+    can_read_page do
       render :action => :show
     end
   end
 
   def destroy
-    @documentation_page = DocumentationPage.find(params[:id])
-    if can? :destroy, @documentation_page
-      @documentation_page.destroy
-      flash[:notice] = "Page deleted"
-      redirect_to root_url
-    else
-      flash[:error] = "You are not allowed to destroy documentation pages"
-      redirect_to @documentation_page
+    can_destroy_page do
+      destroy_page
     end
   end
 
   def root
     if DocumentationPage.roots.empty?
-      if can? :create, DocumentationPage
-        setup_new_page
-        render :action => :new
-      else
-        cant_create_page
-      end
+      display_new_page
     else
-      @documentation_page = DocumentationPage.roots[0]
-      if can? :read, @documentation_page
-        render :action => :show
-      end
+      display_first_page
     end
   end
 
   private
+
+  def find_documentation_page
+    @documentation_page = DocumentationPage.find(params[:id])
+  end
+
+  def display_new_page
+    if can? :create, DocumentationPage
+      setup_new_page
+      render :action => :new
+    else
+      cant_create_page
+    end
+  end
+
+  def display_first_page
+    @documentation_page = DocumentationPage.roots.first
+    can_read_page do
+      render :action => :show
+    end
+  end
 
   def setup_new_page
     @documentation_page = DocumentationPage.new
@@ -120,5 +115,46 @@ class DocumentationPagesController < ApplicationController
 
   def find_candidate_parent_pages
     DocumentationPage.find(:all) - [@documentation_page]
+  end
+
+  def can_create_page
+    if can? :create, DocumentationPage
+      yield
+    else
+      cant_create_page
+    end
+  end
+
+  def can_update_page
+    if can? :update, @documentation_page
+      yield
+    else
+      cant_update_page
+    end
+  end
+
+  def can_read_page
+    if can? :read, @documentation_page
+      yield
+    end
+  end
+
+  def can_destroy_page
+    if can? :destroy, @documentation_page
+      yield
+    else
+      cannot_destroy_page
+    end
+  end
+
+  def destroy_page
+    @documentation_page.destroy
+    flash[:notice] = "Page deleted"
+    redirect_to root_url
+  end
+
+  def cannot_destroy_page
+    flash[:error] = "You are not allowed to destroy documentation pages"
+    redirect_to @documentation_page
   end
 end

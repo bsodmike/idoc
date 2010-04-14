@@ -45,12 +45,14 @@
         <dependency name="authlogic" version="2.1.3" bound="EQUAL" />
       </requirement>
       <source from="GemFile" />
+      <source from="Gemfile" />
     </requirement>
     <requirement>
       <requirement>
         <dependency name="cancan" version="1.0.2" bound="EQUAL" />
       </requirement>
       <source from="GemFile" />
+      <source from="Gemfile" />
     </requirement>
     <requirement>
       <requirement>
@@ -63,6 +65,7 @@
         <dependency name="compass" version="0.8.17" bound="EQUAL" />
       </requirement>
       <source from="GemFile" />
+      <source from="Gemfile" />
     </requirement>
     <requirement>
       <requirement>
@@ -81,6 +84,7 @@
         <dependency name="friendly_id" version="3.0.2" bound="EQUAL" />
       </requirement>
       <source from="GemFile" />
+      <source from="Gemfile" />
     </requirement>
     <requirement>
       <requirement>
@@ -93,6 +97,7 @@
         <dependency name="haml" version="2.2.23" bound="EQUAL" />
       </requirement>
       <source from="GemFile" />
+      <source from="Gemfile" />
     </requirement>
     <requirement>
       <requirement>
@@ -105,6 +110,7 @@
         <dependency name="mongrel" version="1.1.6" bound="EQUAL" />
       </requirement>
       <source from="GemFile" />
+      <source from="Gemfile" />
     </requirement>
     <requirement>
       <requirement>
@@ -117,6 +123,7 @@
         <dependency name="pg" version="0.9.0" bound="EQUAL" />
       </requirement>
       <source from="GemFile" />
+      <source from="Gemfile" />
     </requirement>
     <requirement>
       <requirement>
@@ -135,6 +142,7 @@
         <dependency name="rails" version="2.3.5" bound="EQUAL" />
       </requirement>
       <source from="GemFile" />
+      <source from="Gemfile" />
     </requirement>
     <requirement>
       <requirement>
@@ -154,6 +162,7 @@
         <dependency name="sanitize" version="1.2.0" bound="EQUAL" />
       </requirement>
       <source from="GemFile" />
+      <source from="Gemfile" />
     </requirement>
   </component>
   <component name="NewModuleRootManager">
