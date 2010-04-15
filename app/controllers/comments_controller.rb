@@ -22,6 +22,8 @@ class CommentsController < ApplicationController
   def destroy
     @comment = @documentation_page.comments.find(params[:id])
     allowed_to? :destroy, @comment do
+      @comment.destroy
+      flash[:notice] = "Comment deleted"
       redirect_to @documentation_page
     end
   end
