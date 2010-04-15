@@ -3,42 +3,30 @@
 # newer version of cucumber-rails. Consider adding your own code to a new file
 # instead of editing this one. Cucumber will automatically load all features/**/*.rb
 # files.
+ENV["RAILS_ENV"] = "cucumber"
 
-require 'rubygems'
-require 'spork'
+require File.expand_path(File.dirname(__FILE__) + '/../../config/environment')
 
-Spork.prefork do
-  #need to do this explicitly, otherwise the env somehow gets set back to 'test' and the wrong environment config is used
-  ENV["RAILS_ENV"] = "cucumber"
-  
-  require File.expand_path(File.dirname(__FILE__) + '/../../config/environment')
-
-  require 'cucumber/formatter/unicode' # Remove this line if you don't want Cucumber Unicode support
-  require 'cucumber/rails/rspec'
-  require 'cucumber/rails/world'
-  require 'cucumber/rails/active_record'
-  require 'cucumber/web/tableish'
-  require 'email_spec'
-  require 'email_spec/cucumber'
+require 'cucumber/formatter/unicode' # Remove this line if you don't want Cucumber Unicode support
+require 'cucumber/rails/rspec'
+require 'cucumber/rails/world'
+require 'cucumber/rails/active_record'
+require 'cucumber/web/tableish'
+require 'email_spec'
+require 'email_spec/cucumber'
 
 
-  require 'webrat'
-  require 'webrat/core/matchers'
+require 'webrat'
+require 'webrat/core/matchers'
 
-  Webrat.configure do |config|
-    config.mode = :rails
-    config.open_error_files = false # Set to true if you want error pages to pop up in the browser
-  end
-
-
+Webrat.configure do |config|
+  config.mode = :rails
+  config.open_error_files = false # Set to true if you want error pages to pop up in the browser
 end
+ActionController::Base.allow_rescue = false
 
-Spork.each_run do
-  ActionController::Base.allow_rescue = false
+Cucumber::Rails::World.use_transactional_fixtures = true
 
-  Cucumber::Rails::World.use_transactional_fixtures = true
+require 'database_cleaner'
+DatabaseCleaner.strategy = :truncation
 
-  require 'database_cleaner'
-  DatabaseCleaner.strategy = :truncation
-
-end

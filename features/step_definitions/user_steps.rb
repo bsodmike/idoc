@@ -60,6 +60,15 @@ Given /^I am identified as an administrator$/ do
   Given "I have logged in to my account"
 end
 
+Given /^I am identified as a moderator$/ do
+  Given "I have created an account"
+  Given "I have activated my account"
+  user = User.find_by_email(@email_address)
+  user.moderator = true
+  user.save!
+  Given "I have logged in to my account"
+end
+
 Given /^I am identified as a normal user/ do
   Given "I have created an account"
   Given "I have activated my account"
@@ -93,3 +102,4 @@ Then /^I should not see "([^\"]*)" in the moderator list$/ do |user|
     mod.should_not contain(user)
   end
 end
+

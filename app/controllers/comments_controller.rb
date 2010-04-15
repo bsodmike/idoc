@@ -19,6 +19,13 @@ class CommentsController < ApplicationController
     end
   end
 
+  def destroy
+    @comment = @documentation_page.comments.find(params[:id])
+    allowed_to? :destroy, @comment do
+      redirect_to @documentation_page
+    end
+  end
+
   private
 
   def find_documentation_page

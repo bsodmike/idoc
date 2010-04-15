@@ -11,13 +11,7 @@ class Admin::ModeratorListController < ApplicationController
   def update
     allowed_to? :update, ModeratorList do
       ModeratorList.update_list(params[:moderator_list])
-      if !params[:moderator_list][:add_moderators].blank?
-        flash[:notice] = "Moderator added"
-      end
-      if !params[:moderator_list][:remove_moderators].blank?
-        flash[:notice] = "Moderator removed"
-      end
-      
+      construct_update_responses(params[:moderator_list])
       redirect_to admin_moderator_list_url
     end
   end
@@ -25,6 +19,21 @@ class Admin::ModeratorListController < ApplicationController
   def show
     allowed_to? :read, ModeratorList do
       @moderators = ModeratorList.moderators
+    end
+  end
+
+  private
+
+  def construct_update_responses(moderator_update_arrays)
+    flash[:notice] = pluralize_moderator(moderator_update_arrays[:add_moderators], " added")
+    flash[:notice] = pluralize_moderator(moderator_update_arrays[:remove_moderators], " removed")
+  end
+
+  def pluralize_moderator(array, ending)
+    if array.blank?
+      flash[:notice]
+    else
+      "Moderator".smart_pluralize(array.size) + ending
     end
   end
 end

@@ -39,10 +39,22 @@ describe Admin::ModeratorListController, "Update the moderator list" do
         flash[:notice].should contain("Moderator added")
       end
 
+      it "should add 'Moderators added' to the notice when several moderators are added" do
+        @params = {:add_moderators => [1, 2]}
+        perform_action
+        flash[:notice].should contain("Moderators added")
+      end
+
       it "should add 'Moderator removed' to the notice when a single moderator is removed" do
         @params = {:remove_moderators => [1]}
         perform_action
         flash[:notice].should contain("Moderator removed")
+      end
+
+      it "should add 'Moderators removed' to the notice when several moderators are removed" do
+        @params = {:remove_moderators => [1, 2]}
+        perform_action
+        flash[:notice].should contain("Moderators removed")
       end
     end
   end

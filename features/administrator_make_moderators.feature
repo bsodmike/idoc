@@ -21,14 +21,37 @@ Feature:
     Then I should see "Moderator removed"
     And I should not see "Harry" in the moderator list
 
-  @proposed
   Scenario: Add several users to the moderator list
+    Given I am identified as an administrator
+    And there is a non-moderator user called "Harry" with email "harry@test.host"
+    And there is a non-moderator user called "Paul" with email "paul@test.host"
+    When I go to the edit moderator list page
+    And I select "harry@test.host" from "Add moderators"
+    And I select "paul@test.host" from "Add moderators"
+    And I press "Update moderators"
+    Then I should see "Harry" in the moderator list
+    And I should see "Paul" in the moderator list
+    And I should see "Moderators added"
 
-  @proposed
   Scenario: Remove several users from the moderator list
+    Given I am identified as an administrator
+    And there is a moderator user called "Harry" with email "harry@test.host"
+    And there is a moderator user called "Paul" with email "paul@test.host"
+    When I go to the edit moderator list page
+    And I select "harry@test.host" from "Remove moderators"
+    And I select "paul@test.host" from "Remove moderators"
+    And I press "Update moderators"
+    Then I should not see "Harry" in the moderator list
+    And I should not see "Paul" in the moderator list
+    And I should see "Moderators removed"
 
-  @proposed
   Scenario: Non administrator attempts to alter the moderator list
+    Given I am identified
+    When I go to the edit moderator list page
+    Then I should get a "403" status code
 
-  @proposed
   Scenario: Anonymous user attempts to alter the moderator list
+    Given I am not identified
+    When I go to the edit moderator list page
+    Then I should be on the account logon page
+    And I should see "You must be logged in to access this area"
