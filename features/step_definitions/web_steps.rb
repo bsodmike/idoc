@@ -261,3 +261,7 @@ end
 Then /^show me the page$/ do
   save_and_open_page
 end
+
+Then /^I should get a "([^\"]*)" status code$/ do |code|
+  response.status.should contain(code)
+end

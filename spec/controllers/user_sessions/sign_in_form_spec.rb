@@ -1,10 +1,14 @@
 require 'spec_helper'
 
 describe UserSessionsController, "Signing in (providing a logon form)" do
+  def perform_action
+    get :new
+  end
   context "when not logged in" do
     before(:each) do
       UserSession.stub!(:find).and_return(nil)
       UserSession.stub!(:new).and_return(@user_session = mock_model(UserSession).as_new_record)
+      controller.stub!(:can?).and_return(true)
     end
 
     it "should provide the data for a logon form" do
@@ -16,11 +20,7 @@ describe UserSessionsController, "Signing in (providing a logon form)" do
   context "when logged in" do
     before(:each) do
       UserSession.stub!(:find).and_return(@user_session = mock_model(UserSession))
-    end
-
-    it "should find the existing session" do
-      UserSession.should_receive(:find)
-      get :new
+      controller.stub!(:can?).and_return(false)
     end
 
     it "should not create another session" do
@@ -28,14 +28,14 @@ describe UserSessionsController, "Signing in (providing a logon form)" do
       get :new
     end
 
-    it "should inform the user about the problem" do
-      get :new
-      flash[:error].should contain("You are already logged in")
+    it "should provide the user with the 403 screen" do
+      perform_action
+      response.should render_template('shared/403')
     end
 
-    it "should return the user to the home page" do
-      get :new
-      response.should redirect_to(root_url)
+    it "should respond with a 403 status code" do
+      perform_action
+      response.status.should contain("403")
     end
   end
 end

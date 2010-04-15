@@ -1,9 +1,14 @@
 require 'spec_helper'
 
 describe UsersController, "creating a new user account" do
+  def perform_action
+    post :create, :user => {}
+  end
+
   context "When not identified as a user" do
     before(:each) do
       UserSession.stub!(:find).and_return(nil)
+      controller.stub!(:can?).and_return(true)
     end
     context "With valid user data" do
       before(:each) do
@@ -71,11 +76,7 @@ describe UsersController, "creating a new user account" do
     before(:each) do
       UserSession.stub!(:find).and_return(mock_model(UserSession))
       @user_data = {}
-    end
-
-    it "should find the existing session" do
-      UserSession.should_receive(:find)
-      post :create, :user => @user_data
+      controller.stub!(:can?).and_return(false)
     end
 
     it "should not create a user" do
@@ -83,14 +84,14 @@ describe UsersController, "creating a new user account" do
       post :create, :user => @user_data
     end
 
-    it "should inform the user of the problem" do
-      post :create, :user => @user_data
-      flash[:error].should contain("You already have an account")
+    it "should provide the user with the 403 screen" do
+      perform_action
+      response.should render_template('shared/403')
     end
 
-    it "should return the user to the home page" do
-      post :create, :user => @user_data
-      response.should redirect_to(root_url)
+    it "should respond with a 403 status code" do
+      perform_action
+      response.status.should contain("403")
     end
   end
 end

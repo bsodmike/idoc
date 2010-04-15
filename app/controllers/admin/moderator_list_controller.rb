@@ -11,7 +11,13 @@ class Admin::ModeratorListController < ApplicationController
   def update
     allowed_to? :update, ModeratorList do
       ModeratorList.update_list(params[:moderator_list])
-      flash[:notice] = "Moderator added"
+      if !params[:moderator_list][:add_moderators].blank?
+        flash[:notice] = "Moderator added"
+      end
+      if !params[:moderator_list][:remove_moderators].blank?
+        flash[:notice] = "Moderator removed"
+      end
+      
       redirect_to admin_moderator_list_url
     end
   end

@@ -9,6 +9,7 @@ describe UsersController, "requesting a form to create a new user" do
   context "When not identified as a user" do
     before(:each) do
       UserSession.stub!(:find).and_return(nil)
+      controller.stub!(:can?).and_return(true)
     end
     it "should set up the data for a new user form" do
       User.should_receive(:new).and_return(user = mock_model(User).as_new_record)
@@ -20,11 +21,7 @@ describe UsersController, "requesting a form to create a new user" do
   context "When identified as a user" do
     before(:each) do
       UserSession.stub!(:find).and_return(mock_model(UserSession))
-    end
-
-    it "should find the existing session" do
-      UserSession.should_receive(:find)
-      get :new
+      controller.stub!(:can?).and_return(false)
     end
 
     it "should not create a user" do
@@ -32,14 +29,14 @@ describe UsersController, "requesting a form to create a new user" do
       get :new
     end
 
-    it "should inform the user of the problem" do
-      get :new
-      flash[:error].should contain("You already have an account")
+    it "should provide the user with the 403 screen" do
+      perform_action
+      response.should render_template('shared/403')
     end
 
-    it "should return the user to the home page" do
-      get :new
-      response.should redirect_to(root_url)
+    it "should respond with a 403 status code" do
+      perform_action
+      response.status.should contain("403")
     end
   end
 end

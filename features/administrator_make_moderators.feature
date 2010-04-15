@@ -12,8 +12,14 @@ Feature:
     Then I should see "Moderator added"
     And I should see "Harry" in the moderator list
 
-  @proposed
   Scenario: Remove a moderator from the moderator list
+    Given I am identified as an administrator
+    And there is a moderator user called "Harry" with email "harry@test.host"
+    When I go to the edit moderator list page
+    And I select "harry@test.host" from "Remove moderators"
+    And I press "Update moderators"
+    Then I should see "Moderator removed"
+    And I should not see "Harry" in the moderator list
 
   @proposed
   Scenario: Add several users to the moderator list

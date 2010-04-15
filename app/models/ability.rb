@@ -31,10 +31,14 @@ class Ability
   def setup_anonymous_permissions
     can :read, [DocumentationPage, Comment]
     can :create, [User, UserSession]
+    can :confirm, User
   end
 
   def setup_administrator_permissions
     can :manage, :all
+    can :destroy, DocumentationPage do |doc_page|
+      doc_page.children.empty?
+    end
     cannot :create, UserSession
     cannot [:create, :destroy], ModeratorList
   end

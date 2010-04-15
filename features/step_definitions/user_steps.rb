@@ -36,6 +36,12 @@ Given /^there is a non\-moderator user called "([^\"]*)" with email "([^\"]*)"$/
   User.create!(:email => email, :displayname => display_name, :password => "password", :password_confirmation => "password")
 end
 
+Given /^there is a moderator user called "([^\"]*)" with email "([^\"]*)"$/ do |display_name, email|
+  user = User.new(:email => email, :displayname => display_name, :password => "password", :password_confirmation => "password")
+  user.moderator = true
+  user.save!
+end
+
 
 Given /^I have logged in to my account$/ do
   visit path_to("the account logon page")
@@ -79,5 +85,11 @@ end
 Then /^I should see "([^\"]*)" in the moderator list$/ do |user|
   response.should have_selector("#moderator_list") do |mod|
     mod.should contain(user)
+  end
+end
+
+Then /^I should not see "([^\"]*)" in the moderator list$/ do |user|
+  within("#moderator_list") do |mod|
+    mod.should_not contain(user)
   end
 end

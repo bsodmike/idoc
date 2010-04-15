@@ -110,6 +110,10 @@ When /^I enter a non youtube video$/ do
   fill_in "Content", :with => @non_youtube_vid
 end
 
+When /^I attempt to delete "([^\"]*)"$/ do |page_title|
+  visit path_to("the document page for \"#{page_title}\""), :delete
+end
+
 Then /^I should see the documentation page$/ do
   response.should contain(@title)
   response.should contain(@content)

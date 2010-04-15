@@ -8,6 +8,7 @@ describe DocumentationPagesController, "editing an existing page (providing the 
     get :edit, :id => @doc_page.id
   end
   it_should_behave_like "finding menu items"
+  it_should_behave_like "deny access to area with 403 and user login"
 
   it "should check the user has update permission for the page" do
     controller.should_receive(:can?).with(:update, @doc_page)
@@ -34,6 +35,4 @@ describe DocumentationPagesController, "editing an existing page (providing the 
       assigns[:all_documents].should == (@all_pages - [@doc_page])
     end
   end
-
-  it_should_behave_like "deny access to area with 403 and user login"
 end

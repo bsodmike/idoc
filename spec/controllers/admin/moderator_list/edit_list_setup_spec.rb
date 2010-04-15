@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 describe Admin::ModeratorListController, "Setup the edit moderator list form" do
-
   def perform_action
     get :edit  
   end
+  it_should_behave_like "deny access to area with 403 and user login"
 
   context "User can edit the moderator list" do
     before(:each) do
@@ -27,6 +27,4 @@ describe Admin::ModeratorListController, "Setup the edit moderator list form" do
       perform_action
     end
   end
-  
-  it_should_behave_like "deny access to area with 403 and user login"
 end

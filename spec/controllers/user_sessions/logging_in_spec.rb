@@ -1,7 +1,19 @@
 require 'spec_helper'
 
 describe UserSessionsController, "Logging in (creating an authenticated session)" do
+  def perform_action
+    post :create, :user_session => {}
+  end
+
+  it "should check the user has permission to create a session" do
+    controller.should_receive(:can?).with(:create, UserSession)
+    perform_action
+  end
+
   context "when the user is logged out" do
+    before(:each) do
+      controller.stub!(:can?).and_return(true)
+    end
     context "and user provides valid credentials" do
       before(:each) do
         UserSession.stub!(:find).and_return(nil)
@@ -69,26 +81,17 @@ describe UserSessionsController, "Logging in (creating an authenticated session)
     before(:each) do
       UserSession.stub!(:find).and_return(@user_session = mock_model(UserSession))
       @credentials = {}
+      controller.stub!(:can?).and_return(false)
     end
 
-    it "should find the existing session" do
-      UserSession.should_receive(:find)
-      post :create, :user_session => @credentials
+    it "should provide the user with the 403 screen" do
+      perform_action
+      response.should render_template('shared/403')
     end
 
-    it "should not create another session" do
-      UserSession.should_not_receive(:new)
-      post :create, :user_session => @credentials
-    end
-
-    it "should inform the user about the problem" do
-      post :create, :user_session => @credentials
-      flash[:error].should contain("You are already logged in")
-    end
-
-    it "should return the user to the home page" do
-      post :create, :user_session => @credentials
-      response.should redirect_to(root_url)
+    it "should respond with a 403 status code" do
+      perform_action
+      response.status.should contain("403")
     end
   end
 
@@ -98,6 +101,7 @@ describe UserSessionsController, "Logging in (creating an authenticated session)
       UserSession.stub!(:new).and_return(@user_session = mock_model(UserSession, :save => false,
                                                                     :account_inactive? => true))
       @valid_credentials = {}
+      controller.stub!(:can?).and_return(true)
     end
 
     it "should create the session" do

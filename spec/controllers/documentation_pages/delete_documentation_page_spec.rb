@@ -9,6 +9,7 @@ describe DocumentationPagesController, "Deleting a documentation page" do
   def perform_action
     delete :destroy, :id => @page.id
   end
+  it_should_behave_like "deny access to area with 403 and user login"
 
   it "should check for the ability to destroy the documentation page" do
     controller.should_receive(:can?).with(:destroy, @page)
@@ -30,6 +31,4 @@ describe DocumentationPagesController, "Deleting a documentation page" do
       response.should redirect_to(root_url)
     end
   end
-
-  it_should_behave_like "deny access to area with 403 and user login"
 end

@@ -8,6 +8,7 @@ describe CommentsController, "Creating a new comment (form setup)" do
     get :new, :documentation_page_id => @doc_page.id
   end
   it_should_behave_like "finding menu items"
+  it_should_behave_like "deny access to area with 403 and user login"
 
   it "should check the user can create comments" do
     controller.should_receive(:can?).with(:create, Comment)
@@ -29,6 +30,4 @@ describe CommentsController, "Creating a new comment (form setup)" do
       assigns[:comment].should == @comment
     end
   end
-
-  it_should_behave_like "deny access to area with 403 and user login"
 end

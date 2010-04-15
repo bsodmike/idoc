@@ -11,6 +11,7 @@ describe DocumentationPagesController, "creating a new page" do
     post :create, :documentation_page => {}
   end
   it_should_behave_like "finding menu items"
+  it_should_behave_like "deny access to area with 403 and user login"
 
   it "should check the user can create pages" do
     controller.should_receive(:can?).with(:create, DocumentationPage)
@@ -67,6 +68,4 @@ describe DocumentationPagesController, "creating a new page" do
       end
     end
   end
-
-  it_should_behave_like "deny access to area with 403 and user login"
 end

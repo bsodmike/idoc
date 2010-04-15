@@ -15,6 +15,22 @@ if !@included then
     end
   end
 
+  shared_examples_for "deny access to area with 403" do
+    before(:each) do
+      controller.stub!(:can?).and_return(false)
+    end
+
+    it "should provide the user a 403 Forbidden error" do
+      perform_action
+      response.status.should contain("403")
+    end
+
+    it "should render the 403 error page" do
+      perform_action
+      response.should render_template('shared/403')
+    end
+  end
+
   shared_examples_for "deny access to area with 403 and user login" do
     before(:each) do
       controller.stub!(:can?).and_return(false)
@@ -30,7 +46,7 @@ if !@included then
         response.status.should contain("403")
       end
 
-      it "should render nothing" do
+      it "should render the 403 error page" do
         perform_action
         response.should render_template('shared/403')
       end

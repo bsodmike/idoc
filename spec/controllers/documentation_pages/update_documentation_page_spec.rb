@@ -8,6 +8,7 @@ describe DocumentationPagesController, "editing an existing page (performing the
     post :update, :id => @doc_page.id, :documentation_page => {}
   end
   it_should_behave_like "finding menu items"
+  it_should_behave_like "deny access to area with 403 and user login"
 
   it "should find the documentation page" do
     perform_action
@@ -68,5 +69,4 @@ describe DocumentationPagesController, "editing an existing page (performing the
     end
   end
 
-  it_should_behave_like "deny access to area with 403 and user login"
 end

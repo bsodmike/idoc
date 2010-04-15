@@ -10,6 +10,10 @@ describe Ability, "User abilites" do
       @ability.can?(:create, User).should be_true
     end
 
+    it "should be able to confirm a user" do
+      @ability.can?(:confirm, User.new).should be_true
+    end
+
     it "should not be able to read a user" do
       @ability.can?(:read, User.new).should be_false
     end
@@ -31,6 +35,10 @@ describe Ability, "User abilites" do
 
     it "should not be able to create a user" do
       @ability.can?(:create, User).should be_false
+    end
+
+    it "should not be able to confirm a user" do
+      @ability.can?(:confirm, User.new).should be_false
     end
 
     it "should be able to read their own user" do
@@ -63,6 +71,10 @@ describe Ability, "User abilites" do
       @ability.can?(:create, User).should be_false
     end
 
+    it "should not be able to confirm a user" do
+      @ability.can?(:confirm, User.new).should be_false
+    end
+
     it "should be able to read their own user" do
       @ability.can?(:read, @user).should be_true
     end
@@ -92,6 +104,10 @@ describe Ability, "User abilites" do
 
     it "should be able to create users" do
       @ability.can?(:create, User).should be_true
+    end
+
+    it "should be able to confirm users" do
+      @ability.can?(:confirm, @other_user).should be_true
     end
 
     it "should be able to read users" do

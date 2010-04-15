@@ -10,6 +10,7 @@ describe DocumentationPagesController, "providing a blank documentation page" do
     get :new
   end
   it_should_behave_like "finding menu items"
+  it_should_behave_like "deny access to area with 403 and user login"
 
   context "User is allowed to create page" do
     before(:each) do
@@ -31,6 +32,4 @@ describe DocumentationPagesController, "providing a blank documentation page" do
       get :new
     end
   end
-
-  it_should_behave_like "deny access to area with 403 and user login"
 end

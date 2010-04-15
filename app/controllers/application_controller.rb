@@ -22,17 +22,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def require_logged_in(message)
-    if !current_session
-      flash[:error] = message
-      redirect_to new_user_session_url
-      return false
-    else
-      current_user
-      return true
-    end
-  end
-
   def current_session
     return @current_session if @current_session
     @current_session = UserSession.find

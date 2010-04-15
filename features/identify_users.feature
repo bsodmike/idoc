@@ -54,13 +54,11 @@ Feature:
     And I have activated my account
     And I have logged in to my account
     When I go to the new account page
-    Then I should be on the home page
-    And I should see "You already have an account"
+    Then I should get a "403" status code
 
   Scenario: An identified user attempts to re-identify
     Given I have created an account
     And I have activated my account
     And I have logged in to my account
     When I go to the account logon page
-    Then I should be on the home page
-    And I should see "You are already logged in"
+    Then I should get a "403" status code

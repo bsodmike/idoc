@@ -5,6 +5,8 @@ describe Admin::ModeratorListController, "Display the moderators list" do
     get :show
   end
 
+  it_should_behave_like "deny access to area with 403 and user login"
+
   it "should check the user can read the moderators list" do
     controller.should_receive(:can?).with(:read, ModeratorList)
     perform_action
@@ -20,6 +22,4 @@ describe Admin::ModeratorListController, "Display the moderators list" do
       perform_action
     end
   end
-
-  it_should_behave_like "deny access to area with 403 and user login"
 end

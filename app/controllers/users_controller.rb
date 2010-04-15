@@ -1,29 +1,36 @@
 class UsersController < ApplicationController
-
   before_filter :find_menu_items
-  before_filter lambda{|cntrl| cntrl.require_logged_out("You already have an account")}, :only => [:new, :create]
 
   def new
-    @user = User.new
+    allowed_to? :create, UserSession do
+      @user = User.new
+    end
   end
 
   def create
-    @user = User.new(params[:user])
-    if @user.save_without_session_maintenance
-      successful_action("Sign-up successful")
-    else
-      unsuccessful_action
+    allowed_to? :create, UserSession do
+      @user = User.new(params[:user])
+      if @user.save_without_session_maintenance
+        successful_action("Sign-up successful")
+      else
+        unsuccessful_action
+      end
     end
-
   end
 
   def confirm
-    @user = User.find_by_perishable_token(params[:activation_token])
-    @user.activate!
-    successful_action("Account activated")
+    allowed_to? :confirm, User do
+      @user = User.find_by_perishable_token(params[:activation_token])
+      @user.activate!
+      successful_action("Account activated")
+    end
   end
 
-private
+  private
+
+  def unauthorized!
+    render 'shared/403', :status => 403
+  end
 
   def successful_action(success_message)
     flash[:notice] = success_message

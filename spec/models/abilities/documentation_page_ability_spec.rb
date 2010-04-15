@@ -91,8 +91,14 @@ describe Ability, "Documentation page abilities" do
       @ability.can?(:update, DocumentationPage.new).should be_true
     end
 
-    it "should be able to destroy a documentation page" do
+    it "should be able to destroy a documentation page with no children" do
       @ability.can?(:destroy, DocumentationPage.new).should be_true
+    end
+
+    it "should not be able to destroy a documentation page with children" do
+      @doc_page = DocumentationPage.new
+      @doc_page.children << DocumentationPage.new
+      @ability.can?(:destroy, @doc_page).should be_false
     end
   end
 end
