@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100416104730) do
+ActiveRecord::Schema.define(:version => 20100416131620) do
 
   create_table "comments", :force => true do |t|
     t.text     "body",                  :null => false
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(:version => 20100416104730) do
     t.string   "site_title"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "use_document_author_list", :default => false
   end
 
   create_table "slugs", :force => true do |t|

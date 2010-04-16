@@ -51,6 +51,9 @@ module NavigationHelpers
 
       when /the site configuration page/
         admin_site_config_path
+
+      when /the edit document authors list page/
+        edit_admin_document_author_list_path
         
       else
         raise "Can't find mapping from \"#{page_name}\" to a path.\n" +

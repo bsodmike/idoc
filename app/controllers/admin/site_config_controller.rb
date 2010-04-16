@@ -16,7 +16,7 @@ class Admin::SiteConfigController < ApplicationController
   end
 
   def show
-    allowed_to? :update, @site_config do
+    allowed_to? :read, @site_config do
       render :action => :show
     end
   end

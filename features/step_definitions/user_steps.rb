@@ -36,6 +36,10 @@ Given /^there is a non\-moderator user called "([^\"]*)" with email "([^\"]*)"$/
   User.create!(:email => email, :displayname => display_name, :password => "password", :password_confirmation => "password")
 end
 
+Given /^there is a non\-document\-author user called "([^\"]*)" with email "([^\"]*)"$/ do |display_name, email|
+  User.create!(:email => email, :displayname => display_name, :password => "password", :password_confirmation => "password")
+end
+
 Given /^there is a moderator user called "([^\"]*)" with email "([^\"]*)"$/ do |display_name, email|
   user = User.new(:email => email, :displayname => display_name, :password => "password", :password_confirmation => "password")
   user.moderator = true
@@ -102,4 +106,3 @@ Then /^I should not see "([^\"]*)" in the moderator list$/ do |user|
     mod.should_not contain(user)
   end
 end
-

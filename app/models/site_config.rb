@@ -1,7 +1,7 @@
 class SiteConfig < ActiveRecord::Base
   def self.find_or_create_default!
     if count == 0
-      return create!(:site_title => 'iDoc')
+      return create!(:site_title => 'iDoc', :use_document_author_list => false)
     else
       return first
     end

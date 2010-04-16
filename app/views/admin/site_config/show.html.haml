@@ -2,3 +2,6 @@
   != title "Site configuration"
   %ul
     %li= "Site title: #{@site_config.site_title}"
+    %li= "Use document author list: #{@site_config.use_document_author_list}"
+  - if @site_config.use_document_author_list
+    Edit document author list

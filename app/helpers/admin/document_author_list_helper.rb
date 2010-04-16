@@ -1,0 +1,2 @@
+module Admin::DocumentAuthorListHelper
+end

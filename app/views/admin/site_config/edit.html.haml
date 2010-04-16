@@ -1,4 +1,6 @@
 - form_for(@site_config, :url => admin_site_config_path) do |f|
   != f.label :site_title
   != f.text_field :site_title
+  != f.label :use_document_author_list
+  != f.check_box :use_document_author_list
   != submit_tag "Save configuration"
