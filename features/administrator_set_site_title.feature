@@ -10,4 +10,9 @@ Feature:
     And I press "Save configuration"
     Then I should be on the site configuration page
     And I should see "Configuration saved"
-    And I should see the title set to "Testing site title" 
+    And I should see the title set to "Testing site title"
+
+  Scenario: A non-administrator attempts to set the site title on the admin config page
+    Given I am identified
+    When I go to the edit site configuration page
+    Then I should get a "403" status code

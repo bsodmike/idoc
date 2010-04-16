@@ -1,4 +1,4 @@
-- form_for(:site_config, :url => admin_site_config_path, :html => { :method => :put }) do |f|
+- form_for(@site_config, :url => admin_site_config_path) do |f|
   != f.label :site_title
   != f.text_field :site_title
   != submit_tag "Save configuration"

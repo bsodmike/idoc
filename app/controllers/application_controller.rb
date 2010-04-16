@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
+  before_filter :load_config
+
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
   
@@ -44,6 +46,10 @@ class ApplicationController < ActionController::Base
   end
 
   protected
+
+  def load_config
+    @site_config = SiteConfig.find_or_create_default!
+  end
   
   def unauthorized!
     if current_user
