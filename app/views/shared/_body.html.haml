@@ -6,5 +6,5 @@
   .section-item#left_menu
     #menu_container
       != render :partial => 'shared/menu', :locals => {:items => @menu_items}
-    - if @current_user
+    - if can? :create, DocumentationPage
       != button_to "Add page", new_documentation_page_path, :method => :get, :id => "add_page_button"

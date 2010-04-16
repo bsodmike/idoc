@@ -25,7 +25,7 @@ describe Ability, "Documentation page abilities" do
 
   context "User is logged in" do
     before(:each) do
-      @user = mock_model(User, :admin => false, :moderator => false, :author => false)
+      @user = mock_model(User, :admin => false, :moderator => false, :document_author => false)
       @ability = Ability.new(@user)
     end
 
@@ -78,7 +78,7 @@ describe Ability, "Documentation page abilities" do
 
       context "User is a document author" do
         before(:each) do
-          @user.stub!(:author).and_return(true)
+          @user.stub!(:document_author).and_return(true)
           @ability = Ability.new(@user)
         end
         
@@ -103,7 +103,7 @@ describe Ability, "Documentation page abilities" do
 
   context "User is a moderator" do
     before(:each) do
-      @user = mock_model(User, :admin => false, :moderator => true, :author => false)
+      @user = mock_model(User, :admin => false, :moderator => true, :document_author => false)
       @ability = Ability.new(@user)
     end
 

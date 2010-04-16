@@ -58,7 +58,7 @@ class Ability
   end
 
   def setup_documentation_page_permissions_with_config
-    if SiteConfig.find_or_create_default!.use_document_author_list && !@user.author
+    if SiteConfig.find_or_create_default!.use_document_author_list && !@user.document_author
       can :read, DocumentationPage
     else
       can :manage, DocumentationPage
