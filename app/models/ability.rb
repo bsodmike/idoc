@@ -44,16 +44,25 @@ class Ability
   end
 
   def setup_moderator_permissions
-    can :manage, [DocumentationPage, Comment]
+    setup_documentation_page_permissions_with_config
+    can :manage, Comment
     can_control_own_user_only
     can_control_own_user_session_only
   end
 
   def setup_logged_in_permissions
-    can :manage, DocumentationPage
+    setup_documentation_page_permissions_with_config
     can [:read, :create], Comment
     can_control_own_user_only
     can_control_own_user_session_only
+  end
+
+  def setup_documentation_page_permissions_with_config
+    if SiteConfig.find_or_create_default!.use_document_author_list && !@user.author
+      can :read, DocumentationPage
+    else
+      can :manage, DocumentationPage
+    end
   end
 
   def can_control_own_user_only
