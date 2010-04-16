@@ -45,7 +45,13 @@ module NavigationHelpers
 
       when /the edit moderator list page/
         edit_admin_moderator_list_path
-      
+
+      when /the edit site configuration page/
+        edit_admin_site_config_path
+
+      when /the site configuration page/
+        admin_site_config_path
+        
       else
         raise "Can't find mapping from \"#{page_name}\" to a path.\n" +
                 "Now, go and add a mapping in #{__FILE__}"

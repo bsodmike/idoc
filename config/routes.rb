@@ -2,6 +2,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.namespace :admin do |admin|
     admin.resource :moderator_list, :controller => :moderator_list, :only => [:edit, :update, :show]
+    admin.resource :site_config, :controller => :site_config, :only => [:edit, :update, :show]
   end
 
   map.resource :user_session
