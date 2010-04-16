@@ -50,5 +50,10 @@ describe User do
       @user = User.new(@valid_attributes)
       @user.is_moderator?.should be_false
     end
+
+    it "should not be a document author initially" do
+      @user = User.new(@valid_attributes)
+      @user.is_author?.should be_false
+    end
   end
 end

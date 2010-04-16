@@ -1,0 +1,4 @@
+- form_for(:document_author_list, :url => admin_document_author_list_path, :html => { :method => :put }) do |f|
+  != f.label :add_document_authors
+  != f.collection_select :add_document_authors, @users, :id, :email, {}, {:multiple => "multiple"}
+  != submit_tag "Update document authors"

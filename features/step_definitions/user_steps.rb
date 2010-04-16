@@ -101,6 +101,12 @@ Then /^I should see "([^\"]*)" in the moderator list$/ do |user|
   end
 end
 
+Then /^I should see "([^\"]*)" in the document author list$/ do |user|
+  response.should have_selector("#document_author_list") do |mod|
+    mod.should contain(user)
+  end
+end
+
 Then /^I should not see "([^\"]*)" in the moderator list$/ do |user|
   within("#moderator_list") do |mod|
     mod.should_not contain(user)

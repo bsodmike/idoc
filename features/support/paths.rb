@@ -52,6 +52,9 @@ module NavigationHelpers
       when /the site configuration page/
         admin_site_config_path
 
+      when /the document authors list page/
+        admin_document_author_list_path
+        
       when /the edit document authors list page/
         edit_admin_document_author_list_path
         

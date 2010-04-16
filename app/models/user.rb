@@ -18,4 +18,8 @@ class User < ActiveRecord::Base
   def is_moderator?
     self.moderator
   end
+
+  def is_author?
+    self.document_author
+  end
 end
