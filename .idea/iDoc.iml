@@ -85,6 +85,18 @@
       <source from="GemFile" />
       <source from="Gemfile" />
     </requirement>
+    <requirement>
+      <requirement>
+        <dependency name="will_paginate" version="2.3.12" bound="EQUAL" />
+      </requirement>
+      <source from="Gemfile" />
+    </requirement>
+    <requirement>
+      <requirement>
+        <dependency name="xapian-fu" version="1.1.0" bound="EQUAL" />
+      </requirement>
+      <source from="Gemfile" />
+    </requirement>
   </component>
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">

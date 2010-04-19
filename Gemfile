@@ -9,22 +9,23 @@ gem 'authlogic', "2.1.3"
 gem 'friendly_id', "3.0.2"
 gem 'sanitize', "1.2.0"
 gem 'cancan', "1.0.2"
+gem 'xapian-fu', "1.1.0"
+gem 'will_paginate', "2.3.12"
 gem 'mongrel', "1.1.6"
 
 group :test do
   gem 'test-unit', "1.2.3"
-  gem 'rspec-rails', '>= 1.3.2'
-  gem 'spork', '>=0.7.5'
+  gem 'rspec-rails', '1.3.2'
+  gem 'spork', '0.8.2'
   gem 'email_spec', "0.6.2"
 end
 
 group :cucumber do
   gem 'test-unit', "1.2.3"
-  gem 'cucumber-rails', '>=0.2.4'
-  gem 'database_cleaner', '>=0.4.3'
-  gem 'webrat', '>=0.6.0'
-  gem 'rspec', '>=1.3.0'
-  gem 'rspec-rails', '>=1.3.2' 
-  gem 'spork', '>=0.7.5'
+  gem 'cucumber-rails', '0.3.0'
+  gem 'database_cleaner', '0.5.2'
+  gem 'webrat', '0.7.0'
+  gem 'rspec', '1.3.0'
+  gem 'rspec-rails', '1.3.2'
   gem 'email_spec', "0.6.2"
 end
