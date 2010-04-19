@@ -1,10 +1,4 @@
-
-    context "The document author list is in use" do
-      before(:each) do
-        @config = mock_model(SiteConfig, :use_document_author_list => true)
-        SiteConfig.stub!(:find_or_create_default!).and_return(@config)
-        @ability = Ability.new(@user)
-      endFeature:
+Feature:
   In order to delegate the management of a documentation community
   As an administrator
   I need to be able to designate members of the community as moderators

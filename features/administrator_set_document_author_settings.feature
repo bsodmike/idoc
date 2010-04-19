@@ -22,3 +22,12 @@ Feature:
     Then I should be on the document authors list page
     And I should see "Document author added"
     And I should see "Harry" in the document author list
+
+  Scenario: An administrator removes a user from the document authors
+    Given I am identified as an administrator
+    And there is a document author called "Harry" with email "harry@test.host"
+    When I go to the edit document authors list page
+    And I select "harry@test.host" from "Remove document authors"
+    And I press "Update document authors"
+    Then I should see "Document author removed"
+    And I should not see "Harry" in the document author list

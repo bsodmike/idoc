@@ -3,8 +3,8 @@
     #logo!= link_to @site_config.site_title, root_path
   .section-main
     .section-item
-      - if !@current_user
+      - if can? :create, UserSession
         != render :partial => 'shared/login_bar'
-      - else
+      - elsif can? :destroy, @current_session
         #logout_bar
           != button_to "Logout", user_session_path, :method => :delete
