@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   before_filter :find_menu_items, :only => [:new, :create]
-  before_filter :find_documentation_page
+  before_filter :find_documentation_page, :except => [:recent]
 
   def new
     allowed_to? :create, Comment do
@@ -25,6 +25,12 @@ class CommentsController < ApplicationController
       @comment.destroy
       flash[:notice] = "Comment deleted"
       redirect_to @documentation_page
+    end
+  end
+
+  def recent
+    allowed_to? :manage, Comment do
+      @comments = Comment.recent
     end
   end
 

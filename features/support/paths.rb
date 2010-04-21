@@ -60,6 +60,9 @@ module NavigationHelpers
 
       when /the search results page/
         search_documentation_pages_path
+
+      when /the recent comments page/
+        recent_comments_path
         
       else
         raise "Can't find mapping from \"#{page_name}\" to a path.\n" +

@@ -93,7 +93,7 @@
     </requirement>
     <requirement>
       <requirement>
-        <dependency name="xapor" version="0" bound="GREATER_OR_EQUAL" />
+        <dependency name="xapor" version="0.1.0" bound="GREATER_OR_EQUAL" />
       </requirement>
       <source from="Gemfile" />
     </requirement>
@@ -152,6 +152,8 @@
     <orderEntry type="library" name="[gem] haml (v2.2.21, null)" level="application" />
     <orderEntry type="library" name="[gem] cucumber (v0.6.3, null)" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="[gem] cucumber (v0.6.4, /Users/davidworkman/.rvm/gems/ruby-1.9.1-p378/gems/cucumber-0.6.4)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] xapor (v0.1.2, /Users/davidworkman/.rvm/gems/ruby-1.9.1-p378/gems/xapor-0.1.2)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] xapian-fu (v1.1.0, /Users/davidworkman/.rvm/gems/ruby-1.9.1-p378/gems/xapian-fu-1.1.0)" level="application" />
   </component>
 </module>
 
