@@ -1,0 +1,10 @@
+- form_for :documentation_tree, :url => update_tree_documentation_pages_path, :method => :post do |f|
+  - @documentation_pages.each do |d|
+    - f.fields_for "documentation_page[]", d do |df|
+      - field_set_tag do
+        %h3= d.title
+        != df.label "parent_id", "Parent"
+        != df.select "parent_id", options_from_collection_for_select(@documentation_pages - [d], :id, :title, d.parent_id), :include_blank => true
+        != df.label "position", "Position"
+        != df.text_field "position"
+  != submit_tag "Update tree"

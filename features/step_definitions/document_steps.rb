@@ -227,3 +227,13 @@ Then /^I should see a vimeo video$/ do
     video.should have_selector("embed")
   end
 end
+
+When /^I set the parent of "([^\"]*)" to "([^\"]*)"$/ do |page, new_parent|
+  p = DocumentationPage.find_by_title(page)
+  select new_parent, :from => "documentation_tree_documentation_page_#{p.friendly_id}_parent_id"
+end
+
+When /^I set the position of "([^\"]*)" to (\d)$/ do |page, new_position|
+  p = DocumentationPage.find_by_title(page)
+  fill_in "documentation_tree_documentation_page_#{p.friendly_id}_position", :with => new_position
+end

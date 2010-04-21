@@ -1,5 +1,5 @@
 class DocumentationPagesController < ApplicationController
-  before_filter :find_menu_items, :only => [:new, :create, :edit, :update, :show, :root]
+  before_filter :find_menu_items, :only => [:new, :create, :edit, :update, :show, :edit_tree, :root]
   before_filter :store_location, :only => :show
   before_filter :find_documentation_page, :only => [:edit, :update, :show, :destroy]
 
@@ -50,6 +50,16 @@ class DocumentationPagesController < ApplicationController
         #Record isn't in the db anymore, just ignore it
       end
     end
+  end
+
+  def edit_tree
+    allowed_to? :manage, DocumentationPage do
+      @documentation_pages = DocumentationPage.all
+    end
+  end
+
+  def update_tree
+    redirect_to root_url
   end
 
   def root
