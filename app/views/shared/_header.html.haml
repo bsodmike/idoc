@@ -3,6 +3,7 @@
     #logo!= link_to @site_config.site_title, root_path
   .section-main
     .section-item
+      != render :partial => 'shared/search_bar'
       - if can? :create, UserSession
         != render :partial => 'shared/login_bar'
       - elsif can? :destroy, @current_session

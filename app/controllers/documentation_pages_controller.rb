@@ -39,6 +39,19 @@ class DocumentationPagesController < ApplicationController
     end
   end
 
+  def search
+    @query = params[:search]
+    result_set = DocumentationPage.search(@query)
+    @results = []
+    result_set.each do |page|
+      begin
+        @results << DocumentationPage.find(page.id)
+      rescue ActiveRecord::RecordNotFound
+        #Record isn't in the db anymore, just ignore it
+      end
+    end
+  end
+
   def root
     if DocumentationPage.roots.empty?
       display_new_page

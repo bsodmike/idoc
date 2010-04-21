@@ -14,3 +14,5 @@ public/stylesheets/compiled/*.css
 app/stylesheets/.sass-cache/*
 test/*
 spec/fixtures/*
+indexes/*
+db/xapiandbs/*

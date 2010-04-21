@@ -1,5 +1,6 @@
 Given /^there is no documentation$/ do
   DocumentationPage.destroy_all
+  DocumentationPage.reset_index
 end
 
 Given /^I have created a page called "(.*)"$/ do |page_title|

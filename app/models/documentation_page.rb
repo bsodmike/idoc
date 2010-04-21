@@ -2,6 +2,11 @@ require 'tree_positioning'
 require 'tree_navigation'
 
 class DocumentationPage < ActiveRecord::Base
+  xapor do |idx|
+    idx.search :title, :store => true
+    idx.search :content, :store => true
+  end
+  
   has_many :comments
 
   validates_presence_of :title, :content
@@ -14,4 +19,5 @@ class DocumentationPage < ActiveRecord::Base
   def has_parent?
     self.parent_id?
   end
+
 end

@@ -9,7 +9,7 @@ gem 'authlogic', "2.1.3"
 gem 'friendly_id', "3.0.2"
 gem 'sanitize', "1.2.0"
 gem 'cancan', "1.0.2"
-gem 'xapian-fu', "1.1.0"
+gem 'xapor'
 gem 'will_paginate', "2.3.12"
 gem 'mongrel', "1.1.6"
 

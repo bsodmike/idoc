@@ -112,7 +112,7 @@ class Rails::Boot
 
     Rails::Initializer.class_eval do
       def load_gems
-        @bundler_loaded ||= Bundler.require :default, Rails.env
+        @bundler_loaded ||= Bundler.require(:default, Rails.env)
       end
     end
 

@@ -1,0 +1,3 @@
+!= title "Search results for #{@query}"
+- @results.each do |page|
+  != link_to page.title, documentation_page_path(page)

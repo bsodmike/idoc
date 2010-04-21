@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe DocumentationPage do
-
   it "should not be valid without a title" do
     page = DocumentationPage.new(:content => "Some test content")
     page.valid?.should be_false
@@ -65,7 +64,7 @@ describe DocumentationPage do
     end
   end
 
-  context "Multiple layour of documentation" do
+  context "Multiple layers of documentation" do
     context "finding the next item of an item with children" do
       it "should have a next item when a page has children" do
         page1 = DocumentationPage.create(:title => "Test", :content => "Some content")
@@ -111,4 +110,5 @@ describe DocumentationPage do
       end
     end
   end
+
 end

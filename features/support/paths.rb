@@ -57,6 +57,9 @@ module NavigationHelpers
         
       when /the edit document authors list page/
         edit_admin_document_author_list_path
+
+      when /the search results page/
+        search_documentation_pages_path
         
       else
         raise "Can't find mapping from \"#{page_name}\" to a path.\n" +
