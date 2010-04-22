@@ -8,3 +8,5 @@
       != render :partial => 'shared/menu', :locals => {:items => @menu_items}
     - if can? :create, DocumentationPage
       != button_to "Add page", new_documentation_page_path, :method => :get, :id => "add_page_button"
+    - if can? :manage, DocumentationPage
+      != button_to "Edit tree", edit_tree_documentation_pages_path, :method => :get, :id => "edit_tree_button"

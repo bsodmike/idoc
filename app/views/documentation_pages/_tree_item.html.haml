@@ -1,0 +1,5 @@
+%li{:rel => "editable", :"data-name" => tree_item.friendly_id, :"data-id" => tree_item.id, :"data-position" => tree_item.position}
+  %ins &nbsp;
+  != link_to h(tree_item.title), "#"
+  - if !tree_item.children.empty?
+    %ul.menu!= render :partial => 'tree_item', :collection => tree_item.children
