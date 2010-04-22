@@ -9,9 +9,20 @@ module PositionCollisionCorrection
       collision.position += 1
       collision.save!
     end
+
+    def skip_collisions
+      @skip_collisions = true
+      yield
+      @skip_collisions = false
+    end
+
+    def skip_collisions?
+      @skip_collisions
+    end
   end
 
   def fix_position_collisions
+    return if self.class.skip_collisions?
     if collision = find_position_collisions
       self.class.fix_collision(collision)
     end

@@ -1,5 +1,5 @@
 class DocumentationPagesController < ApplicationController
-  before_filter :find_menu_items, :only => [:new, :create, :edit, :update, :show, :edit_tree, :root]
+  before_filter :find_menu_items, :except => :destroy
   before_filter :store_location, :only => :show
   before_filter :find_documentation_page, :only => [:edit, :update, :show, :destroy]
 
@@ -59,7 +59,10 @@ class DocumentationPagesController < ApplicationController
   end
 
   def update_tree
-    redirect_to root_url
+    allowed_to? :manage, DocumentationPage do
+      DocumentationPage.update_tree(params[:documentation_tree])
+      redirect_to root_url
+    end
   end
 
   def root

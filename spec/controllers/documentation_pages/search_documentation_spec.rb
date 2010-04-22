@@ -14,6 +14,8 @@ describe DocumentationPagesController, "Searching documentation" do
   def perform_action
     get :search, :search => @search_term
   end
+  
+  it_should_behave_like "finding menu items"
 
   it "should get the documentation page index" do
     DocumentationPage.should_receive(:search).with(@search_term)

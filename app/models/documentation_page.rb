@@ -6,7 +6,7 @@ class DocumentationPage < ActiveRecord::Base
     idx.search :title, :store => true
     idx.search :content, :store => true
   end
-  
+
   has_many :comments
 
   validates_presence_of :title, :content
@@ -20,4 +20,15 @@ class DocumentationPage < ActiveRecord::Base
     self.parent_id?
   end
 
+  def self.update_tree(new_tree)
+    skip_collisions do
+      @pages = all
+      if new_tree[:documentation_page]
+        new_tree[:documentation_page].each do |id, new_values|
+          current = @pages.find {|p| p.friendly_id == id}
+          current.update_attributes(new_values) if current
+        end
+      end
+    end
+  end
 end

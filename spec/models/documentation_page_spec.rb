@@ -36,7 +36,7 @@ describe DocumentationPage do
 
     subpage.up.should == page
   end
-  
+
   context "Single layer of documentation"  do
     it "should give a positive result with has_next? when there is a documentation page at the same level with a greater position" do
       page = DocumentationPage.create(:title => "Test", :content => "Some content")
@@ -111,4 +111,22 @@ describe DocumentationPage do
     end
   end
 
+  context "Updating the tree" do
+    it "should find all pages" do
+      DocumentationPage.should_receive(:all)
+      DocumentationPage.update_tree({})
+    end
+
+    it "should update the position and parent of each page" do
+      page1 = DocumentationPage.create(:title => "Test", :content => "Some content")
+      page2 = DocumentationPage.create(:title => "Another test", :content => "more content")
+      DocumentationPage.update_tree({:documentation_page => {page1.friendly_id => {:position => 2, :parent_id => page2.id}, page2.friendly_id => {:position => 1, :parent_id => ""}}})
+      updated_page1 = DocumentationPage.find(page1.friendly_id)
+      updated_page2 = DocumentationPage.find(page2.friendly_id)
+      updated_page1.parent_id.should == updated_page2.id
+      updated_page1.position.should == 2
+      updated_page2.position.should == 1
+      updated_page2.parent.should == nil
+    end
+  end
 end
