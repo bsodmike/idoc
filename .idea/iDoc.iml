@@ -143,6 +143,9 @@
     <orderEntry type="library" scope="PROVIDED" name="[gem] spork (v0.8.2, /Users/davidworkman/.rvm/gems/ruby-1.9.1-p378/gems/spork-0.8.2)" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="[gem] email_spec (v0.6.2, /Users/davidworkman/.rvm/gems/ruby-1.9.1-p378/gems/email_spec-0.6.2)" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="[gem] database_cleaner (v0.5.2, /Users/davidworkman/.rvm/gems/ruby-1.9.1-p378/gems/database_cleaner-0.5.2)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] cucumber (v0.6.4, /Users/davidworkman/.rvm/gems/ruby-1.9.1-p378/gems/cucumber-0.6.4)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] xapor (v0.1.2, /Users/davidworkman/.rvm/gems/ruby-1.9.1-p378/gems/xapor-0.1.2)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] xapian-fu (v1.1.0, /Users/davidworkman/.rvm/gems/ruby-1.9.1-p378/gems/xapian-fu-1.1.0)" level="application" />
     <orderEntry type="library" name="[gem] database_cleaner (v0.5.0, null)" level="application" />
     <orderEntry type="library" name="[gem] pg (v0.8.0, null)" level="application" />
     <orderEntry type="library" name="[gem] cucumber (v0.6.2, null)" level="application" />
@@ -151,9 +154,6 @@
     <orderEntry type="library" name="[gem] friendly_id (v2.3.3, null)" level="application" />
     <orderEntry type="library" name="[gem] haml (v2.2.21, null)" level="application" />
     <orderEntry type="library" name="[gem] cucumber (v0.6.3, null)" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="[gem] cucumber (v0.6.4, /Users/davidworkman/.rvm/gems/ruby-1.9.1-p378/gems/cucumber-0.6.4)" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="[gem] xapor (v0.1.2, /Users/davidworkman/.rvm/gems/ruby-1.9.1-p378/gems/xapor-0.1.2)" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="[gem] xapian-fu (v1.1.0, /Users/davidworkman/.rvm/gems/ruby-1.9.1-p378/gems/xapian-fu-1.1.0)" level="application" />
   </component>
 </module>
 

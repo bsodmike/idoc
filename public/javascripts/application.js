@@ -1,6 +1,6 @@
 $(document).ready(function() {
     $('#menu_container > ul.menu').treeview({
-        persist : "cookie",
+        persist : "location",
         collapsed : true,
         unique : true
     });
