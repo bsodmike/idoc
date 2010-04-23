@@ -20,5 +20,5 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :comments, :collection => {:recent => :get}, :only => [:recent]
 
-  map.root :controller => :documentation_pages, :action => :root
+  map.root :controller => :documentation_pages, :action => :index
 end

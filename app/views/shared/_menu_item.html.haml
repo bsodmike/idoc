@@ -1,4 +1,4 @@
 %li
   != link_to h(menu_item.title), documentation_page_path(menu_item)
   - if !menu_item.children.empty?
-    != render :partial => 'shared/menu', :locals => {:items => menu_item.children}
+    %ul.menu!= render :partial => 'shared/menu_item', :collection => menu_item.children

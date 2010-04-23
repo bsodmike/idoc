@@ -4,9 +4,7 @@ module EmptyPositionCorrection
   end
 
   def set_position
-    if !self.position
-      set_position_to_bottom
-    end
+    set_position_to_bottom unless self.position
   end
 
   def set_position_to_bottom
