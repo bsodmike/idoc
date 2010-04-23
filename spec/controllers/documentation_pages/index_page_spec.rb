@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe DocumentationPagesController, "Documentation root handling" do
   def perform_action
-    get :root
+    get :index
   end
 
   context "No pages exist" do
