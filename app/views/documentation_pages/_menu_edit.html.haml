@@ -1,5 +1,4 @@
 %ul.menu
   != render :partial => 'menu_item', :collection => items, :locals => {:current_item => current_item}
-
-  - if render_as_new_item?(current_item, root)
-    != render :partial => 'new_menu_item', :locals => {:new_item => current_item}
+  - if current_item.new_record?
+    != render :partial => 'new_menu_item', :object => current_item
