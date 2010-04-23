@@ -1,4 +1,4 @@
-module Application::SessionManagement
+module App::SessionManagement
   def current_session
     return @current_session if @current_session
     @current_session = UserSession.find

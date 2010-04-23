@@ -1,4 +1,4 @@
-module Application::SiteMenu
+module App::SiteMenu
   def find_menu_items
     @menu_items = ::DocumentationPage.roots
   end

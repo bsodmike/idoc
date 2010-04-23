@@ -58,8 +58,9 @@ describe CommentsController, "Creating a new comment (comment construction)" do
       end
 
       it "should inform the user of the failed save" do
+        flash.should_receive(:now).and_return(h = mock(Hash))
+        h.should_receive(:[]=).with(:error, "Your comment could not be saved")
         perform_action
-        flash[:error].should contain("Your comment could not be saved")
       end
 
       it "should provide the user with the form to correct their mistake" do

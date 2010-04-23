@@ -1,4 +1,4 @@
-module Application::SiteConfig
+module App::SiteConfig
   def self.included(base)
     base.before_filter(:load_config)
   end

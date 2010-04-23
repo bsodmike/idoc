@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_filter :find_menu_items, :only => [:new, :create]
+  before_filter :find_menu_items, :except => [:destroy]
   before_filter :find_documentation_page, :except => [:recent]
 
   def new
@@ -57,7 +57,7 @@ class CommentsController < ApplicationController
   end
 
   def create_failed
-    flash[:error] = "Your comment could not be saved"
+    flash.now[:error] = "Your comment could not be saved"
     render :action => :new
   end
 end

@@ -1,4 +1,4 @@
-module Application::Permissions
+module App::Permissions
   protected
 
   def unauthorized!
