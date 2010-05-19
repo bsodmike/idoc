@@ -1,4 +1,0 @@
-== Notes on deployment ==
-
-With the current in-memory index for xapian and the bundler setup, only the conservative spawn method works
-with passenger.

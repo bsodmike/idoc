@@ -12,88 +12,88 @@
   <component name="GemRequirementsHolder" version="2">
     <requirement>
       <requirement>
-        <dependency name="authlogic" version="2.1.3" bound="EQUAL" />
+        <dependency name="authlogic" version="2.1.3" bound="EQUAL" git="false" />
       </requirement>
       <source from="GemFile" />
       <source from="Gemfile" />
     </requirement>
     <requirement>
       <requirement>
-        <dependency name="cancan" version="1.0.2" bound="EQUAL" />
+        <dependency name="cancan" version="1.0.2" bound="EQUAL" git="false" />
       </requirement>
       <source from="GemFile" />
       <source from="Gemfile" />
     </requirement>
     <requirement>
       <requirement>
-        <dependency name="compass" version="0.8.17" bound="EQUAL" />
+        <dependency name="compass" version="0.8.17" bound="EQUAL" git="false" />
       </requirement>
       <source from="GemFile" />
       <source from="Gemfile" />
     </requirement>
     <requirement>
       <requirement>
-        <dependency name="friendly_id" version="3.0.2" bound="EQUAL" />
+        <dependency name="friendly_id" version="3.0.2" bound="EQUAL" git="false" />
       </requirement>
       <source from="GemFile" />
       <source from="Gemfile" />
     </requirement>
     <requirement>
       <requirement>
-        <dependency name="haml" version="2.2.23" bound="EQUAL" />
+        <dependency name="haml" version="2.2.23" bound="EQUAL" git="false" />
       </requirement>
       <source from="GemFile" />
       <source from="Gemfile" />
     </requirement>
     <requirement>
       <requirement>
-        <dependency name="mongrel" version="1.1.6" bound="EQUAL" />
+        <dependency name="mongrel" version="1.1.6" bound="EQUAL" git="false" />
       </requirement>
       <source from="GemFile" />
       <source from="Gemfile" />
     </requirement>
     <requirement>
       <requirement>
-        <dependency name="pg" version="0.9.0" bound="EQUAL" />
+        <dependency name="pg" version="0.9.0" bound="EQUAL" git="false" />
       </requirement>
       <source from="GemFile" />
       <source from="Gemfile" />
     </requirement>
     <requirement>
       <requirement>
-        <dependency name="pg" version="0" bound="GREATER_OR_EQUAL" />
+        <dependency name="pg" version="0" bound="GREATER_OR_EQUAL" git="false" />
       </requirement>
       <source from="config/database.yml" />
     </requirement>
     <requirement>
       <requirement>
-        <dependency name="rails" version="2.3.5" bound="EQUAL" />
+        <dependency name="rails" version="2.3.5" bound="EQUAL" git="false" />
       </requirement>
       <source from="GemFile" />
       <source from="Gemfile" />
     </requirement>
     <requirement>
       <requirement>
-        <dependency name="rails" version="0" bound="GREATER_OR_EQUAL" />
+        <dependency name="rails" version="0" bound="GREATER_OR_EQUAL" git="false" />
       </requirement>
       <source from="config/boot.rb" />
     </requirement>
     <requirement>
       <requirement>
-        <dependency name="sanitize" version="1.2.0" bound="EQUAL" />
+        <dependency name="sanitize" version="1.2.0" bound="EQUAL" git="false" />
       </requirement>
       <source from="GemFile" />
       <source from="Gemfile" />
     </requirement>
     <requirement>
       <requirement>
-        <dependency name="will_paginate" version="2.3.12" bound="EQUAL" />
+        <dependency name="will_paginate" version="2.3.12" bound="EQUAL" git="false" />
       </requirement>
       <source from="Gemfile" />
     </requirement>
     <requirement>
       <requirement>
-        <dependency name="xapor" version="0.1.0" bound="GREATER_OR_EQUAL" />
+        <dependency name="xapor" version="0.1.0" bound="GREATER_OR_EQUAL" git="false" />
       </requirement>
       <source from="Gemfile" />
     </requirement>

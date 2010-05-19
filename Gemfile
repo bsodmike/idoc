@@ -9,7 +9,7 @@ gem 'authlogic', "2.1.3"
 gem 'friendly_id', "3.0.2"
 gem 'sanitize', "1.2.0"
 gem 'cancan', "1.0.2"
-gem 'xapor', ">= 0.1.0"
+gem 'xapor', ">= 0.1.5"
 gem 'will_paginate', "2.3.12"
 gem 'mongrel', "1.1.6"
 
@@ -18,6 +18,7 @@ group :test do
   gem 'rspec-rails', '1.3.2'
   gem 'spork', '0.8.2'
   gem 'email_spec', "0.6.2"
+  gem 'shoulda'
 end
 
 group :cucumber do

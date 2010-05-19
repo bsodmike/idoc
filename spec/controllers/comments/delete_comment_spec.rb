@@ -3,8 +3,8 @@ require 'spec_helper'
 describe CommentsController, "Deleting a comment" do
   before(:each) do
     @comment = mock_model(Comment, :destroy => true)
-    @comments = mock_model(Array, :find => @comment)
-    @doc_page = mock_model(DocumentationPage, :comments => @comments)
+    @doc_page = mock_model(DocumentationPage)
+    @doc_page.stub_chain(:comments, :find).and_return(@comment)
     DocumentationPage.stub!(:find).and_return(@doc_page)
   end
 
