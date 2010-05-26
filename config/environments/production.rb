@@ -9,7 +9,7 @@ config.action_controller.consider_all_requests_local = false
 config.action_controller.perform_caching             = true
 config.action_view.cache_template_loading            = true
 config.action_mailer.delivery_method                 = :sendmail
-config.action_mailer.default_url_options             = { :host => "loki.cs.man.ac.uk:7000"}
+config.action_mailer.default_url_options             = { :host => "eos.cs.man.ac.uk:8080"}
 
 # See everything in the log (default is :info)
 # config.log_level = :debug
