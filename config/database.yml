@@ -21,7 +21,7 @@ test: &TEST
 
 production:
   adapter: postgresql
-  database: idoc_deploy
+  database: iDoc
   pool: 5
   timeout: 5000
 
