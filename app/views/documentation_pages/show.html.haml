@@ -1,7 +1,10 @@
 #documentation
   != title h(@documentation_page.title)
   != render :partial => 'page_bar', :locals => {:doc_page => @documentation_page}
-  #toc!= @documentation_page.toc
+  - unless @documentation_page.toc.blank?
+    #toc
+      %h3 Page contents
+      != @documentation_page.toc
   .page_content!= @documentation_page.content
 != render :partial => 'page_bar', :locals => {:doc_page => @documentation_page}
 #comments
