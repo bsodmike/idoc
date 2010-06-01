@@ -3,7 +3,7 @@ Given /^there is no documentation$/ do
   DocumentationPage.reset_index
 end
 
-Given /^I have created a page called "(.*)"$/ do |page_title|
+Given /^I have created a page called "([^\"]*)"$/ do |page_title|
   DocumentationPage.create("title" => page_title, "content" => "Some content")
 end
 
@@ -13,7 +13,7 @@ Given /^I have created a page$/ do
   @documentation_page = DocumentationPage.create("title" => @title, "content" => @content)
 end
 
-Given /^I have created a page called "(.*)" with position (\d)$/ do |page_title, position|
+Given /^I have created a page called "([^\"]*)" with position (\d)$/ do |page_title, position|
   DocumentationPage.create("title" => page_title, "content" => "Test content", "position" => position)
 end
 
@@ -26,7 +26,7 @@ Given /^I have created two document pages$/ do
   @documentation_page2 = DocumentationPage.create("title" => @title2, "content" => @content2)
 end
 
-Given /^I have created a subpage of "(.*)" called "(.*)"$/ do |parent_title, page_title|
+Given /^I have created a subpage of "([^\"]*)" called "([^\"]*)"$/ do |parent_title, page_title|
   @parent = DocumentationPage.find_by_title(parent_title)
   DocumentationPage.create("title" => page_title, "parent_id" => @parent.id, "content" => "Test content")
 end
@@ -236,4 +236,19 @@ end
 When /^I set the position of "([^\"]*)" to (\d)$/ do |page, new_position|
   p = DocumentationPage.find_by_title(page)
   fill_in "documentation_tree_documentation_page_#{p.friendly_id}_position", :with => new_position
+end
+
+Given /^I have created a page called "([^"]*)" with a heading of "([^"]*)"$/ do |page_title, heading_name|
+  heading = "<h2>#{heading_name}</h2>"
+  DocumentationPage.create("title" => page_title, "content" => heading)
+end
+
+Then /^I should see a table of contents with "([^\"]*)"$/ do |heading|
+  response.should have_selector("#toc") do |toc|
+    toc.should contain(heading)
+  end
+end
+
+Then /^I should have a section with an id of "([^\"]*)"$/ do |heading_id|
+  response.should have_selector("h2##{heading_id}")
 end

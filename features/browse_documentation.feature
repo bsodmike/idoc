@@ -43,3 +43,10 @@ Feature:
     And I am on the document page for "Test subpage 1"
     When I follow "Up"
     Then I should be on the document page for "Test page 1"
+
+  Scenario: Viewing a document page with a table of contents
+    Given I am not identified
+    And I have created a page called "Test page 1" with a heading of "Test section"
+    When I go to the document page for "Test page 1"
+    Then I should see a table of contents with "Test section"
+    And I should have a section with an id of "test_section"

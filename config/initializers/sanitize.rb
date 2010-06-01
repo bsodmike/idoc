@@ -1,4 +1,5 @@
-Sanitize::Config::RELAXED[:transformers] = lambda do |env|
+Sanitize::Config::RELAXED[:transformers] = []
+Sanitize::Config::RELAXED[:transformers] << lambda do |env|
       node      = env[:node]
       node_name = node.name
       parent    = node.parent
@@ -23,10 +24,22 @@ Sanitize::Config::RELAXED[:transformers] = lambda do |env|
               }
       })
       {:whitelist_nodes => [node, parent]}
-    end
+end
+
+Sanitize::Config::RELAXED[:transformers] << lambda do |env|
+  node = env[:node]
+  node_name = node.name
+  return nil unless (node_name == 'h2')
+  node['id'] = node.text.snake_case
+  {:node => node, :attr_whitelist => ["id"]}
+end
 
 class String
   def sanitize()
     Sanitize.clean(self, Sanitize::Config::RELAXED)
+  end
+
+  def snake_case()
+    self.gsub(/\W+/, "_").downcase
   end
 end

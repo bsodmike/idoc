@@ -13,6 +13,13 @@ class DocumentationPage < ActiveRecord::Base
   has_friendly_id :title, :use_slug => true
   acts_as_tree :order => 'position ASC'
 
+  def content
+    
+    read_attribute(:content).try(:sanitize)
+  end
+
+  before_save :generate_toc
+
   include TreePositioning
   include TreeNavigation
 
@@ -30,5 +37,11 @@ class DocumentationPage < ActiveRecord::Base
         end
       end
     end
+  end
+
+  def generate_toc
+    doc = Nokogiri::HTML(self.content)
+    toc_items = doc.css("h2").map {|h2| "<li><a href=\"##{h2.text.snake_case}\">#{h2.text}</a></li>"}
+    self.toc = toc_items.empty? ? "" : "<ul>#{toc_items.join("")}</ul>"
   end
 end

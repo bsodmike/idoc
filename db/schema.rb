@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100416141725) do
+ActiveRecord::Schema.define(:version => 20100601161716) do
 
   create_table "comments", :force => true do |t|
     t.text     "body",                  :null => false
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(:version => 20100416141725) do
     t.datetime "updated_at"
     t.integer  "parent_id"
     t.integer  "position"
+    t.text     "toc"
   end
 
   add_index "documentation_pages", ["parent_id", "position"], :name => "documentation_pages_parent_id_key", :unique => true

@@ -1,7 +1,8 @@
 #documentation
   != title h(@documentation_page.title)
   != render :partial => 'page_bar', :locals => {:doc_page => @documentation_page}
-  .page_content!= @documentation_page.content.sanitize
+  #toc!= @documentation_page.toc
+  .page_content!= @documentation_page.content
 != render :partial => 'page_bar', :locals => {:doc_page => @documentation_page}
 #comments
   .comment_head= "Comments (#{@documentation_page.comments.count})" 

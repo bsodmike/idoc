@@ -5,4 +5,8 @@ class Comment < ActiveRecord::Base
   named_scope :recent, :order => "created_at DESC"
 
   validates_presence_of :body, :message => "Comment cannot be blank"
+
+  def body
+    read_attribute(:body).try(:sanitize)
+  end
 end

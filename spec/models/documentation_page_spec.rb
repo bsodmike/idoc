@@ -104,6 +104,27 @@ describe DocumentationPage do
     end
   end
 
+  context "Generating a ToC" do
+    it "should set the ToC on save" do
+      page = DocumentationPage.new(:title => "Test", :content => "Some content")
+      page.toc.should be_nil
+      page.save!
+      page.toc.should == ""
+    end
+
+    it "should generate a list if the content contains an h2 element" do
+      page = DocumentationPage.new(:title => "Test", :content => "<h2>A heading</h2>")
+      page.save!
+      page.toc.should == "<ul><li><a href=\"#a_heading\">A heading</a></li></ul>"
+    end
+
+    it "should add id elements to the headings in the content" do
+      page = DocumentationPage.new(:title => "Test", :content => "<h2>A heading</h2>")
+      page.save!
+      page.content.should == "<h2 id=\"a_heading\">A heading</h2>"
+    end
+  end
+
   context "Updating the tree" do
     it "should find all pages" do
       DocumentationPage.should_receive(:all)
