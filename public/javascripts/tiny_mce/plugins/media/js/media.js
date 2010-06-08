@@ -312,12 +312,6 @@ function getType(v) {
 		return 'flash';
 	}
 
-    // screencast
-    if (v.indexOf('http://www.screencast.com/users') == 0) {
-        f.src.value = 'http://content.' + v.match(/^http:\/\/www\.(.*)$/)[0];
-        return 'flash';
-    }
-
 	// Google video
 	if (v.indexOf('http://video.google.com/videoplay?docid=') == 0) {
 		f.width.value = '425';
@@ -525,7 +519,7 @@ function jsEncode(s) {
 }
 
 function generatePreview(c) {
-	var f = document.forms[0], p = document.getElementById('prev'), h = '', cls, pl, n, type, codebase, wp, hp, nw, nh;
+	var f = document.forms[0], p = document.getElementById('prev'), h = '', cls, pl, n, type, codebase, wp, hp, nw, nh, flashvars;
 
 	p.innerHTML = '<!-- x --->';
 
