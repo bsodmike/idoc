@@ -312,6 +312,12 @@ function getType(v) {
 		return 'flash';
 	}
 
+    // screencast
+    if (v.indexOf('http://www.screencast.com/users') == 0) {
+        f.src.value = 'http://content.' + v.match(/^http:\/\/www\.(.*)$/)[0];
+        return 'flash';
+    }
+
 	// Google video
 	if (v.indexOf('http://video.google.com/videoplay?docid=') == 0) {
 		f.width.value = '425';
