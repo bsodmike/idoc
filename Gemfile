@@ -1,5 +1,4 @@
 source :gemcutter
-source "http://gems.rubyinstaller.org"
 
 gem "rails", "2.3.5"
 gem 'pg', "0.9.0"
@@ -11,7 +10,7 @@ gem 'sanitize', "1.2.0"
 gem 'cancan', "1.0.2"
 gem 'xapor', ">= 0.1.5"
 gem 'will_paginate', "2.3.12"
-gem 'mongrel', "1.1.6"
+gem 'mongrel', "1.2.0.pre2"
 
 group :test do
   gem 'test-unit', "1.2.3"

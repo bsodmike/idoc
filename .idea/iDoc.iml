@@ -42,7 +42,7 @@
     </requirement>
     <requirement>
       <requirement>
-        <dependency name="mongrel" version="1.1.6" bound="EQUAL" git="false" />
+        <dependency name="mongrel" version="1.2.0.pre2" bound="EQUAL" git="false" />
       </requirement>
       <source from="Gemfile" />
     </requirement>
