@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100601161716) do
+ActiveRecord::Schema.define(:version => 20100610132045) do
 
   create_table "comments", :force => true do |t|
     t.text     "body",                  :null => false
@@ -28,8 +28,6 @@ ActiveRecord::Schema.define(:version => 20100601161716) do
     t.integer  "position"
     t.text     "toc"
   end
-
-  add_index "documentation_pages", ["parent_id", "position"], :name => "documentation_pages_parent_id_key", :unique => true
 
   create_table "site_configs", :force => true do |t|
     t.string   "site_title"

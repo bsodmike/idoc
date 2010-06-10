@@ -13,7 +13,7 @@ Given /^I have created a page$/ do
   @documentation_page = DocumentationPage.create("title" => @title, "content" => @content)
 end
 
-Given /^I have created a page called "([^\"]*)" with position (\d)$/ do |page_title, position|
+Given /^I have created a page called "([^\"]*)" with position (\d+)$/ do |page_title, position|
   DocumentationPage.create("title" => page_title, "content" => "Test content", "position" => position)
 end
 
