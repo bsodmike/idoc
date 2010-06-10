@@ -9,11 +9,11 @@ Feature:
   	And I enter the required account details
   	And I press "Register"
   	Then I should see "Sign-up successful"
-  	And I should receive an email
+  	And "test@test.com" should receive an email
 
   Scenario: A registered user confirms their email address
   	Given I have created an account
-  	Then I should receive an email
+  	Then "test@test.com" should receive an email
   	When I open the email
     Then I should see "confirm" in the email body
   	When I follow "confirm" in the email

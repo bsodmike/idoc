@@ -12,7 +12,7 @@ module PositionCollisionCorrection
 
     def skip_collisions
       @skip_collisions = true
-      yield
+      transaction {yield}
       @skip_collisions = false
     end
 

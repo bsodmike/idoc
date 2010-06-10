@@ -9,7 +9,7 @@ Given /^I have created an account$/ do
 end
 
 Given /^I have activated my account$/ do
-  Then 'I should receive an email'
+  Then '"test@test.com" should receive an email'
   When 'I open the email'
   Then 'I should see "confirm" in the email body'
   When 'I follow "confirm" in the email'
