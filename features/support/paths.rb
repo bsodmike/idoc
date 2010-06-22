@@ -66,6 +66,9 @@ module NavigationHelpers
 
       when /the edit documentation tree page/
         edit_tree_documentation_pages_path
+
+      when /a non-existent page called "([^\"]*)"/
+        url_for(:controller => :documentation_pages, :action => :show, :id => $1)
       else
         raise "Can't find mapping from \"#{page_name}\" to a path.\n" +
                 "Now, go and add a mapping in #{__FILE__}"

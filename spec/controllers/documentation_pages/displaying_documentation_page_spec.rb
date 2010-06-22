@@ -32,5 +32,21 @@ describe DocumentationPagesController, "displaying a documentation page" do
       perform_action
       response.should render_template('documentation_pages/show')
     end
+
+    context "Page doesn't exist" do
+      before(:each) do
+        DocumentationPage.stub!(:find).and_raise(ActiveRecord::RecordNotFound)
+      end
+
+      it "should redirect the user to the home page" do
+        perform_action
+        response.should redirect_to(root_url)
+      end
+
+      it "should display a flash error saying the page doesn't exist" do
+        perform_action
+        flash[:error].should contain("Sorry, that page doesn't exist")
+      end
+    end
   end
 end

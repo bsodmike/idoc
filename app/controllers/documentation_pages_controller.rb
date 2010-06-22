@@ -6,7 +6,11 @@ class DocumentationPagesController < ApplicationController
   private
 
   def find_documentation_page
-    @documentation_page = DocumentationPage.find(params[:id])
+    begin
+      @documentation_page = DocumentationPage.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      @documentation_page = nil
+    end
   end
 
   public
@@ -40,6 +44,10 @@ class DocumentationPagesController < ApplicationController
   end
 
   def show
+    unless @documentation_page
+      flash[:error] = "Sorry, that page doesn't exist"
+      redirect_to root_url and return
+    end
     allowed_to? :read, @documentation_page do
       render :action => :show
     end

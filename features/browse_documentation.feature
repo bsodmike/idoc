@@ -50,3 +50,10 @@ Feature:
     When I go to the document page for "Test page 1"
     Then I should see a table of contents with "Test section"
     And I should have a section with an id of "test_section"
+
+  Scenario: Attempt to view a document page that doesn't exist
+    Given I am not identified
+    And I have created a page called "Test page 1" with a heading of "Test section"
+    When I go to a non-existent page called "test-page-3"
+    Then I should see "Sorry, that page doesn't exist"
+    And I should be on the home page
