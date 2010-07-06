@@ -613,7 +613,7 @@ function generatePreview(c) {
 		}
 	}
 
-	h += '<embed type="' + type + '" ';
+	h += '<embed allowfullscreen="true" allowscriptaccess="true" type="' + type + '" ';
 
 	for (n in pl)
 		h += n + '="' + pl[n] + '" ';
