@@ -13,8 +13,9 @@ Sanitize::Config::RELAXED[:transformers] << lambda do |env|
       end
       youtube_url = /^http:\/\/(?:www\.)?youtube\.com\/v\//
       vimeo_url = /^http:\/\/vimeo.com\//
+      local_url = /^\//
 
-      return nil unless url =~ youtube_url || url =~ vimeo_url
+      return nil unless url =~ youtube_url || url =~ vimeo_url || url =~ local_url
 
       Sanitize.clean_node!(parent, {
               :elements   => ['embed', 'object', 'param'],

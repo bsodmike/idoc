@@ -17,4 +17,5 @@ Feature:
       | non youtube  | not see an object element in the content |
       | youtube      | see a youtube video                      |
       | vimeo        | see a vimeo video                        |
+      | local site   | see an embedded flash file               |
 

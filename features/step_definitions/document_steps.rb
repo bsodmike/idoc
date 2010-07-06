@@ -106,6 +106,11 @@ When /^I enter a vimeo video$/ do
   fill_in "Content", :with => @vimeo_vid
 end
 
+When /^I enter a local site video$/ do
+  @local_vid = '<object width="400" height="264"><param name="movie" value="/some_file.swf" /><embed src="/some_file.swf" type="application/x-shockwave-flash" width="400" height="264"></embed></object>'
+  fill_in "Content", :with => @local_vid
+end
+
 When /^I enter a non youtube video$/ do
   @non_youtube_vid = 'rad video <object width="640" height="385"><param name="movie" value="http://www.yawntube.com/v/RyMTjhel_oM&amp;hl=en_US&amp;fs=1&amp;" /><param name="allowFullScreen" value="true" /><param name="allowscriptaccess" value="always" /><embed src="http://www.yawntube.com/v/RyMTjhel_oM&amp;hl=en_US&amp;fs=1&amp;" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="640" height="385"></embed></object>'
   fill_in "Content", :with => @non_youtube_vid
@@ -222,6 +227,13 @@ Then /I should see a youtube video$/ do
 end
 
 Then /^I should see a vimeo video$/ do
+  response.should have_selector("object") do |video|
+    video.should have_selector("param")
+    video.should have_selector("embed")
+  end
+end
+
+Then /^I should see an embedded flash file$/ do
   response.should have_selector("object") do |video|
     video.should have_selector("param")
     video.should have_selector("embed")
