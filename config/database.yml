@@ -1,3 +1,4 @@
+
 setup: &SETUP
   adapter: postgresql
   pool: 5
