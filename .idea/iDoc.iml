@@ -9,7 +9,7 @@
       </configuration>
     </facet>
   </component>
-  <component name="GemRequirementsHolder" version="2">
+  <component name="GemRequirementsHolder" version="3">
     <requirement>
       <requirement>
         <dependency name="authlogic" version="2.1.3" bound="EQUAL" git="false" />
@@ -42,7 +42,7 @@
     </requirement>
     <requirement>
       <requirement>
-        <dependency name="mongrel" version="1.1.6" bound="EQUAL" git="false" />
+        <dependency name="mongrel" version="1.2.0.pre2" bound="EQUAL" git="false" />
       </requirement>
       <source from="Gemfile" />
     </requirement>
@@ -54,33 +54,15 @@
     </requirement>
     <requirement>
       <requirement>
-        <dependency name="pg" version="0" bound="GREATER_OR_EQUAL" git="false" />
-      </requirement>
-      <source from="config/database.yml" />
-    </requirement>
-    <requirement>
-      <requirement>
         <dependency name="rails" version="2.3.5" bound="EQUAL" git="false" />
       </requirement>
       <source from="Gemfile" />
     </requirement>
     <requirement>
       <requirement>
-        <dependency name="rails" version="0" bound="GREATER_OR_EQUAL" git="false" />
-      </requirement>
-      <source from="config/boot.rb" />
-    </requirement>
-    <requirement>
-      <requirement>
         <dependency name="sanitize" version="1.2.0" bound="EQUAL" git="false" />
       </requirement>
       <source from="Gemfile" />
-    </requirement>
-    <requirement>
-      <requirement>
-        <dependency name="test-unit" version="1.2.3" bound="EQUAL" git="false" />
-      </requirement>
-      <source from="lib/tasks/rspec.rake" />
     </requirement>
     <requirement>
       <requirement>
