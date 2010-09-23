@@ -1,3 +1,4 @@
 != title "Search results for #{@query}"
-- @results.each do |page|
-  != link_to h(page.title), documentation_page_path(page)
+%ul
+  - @results.each do |page|
+    %li!= link_to h(page.title), documentation_page_path(page)
